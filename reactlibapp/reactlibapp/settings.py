@@ -40,6 +40,8 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'rest_framework',
     'rest_framework_swagger',
+    'libraryapp.apps.LibraryappConfig',
+    'libraryapi.apps.LibraryapiConfig',
 )
 
 MIDDLEWARE_CLASSES = (

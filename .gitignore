@@ -63,3 +63,7 @@ target/
 
 # escape env.yml file
 *.env.*
+
+# ignore node modules
+/node_modules
+
