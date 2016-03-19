@@ -43,9 +43,7 @@ class Books(BaseInfo):
     edition = models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
     isbn = models.CharField(max_length=50)
-    author = models.ForeignKey('Authors',
-                               related_name="myauthor",
-                               on_delete=models.CASCADE)
+    author = models.ForeignKey('Authors', on_delete=models.CASCADE)
 
     def _check_status(self):
         if self.quantity <= 0:
@@ -60,12 +58,8 @@ class Reviews(BaseInfo):
 
     comment = models.TextField()
     # ratings needs to be implemented here.
-    user = models.ForeignKey('Users',
-                             related_name="myuser",
-                             on_delete=models.CASCADE)
-    book = models.ForeignKey('Books',
-                             related_name="mybook",
-                             on_delete=models.CASCADE)
+    user = models.ForeignKey('Users', on_delete=models.CASCADE)
+    book = models.ForeignKey('Books', on_delete=models.CASCADE)
 
 
 class History(BaseInfo):
@@ -86,9 +80,5 @@ class History(BaseInfo):
 
     exptdreturn_date = property(_expected_return_date)
 
-    book = models.ForeignKey('Books',
-                             related_name="mybook",
-                             on_delete=models.CASCADE)
-    user = models.ForeignKey('Users',
-                             related_name="myuser",
-                             on_delete=models.CASCADE)
+    book = models.ForeignKey('Books', on_delete=models.CASCADE)
+    user = models.ForeignKey('Users', on_delete=models.CASCADE)
