@@ -22,8 +22,8 @@ class BooksAdmin(admin.ModelAdmin):
             'fields': ('created_at', 'updated_at')
         }),
         ("Relationship", {
-            'fields': ('author')
-        }),
+            'fields': ('author',)
+        })
     )
 
 
@@ -64,7 +64,7 @@ class HistoryAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Status', {
-            'fields': ('returned')
+            'fields': ('returned',)
         }),
         ('Time Info', {
             'fields': ('created_at', 'updated_at', 'lending_date',
@@ -72,7 +72,7 @@ class HistoryAdmin(admin.ModelAdmin):
         }),
         ("Relationship", {
             'fields': ('book', 'user')
-        }),
+        })
     )
 
 
@@ -83,14 +83,14 @@ class ReviewsAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('comment')
+            'fields': ('comment',)
         }),
         ('Time Info', {
             'fields': ('created_at', 'updated_at',)
         }),
         ("Relationship", {
-            'fields': ('book', 'user')
-        }),
+            'fields': ('book', 'user',)
+        })
     )
 
 
