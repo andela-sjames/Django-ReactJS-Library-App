@@ -33,6 +33,9 @@ class Author(BaseInfo):
 
     name = models.CharField(max_length=200)
 
+    def __unicode__(self):
+        return "{}" .format(self.name)
+
 
 class Book(BaseInfo):
     """Book model defined."""
@@ -52,6 +55,9 @@ class Book(BaseInfo):
             return "Available"
     status = property(_check_status)
 
+    def __unicode__(self):
+        return "Book title: {}" .format(self.title)
+
 
 class Review(BaseInfo):
     """Book review model defined."""
@@ -60,6 +66,9 @@ class Review(BaseInfo):
     # ratings needs to be implemented here.
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     book = models.ForeignKey('Book', on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return "Review by user : {}" .format(self.user)
 
 
 class History(BaseInfo):
@@ -82,3 +91,6 @@ class History(BaseInfo):
 
     book = models.ForeignKey('Book', on_delete=models.CASCADE)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return "History for user : {}" .format(self.user)
