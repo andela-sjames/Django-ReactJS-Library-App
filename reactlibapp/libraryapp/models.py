@@ -40,17 +40,24 @@ class Books(BaseInfo):
     publisher = models.CharField(max_length=100)
     description = models.TextField()
     isbn = models.CharField(max_length=50)
-    quantity = models.CharField(max_length=10)
-    status = models.CharField(max_length=100) # add status based on qty
+    quantity = models.IntegerField()
     author = models.ForeignKey('Authors',
                                related_name="myauthor",
                                on_delete=models.CASCADE)
+
+    def _check_status(self):
+        if self.quantity <= 0:
+            return "Not Available"
+        else:
+            return "Available"
+    status = property(_check_status)
 
 
 class Reviews(BaseInfo):
     """Book review model defined."""
 
     comment = models.TextField()
+    # ratings needs to be implemented here.
     user = models.ForeignKey('Users',
                              related_name="myuser",
                              on_delete=models.CASCADE)
@@ -63,11 +70,20 @@ class History(BaseInfo):
     """User history model defined."""
 
     lending_date = models.DateTimeField(auto_now_add=True)
-    expreturn_date = models.DateTimeField(auto_now_add=False,
-                                          auto_now=False, blank=False)  # increment by 14 days
     return_date = models.DateTimeField(auto_now_add=False,
-                                       auto_now=False, blank=True, null=True)
-    status = models.CharField(max_length=100)
+                                       auto_now=False,
+                                       blank=True, null=True)
+    returned = models.BooleanField(default=False)
+
+    def _expected_return_date(self):
+        import datetime
+        present_day = datetime.date.today()
+        day_14 = datetime.timedelta(weeks=2)
+        return_date = present_day + day_14
+        return return_date
+
+    exptdreturn_date = property(_expected_return_date)
+
     book = models.ForeignKey('Books',
                              related_name="mybook",
                              on_delete=models.CASCADE)
