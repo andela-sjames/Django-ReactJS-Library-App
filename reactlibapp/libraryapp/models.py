@@ -38,11 +38,11 @@ class Books(BaseInfo):
     """Book model defined."""
 
     title = models.CharField(max_length=100)
+    description = models.TextField()
+    quantity = models.IntegerField()
     edition = models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
-    description = models.TextField()
     isbn = models.CharField(max_length=50)
-    quantity = models.IntegerField()
     author = models.ForeignKey('Authors',
                                related_name="myauthor",
                                on_delete=models.CASCADE)
