@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from libraryapp.models import Users, Authors, Books, Reviews, History
+from libraryapp.models import User, Author, Book, Review, History
 
 
 class BooksAdmin(admin.ModelAdmin):
@@ -9,6 +9,7 @@ class BooksAdmin(admin.ModelAdmin):
     search_fields = ['^title', '^description']
     raw_id_fields = ('author',)
     date_hierarchy = 'created_at'
+    readonly_fields = ('created_at', 'updated_at')
 
     fieldsets = (
         (None, {
@@ -31,6 +32,7 @@ class UsersAdmin(admin.ModelAdmin):
     """User admin model class defined."""
 
     date_hierarchy = 'created_at'
+    readonly_fields = ('created_at', 'updated_at')
 
     fieldsets = (
         ('None', {
@@ -45,7 +47,9 @@ class UsersAdmin(admin.ModelAdmin):
 class AuthorsAdmin(admin.ModelAdmin):
     """Author admin model class defined."""
 
+    search_fields = ['^name']
     date_hierarchy = 'created_at'
+    readonly_fields = ('created_at', 'updated_at')
 
     fieldsets = (
         ('None', {
@@ -61,6 +65,8 @@ class HistoryAdmin(admin.ModelAdmin):
     """History admin model class defined."""
 
     date_hierarchy = 'created_at'
+    readonly_fields = ('created_at', 'updated_at', 'lending_date',
+                       'exptdreturn_date')
 
     fieldsets = (
         ('Status', {
@@ -79,7 +85,9 @@ class HistoryAdmin(admin.ModelAdmin):
 class ReviewsAdmin(admin.ModelAdmin):
     """Review admin model class defined."""
 
+    search_fields = ['^comment']
     date_hierarchy = 'created_at'
+    readonly_fields = ('created_at', 'updated_at')
 
     fieldsets = (
         (None, {
@@ -94,8 +102,8 @@ class ReviewsAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(Books, BooksAdmin)
-admin.site.register(Users, UsersAdmin)
-admin.site.register(Authors, AuthorsAdmin)
+admin.site.register(Book, BooksAdmin)
+admin.site.register(User, UsersAdmin)
+admin.site.register(Author, AuthorsAdmin)
 admin.site.register(History, HistoryAdmin)
-admin.site.register(Reviews, ReviewsAdmin)
+admin.site.register(Review, ReviewsAdmin)

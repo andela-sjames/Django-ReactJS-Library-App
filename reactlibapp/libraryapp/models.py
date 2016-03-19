@@ -15,7 +15,7 @@ class BaseInfo(models.Model):
         abstract = True
 
 
-class Users(BaseInfo):
+class User(BaseInfo):
     """User model defined."""
 
     USER_ROLE = (
@@ -28,13 +28,13 @@ class Users(BaseInfo):
     role = models.CharField(max_length=2, choices=USER_ROLE)
 
 
-class Authors(BaseInfo):
+class Author(BaseInfo):
     """Book author models defined."""
 
     name = models.CharField(max_length=200)
 
 
-class Books(BaseInfo):
+class Book(BaseInfo):
     """Book model defined."""
 
     title = models.CharField(max_length=100)
@@ -43,7 +43,7 @@ class Books(BaseInfo):
     edition = models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
     isbn = models.CharField(max_length=50)
-    author = models.ForeignKey('Authors', on_delete=models.CASCADE)
+    author = models.ForeignKey('Author', on_delete=models.CASCADE)
 
     def _check_status(self):
         if self.quantity <= 0:
@@ -53,13 +53,13 @@ class Books(BaseInfo):
     status = property(_check_status)
 
 
-class Reviews(BaseInfo):
+class Review(BaseInfo):
     """Book review model defined."""
 
     comment = models.TextField()
     # ratings needs to be implemented here.
-    user = models.ForeignKey('Users', on_delete=models.CASCADE)
-    book = models.ForeignKey('Books', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
 
 
 class History(BaseInfo):
@@ -80,5 +80,5 @@ class History(BaseInfo):
 
     exptdreturn_date = property(_expected_return_date)
 
-    book = models.ForeignKey('Books', on_delete=models.CASCADE)
-    user = models.ForeignKey('Users', on_delete=models.CASCADE)
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
