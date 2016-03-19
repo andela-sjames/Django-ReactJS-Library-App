@@ -10,6 +10,8 @@ class BaseInfo(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        """Define Model as abstract."""
+
         abstract = True
 
 
