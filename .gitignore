@@ -67,3 +67,5 @@ target/
 # ignore node modules
 /node_modules
 
+# escape database
+db.sqlite3
