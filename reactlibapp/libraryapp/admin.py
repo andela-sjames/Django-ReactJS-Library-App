@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from libraryapp.models import User, Author, Book, Review, History
+from libraryapp.models import Author, Book, Review, History, GoogleUser
 
 
 class BooksAdmin(admin.ModelAdmin):
@@ -25,22 +24,6 @@ class BooksAdmin(admin.ModelAdmin):
         ("Relationship", {
             'fields': ('author',)
         })
-    )
-
-
-class UsersAdmin(admin.ModelAdmin):
-    """User admin model class defined."""
-
-    date_hierarchy = 'created_at'
-    readonly_fields = ('created_at', 'updated_at')
-
-    fieldsets = (
-        ('None', {
-            'fields': ('name', 'email', 'role')
-        }),
-        ('Time Info', {
-            'fields': ('created_at', 'updated_at')
-        }),
     )
 
 
@@ -102,8 +85,21 @@ class ReviewsAdmin(admin.ModelAdmin):
     )
 
 
+class GoogleUserAdmin(admin.ModelAdmin):
+    """Google user admin model class defined."""
+
+    fieldsets = (
+        ("Basic Information", {
+            'fields': ('google_id', 'appuser_picture',)
+        }),
+        ("Relationship", {
+            'fields': ('app_user',)
+        })
+    )
+
+
 admin.site.register(Book, BooksAdmin)
-admin.site.register(User, UsersAdmin)
 admin.site.register(Author, AuthorsAdmin)
-admin.site.register(History, HistoryAdmin)
 admin.site.register(Review, ReviewsAdmin)
+admin.site.register(History, HistoryAdmin)
+admin.site.register(GoogleUser, GoogleUserAdmin)
