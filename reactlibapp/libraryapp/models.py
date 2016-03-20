@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class BaseInfo(models.Model):
@@ -15,17 +16,16 @@ class BaseInfo(models.Model):
         abstract = True
 
 
-class User(BaseInfo):
-    """User model defined."""
+class GoogleUser(models.Model):
+    google_id = models.CharField(max_length=60, unique=True)
 
-    USER_ROLE = (
-        ('A', 'Admin'),
-        ('U', 'User'),
-    )
+    app_user = models.OneToOneField(User, related_name='user',
+                                    on_delete=models.CASCADE)
+    appuser_picture = models.TextField()
 
-    name = models.CharField(max_length=200)
-    email = models.EmailField(max_length=254)
-    role = models.CharField(max_length=2, choices=USER_ROLE)
+    def __unicode__(self):
+        return "%s - %s" % (self.contrib_user.first_name,
+                            self.contrib_user.last_name)
 
 
 class Author(BaseInfo):
@@ -64,7 +64,7 @@ class Review(BaseInfo):
 
     comment = models.TextField()
     # ratings needs to be implemented here.
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey('Book', on_delete=models.CASCADE)
 
     def __unicode__(self):
@@ -90,7 +90,7 @@ class History(BaseInfo):
     exptdreturn_date = property(_expected_return_date)
 
     book = models.ForeignKey('Book', on_delete=models.CASCADE)
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return "History for user : {}" .format(self.user)
