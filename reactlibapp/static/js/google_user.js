@@ -26,4 +26,5 @@ function onSignIn(googleUser) {
     console.log('Email: ' + profile.getEmail());
 }
 
-'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=XYZ123'
+
+//url: "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token,
