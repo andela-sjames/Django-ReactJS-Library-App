@@ -25,7 +25,7 @@ class GoogleUser(models.Model):
 
     def __unicode__(self):
         return "%s %s" % (self.app_user.first_name,
-                            self.app_user.last_name)
+                          self.app_user.last_name)
 
 
 class Author(BaseInfo):
@@ -47,6 +47,7 @@ class Book(BaseInfo):
     publisher = models.CharField(max_length=100)
     isbn = models.CharField(max_length=50)
     author = models.ForeignKey('Author', on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
 
     def _check_status(self):
         if self.quantity <= 0:
@@ -92,5 +93,13 @@ class History(BaseInfo):
     book = models.ForeignKey('Book', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ('-created_at',)
+
     def __unicode__(self):
         return "History for user : {}" .format(self.user)
+
+
+class Category(BaseInfo):
+
+    name = models.CharField(max_length=200)
