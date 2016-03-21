@@ -24,8 +24,8 @@ class GoogleUser(models.Model):
     appuser_picture = models.TextField()
 
     def __unicode__(self):
-        return "%s - %s" % (self.contrib_user.first_name,
-                            self.contrib_user.last_name)
+        return "%s %s" % (self.app_user.first_name,
+                            self.app_user.last_name)
 
 
 class Author(BaseInfo):
