@@ -1,5 +1,6 @@
 from django.contrib import admin
-from libraryapp.models import Author, Book, Review, History, GoogleUser
+from libraryapp.models import Author, Book, Review, History, GoogleUser, \
+    Category
 
 
 class BooksAdmin(admin.ModelAdmin):
@@ -22,7 +23,7 @@ class BooksAdmin(admin.ModelAdmin):
             'fields': ('created_at', 'updated_at')
         }),
         ("Relationship", {
-            'fields': ('author',)
+            'fields': ('author', 'category')
         })
     )
 
@@ -98,8 +99,21 @@ class GoogleUserAdmin(admin.ModelAdmin):
     )
 
 
+class CategoryUserAdmin(admin.ModelAdmin):
+    """Category admin model class defined."""
+
+    search_fields = ['^name']
+
+    fieldsets = (
+        ("Basic Information", {
+            'fields': ('name',)
+        }),
+    )
+
+
 admin.site.register(Book, BooksAdmin)
 admin.site.register(Author, AuthorsAdmin)
 admin.site.register(Review, ReviewsAdmin)
 admin.site.register(History, HistoryAdmin)
 admin.site.register(GoogleUser, GoogleUserAdmin)
+admin.site.register(Category, CategoryUserAdmin)
