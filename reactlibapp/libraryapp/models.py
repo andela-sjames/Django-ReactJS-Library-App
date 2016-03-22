@@ -101,5 +101,24 @@ class History(BaseInfo):
 
 
 class Category(BaseInfo):
+    """Book category model defined."""
 
     name = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return "Category : {}" .format(self.name)
+
+
+class Interest(BaseInfo):
+    """User Interest Model defined."""
+
+    done = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('-created_at',)
+
+    def __unicode__(self):
+        return "User {} interested in book {}" .format(self.user.username,
+                                                       self.book.title)

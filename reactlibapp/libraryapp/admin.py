@@ -1,6 +1,6 @@
 from django.contrib import admin
 from libraryapp.models import Author, Book, Review, History, GoogleUser, \
-    Category
+    Category, Interest
 
 
 class BooksAdmin(admin.ModelAdmin):
@@ -111,9 +111,26 @@ class CategoryUserAdmin(admin.ModelAdmin):
     )
 
 
+class InterestUserAdmin(admin.ModelAdmin):
+    """Intereset Admin Model Class defined."""
+
+    date_hierarchy = 'created_at'
+    readonly_fields = ('created_at', 'updated_at')
+
+    fieldsets = (
+        (None, {
+            'fields': ('done',)
+        }),
+        ("Relationship", {
+            'fields': ('user', 'book')
+        }),
+    )
+
+
 admin.site.register(Book, BooksAdmin)
 admin.site.register(Author, AuthorsAdmin)
 admin.site.register(Review, ReviewsAdmin)
 admin.site.register(History, HistoryAdmin)
 admin.site.register(GoogleUser, GoogleUserAdmin)
 admin.site.register(Category, CategoryUserAdmin)
+admin.site.register(Interest, InterestUserAdmin)
