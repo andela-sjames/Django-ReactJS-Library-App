@@ -105,6 +105,9 @@ class Category(BaseInfo):
 
     name = models.CharField(max_length=200)
 
+    def __unicode__(self):
+        return "Category : {}" .format(self.name)
+
 
 class Interest(BaseInfo):
     """User Interest Model defined."""
@@ -115,3 +118,7 @@ class Interest(BaseInfo):
 
     class Meta:
         ordering = ('-created_at',)
+
+    def __unicode__(self):
+        return "User {} interested in book {}" .format(self.user.username,
+                                                       self.book.title)
