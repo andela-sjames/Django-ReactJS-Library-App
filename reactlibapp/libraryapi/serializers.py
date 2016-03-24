@@ -5,6 +5,22 @@ from libraryapp.models import Book, Author, GoogleUser, Review, History,\
 from rest_framework import serializers
 
 
+class UserSerializer(serializers.ModelSerializer):
+    """User Model serializer class."""
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name')
+
+
+class GoogleUserSerializer(serializers.ModelSerializer):
+    """GoogleUser Model serializer class."""
+
+    class Meta:
+        model = GoogleUser
+        fields = ('google_id', 'app_user', 'appuser_picture')
+
+
 class AuthorSerializer(serializers.ModelSerializer):
     """Author Model serializer class."""
 
@@ -33,4 +49,41 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = ('title', 'description', 'quantiy', 'edition', 'publisher',
                   'isbn', 'author', 'category')
+        exclude = ('created_at', 'updated_at')
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    """Review Model Serializer class."""
+
+    user = UserSerializer(many=True, read_only=True)
+    book = BookSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Review
+        fields = ('comment', 'user', 'book')
+        exclude = ('created_at', 'updated_at')
+
+
+class InterestSerializer(serializers.ModelSerializer):
+    """Interest Model serializer class."""
+
+    user = UserSerializer(many=True, read_only=True)
+    book = BookSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Interest
+        fields = ('done', 'user', 'book')
+        exclude = ('created_at', 'updated_at')
+
+
+class HistorySerializer(serializers.ModelSerializer):
+    """History Model serializer class."""
+
+    user = UserSerializer(many=True, read_only=True)
+    book = BookSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = History
+        fields = ('lending_date', 'return_date',
+                  'returned', 'exptdreturn_date', 'book', 'user')
         exclude = ('created_at', 'updated_at')
