@@ -17,11 +17,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from libraryapp import views
-import libraryapp
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.HomeView.as_view(), name='homepage'),
-    url(r'^libraryapp/', include('libraryapp.urls'))
+    url(r'^libraryapp/', include('libraryapp.urls')),
+    url(r'^api/', include('libraryapi.urls'))
 
 ]
