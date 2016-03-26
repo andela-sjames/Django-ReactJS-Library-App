@@ -12,7 +12,7 @@ from libraryapi.serializers import CategorySerializer, AuthorSerializer, BookSer
 
 
 class CategoryListView(ListAPIView):
-     """List all Categories."""
+    """List all Categories."""
 
     model = Category
     serializer_class = CategorySerializer
