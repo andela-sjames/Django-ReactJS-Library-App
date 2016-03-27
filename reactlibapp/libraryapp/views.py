@@ -11,7 +11,7 @@ from .models import GoogleUser
 
 class HomeView(TemplateView):
 
-    template_name = 'libraryapp/home.html'
+    template_name = "libraryapp/main.html"
 
 
 class GoogleLoginView(View):

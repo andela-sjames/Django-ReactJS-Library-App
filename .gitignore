@@ -69,3 +69,6 @@ target/
 
 # escape database
 db.sqlite3
+
+# staticfiles
+staticfiles
