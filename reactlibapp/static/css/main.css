@@ -10,3 +10,34 @@ body {
   smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+
+.ui.header {
+    color: white;
+}
+
+.ui.block.header {
+    font-family: 'Kaushan Script', cursive;
+    background: #4A90E2;
+}
+
+#wrapper {
+    min-height:100%;
+    position:relative;
+}
+
+#content {
+    padding-bottom:100px; /* Height of the footer element */
+}
+
+#footer {
+    width:100%;
+    /*height:100px;*/
+    position:absolute;
+    bottom:0;
+    left:0;
+    background: #4A90E2;
+}
+
+.ui.floated.header {
+    color: white;
+}
