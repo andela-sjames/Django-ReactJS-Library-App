@@ -18,6 +18,10 @@ urlpatterns = [
 
     url(r'^interest/$', views.InterestListView.as_view(),
         name='api_interest'),
+
+    url(r'^quotes/$', views.QuotesListView.as_view(),
+        name='apiquotes'),
+
 ]
 
 

@@ -122,3 +122,12 @@ class Interest(BaseInfo):
     def __unicode__(self):
         return "User {} interested in book {}" .format(self.user.username,
                                                        self.book.title)
+
+class Quote(models.Model):
+    """Model used to define homepage quotes"""
+
+    author = models.CharField(max_length=100)
+    statement = models.TextField()
+
+    def __unicode__(self):
+        return "{}" .format(self.author)

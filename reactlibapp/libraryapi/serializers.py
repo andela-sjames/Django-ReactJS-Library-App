@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from libraryapp.models import Book, Author, GoogleUser, Review, History,\
-    Category, Interest
+    Category, Interest, Quote
 
 from rest_framework import serializers
 
@@ -87,3 +87,11 @@ class HistorySerializer(serializers.ModelSerializer):
         fields = ('lending_date', 'return_date',
                   'returned', 'exptdreturn_date', 'book', 'user')
         exclude = ('created_at', 'updated_at')
+
+
+class QuoteSerializer(serializers.ModelSerializer):
+    """Quotes  Model serializer class."""
+
+    class Meta:
+        model = Quote
+        fields = ("author", "statement")

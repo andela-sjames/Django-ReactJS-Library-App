@@ -6,9 +6,9 @@ from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView, ListAPIView
 
 from libraryapi.setpagination import LimitOffsetpage
-from libraryapp.models import Category, Author, Book, History, Interest
+from libraryapp.models import Category, Author, Book, History, Interest, Quote
 from libraryapi.serializers import CategorySerializer, AuthorSerializer, BookSerializer,\
-    HistorySerializer, InterestSerializer
+    HistorySerializer, InterestSerializer, QuoteSerializer
 
 
 class CategoryListView(ListAPIView):
@@ -78,3 +78,12 @@ class InterestListView(ListAPIView):
 
         return queryset
 
+
+class QuotesListView(ListAPIView):
+    """List all quotes and respective authors."""
+
+    model = Quote
+    serializer_class = QuoteSerializer
+    queryset = Quote.objects.all()
+    pagination_class = LimitOffsetpage
+    filter_fields = ('author', 'statement')
