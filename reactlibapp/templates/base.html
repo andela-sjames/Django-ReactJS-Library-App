@@ -17,7 +17,8 @@
      <link href="{% static 'bower_components/semantic/dist/semantic.min.css' %}" rel="stylesheet" type="text/css" media="screen" />
      <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css" media="screen" />
      <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-     <script src="https://apis.google.com/js/platform.js" async defer></script>
+     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -36,6 +37,21 @@
 
 
     {% endblock main %}
+
+    <div class="ui basic modal">
+    <i class="close icon"></i>
+        <div class="header">
+            Archive Old Messages
+        </div>
+          <div class="image content">
+            <div class="image">
+              <i class="archive icon"></i>
+            </div>
+            <div class="description">
+              <p>Please sign in with your andela account?</p>
+            </div>
+          </div>
+    </div>
 
 {% block base_js %}
      <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>

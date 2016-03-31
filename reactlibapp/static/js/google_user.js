@@ -31,7 +31,10 @@ function onSignIn(googleUser) {
                     error: function(error) {
                          console.log(error.responseText)
                         if (error.status == 405) {
-                            alert("wrong data received")
+
+                            $('.ui.basic.modal')
+                                .modal('show');
+                            signOut();
                         }
 
                     },
@@ -58,5 +61,27 @@ function onSignIn(googleUser) {
     console.log('Email: ' + profile.getEmail());
 }
 
+function onFailure(error) {
+      console.log(error);
+    }
+
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.disconnect().then(function () {
+      console.log('User signed out.');
+    });
+}
+
+function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSignIn,
+        'onfailure': onFailure
+      });
+    }
 
 //url: "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token,

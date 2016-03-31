@@ -16,23 +16,17 @@
             $("#quotesDisplay").typed({
                 strings: quotes_result,
                 loop: true,
-                showCursor: true,
+                showCursor: false,
                 contentType: 'html',
                 typeSpeed: 30,
                 backSpeed: 0,
             });
 
 
-            // $("#authorDisplay").typed({
-            //     strings: quotes_author,
-            //     loop: true,
-            //     showCursor: true,
-            //     contentType: 'html',
-            //     typeSpeed: 250,
-            //     backSpeed: 250,
-            //     backDelay: 1000,
-            // });
+        },
 
+        error: function(error) {
+            console.log(error.responseText)
         },
 
 

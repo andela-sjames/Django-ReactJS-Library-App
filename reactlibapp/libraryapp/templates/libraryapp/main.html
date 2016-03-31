@@ -6,16 +6,30 @@
 {% block main %}
     <div id="wrapper">
         <div id="header"><h1 class="ui block header">CuriousMind</h1></div>
-        <div id="quotesDisplay" class="typed-curso"></div>
-        <div id="authorDisplay" class="typed-curso"></div>
-        <div id="text"></div>
-        <div id="signin"></div>
+
+        <div id="space"></div>
+        <div class="divider"></div>
+
+        <div class="typed">
+            <center><p id="quotesDisplay"></p></center>
+        </div>
+
+        <div class="divider"></div>
+
+        <center>
+        <div id="my-signin2" class="signin">
+        </div>
+
+        </center>
+
+
+
         <div id="footer" class="ui clearing segment">
             <h3 class="ui right floated header">
-                copyright 2016
+                Andela
             </h3>
             <h3 class="ui left floated header">
-                Andela
+                © {% now "Y" %}
             </h3>
         </div>
     </div>
