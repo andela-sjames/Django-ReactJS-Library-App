@@ -23,7 +23,6 @@ body {
 
 #wrapper {
     min-height:100%;
-    position:relative;
 }
 
 #content {
@@ -71,9 +70,19 @@ body {
   height:120px;
   padding:46px;
   color:#000;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   font-size:16px;
   line-height:1.5em;
+}
+
+p#quotesDisplay {
+    font-weight: lighter;
+    color: #9A9794;
+}
+
+#info {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #9A9794;
 }
 
 .divider {
@@ -99,49 +108,3 @@ body {
 .signin {
   margin-top: 37px;
 }
-
-.custom {
-  padding: 1.31714em 7.5em !important;
-}
-
-.google.icon {
-
-}
-
-#customBtn {
-      display: inline-block;
-      background: white;
-      color: #444;
-      width: 280px;
-      border-radius: 5px;
-      border: thin solid #888;
-      box-shadow: 1px 1px 1px grey;
-      white-space: nowrap;
-    }
-    #customBtn:hover {
-      cursor: pointer;
-    }
-    span.label {
-      font-family: serif;
-      font-weight: normal;
-    }
-    span.icon {
-      background: url('../img/btn_google_light_normal_ios.svg') no-repeat;
-      display: inline-block;
-      vertical-align: middle;
-      width: 42px;
-      height: 42px;
-      position: relative;
-      top: -1px;
-      left: -8px;
-    }
-    span.buttonText {
-      display: inline-block;
-      vertical-align: middle;
-      padding-left: 30px;
-      padding-right: 30px;
-      font-size: 14px;
-      font-weight: bold;
-      /* Use the Roboto font that is loaded in the <head> */
-      font-family: 'Roboto', sans-serif;
-    }
