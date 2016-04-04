@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Library | Home{% endblock %}
+
+{% block main %}
+    <div id="wrapper">
+        <div id="header"><h1 class="ui block header">CuriousMind</h1></div>
+
+        <div id="space"></div>
+        <div class="divider"></div>
+
+        <div class="typed">
+            <center><p id="quotesDisplay"></p></center>
+        </div>
+
+        <div class="divider"></div>
+
+        <center>
+            <div id="my-signin2" class="signin"></div>
+            <div><p id="info">For Andela</p></div>
+        </center>
+
+
+
+        <div id="footer" class="ui clearing segment">
+            <h3 class="ui right floated header">
+                Andela
+            </h3>
+            <h3 class="ui left floated header">
+                © {% now "Y" %}
+            </h3>
+        </div>
+    </div>
+{% endblock %}
+
+

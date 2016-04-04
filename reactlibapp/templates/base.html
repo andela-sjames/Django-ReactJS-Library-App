@@ -15,7 +15,16 @@
     <title>{% block title %}Andela Library{% endblock %}</title>
 
      <link href="{% static 'bower_components/semantic/dist/semantic.min.css' %}" rel="stylesheet" type="text/css" media="screen" />
-     <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+     <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css" media="screen" />
+
+     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+
+     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+
+     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+
+     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -35,11 +44,28 @@
 
     {% endblock main %}
 
+    <div class="ui basic modal">
+    <i class="close icon"></i>
+        <div class="header">
+            <center><P>Something is not right..</P></center>
+        </div>
+          <div class="image content">
+            <div class="image">
+              <i class="warning icon"></i>
+            </div>
+            <div class="description">
+              <center><p>Please sign in with your andela account?</p></center>
+            </div>
+          </div>
+    </div>
+
 {% block base_js %}
      <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
      <script src="{% static 'bower_components/semantic/dist/semantic.min.js' %}"></script>
+     <script src="{% static 'bower_components/typed.js/dist/typed.min.js' %}"></script>
      <script src="{% static 'js/google_user.js' %}"></script>
-
+     <script src="{% static 'js/transition.js' %}"></script>
+     <script src="{% static 'dist/index_bundle.js' %}"></script>
 
 
 {% endblock %}

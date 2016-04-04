@@ -1,6 +1,6 @@
 from django.contrib import admin
 from libraryapp.models import Author, Book, Review, History, GoogleUser, \
-    Category, Interest
+    Category, Interest, Quote
 
 
 class BooksAdmin(admin.ModelAdmin):
@@ -127,6 +127,16 @@ class InterestUserAdmin(admin.ModelAdmin):
     )
 
 
+class QuoteAdmin(admin.ModelAdmin):
+    """Quotes Admin Class defined."""
+
+    fieldsets = (
+        (None, {
+            'fields': ('author', 'statement')
+        }),
+    )
+
+
 admin.site.register(Book, BooksAdmin)
 admin.site.register(Author, AuthorsAdmin)
 admin.site.register(Review, ReviewsAdmin)
@@ -134,3 +144,4 @@ admin.site.register(History, HistoryAdmin)
 admin.site.register(GoogleUser, GoogleUserAdmin)
 admin.site.register(Category, CategoryUserAdmin)
 admin.site.register(Interest, InterestUserAdmin)
+admin.site.register(Quote, QuoteAdmin)
