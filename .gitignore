@@ -65,10 +65,16 @@ target/
 *.env.*
 
 # ignore node modules
-/node_modules
+reactlibapp/static/node_modules
+
+# ignore bower components
+/bower_components
 
 # escape database
 db.sqlite3
 
 # staticfiles
-staticfiles
+reactlibapp/staticfiles
+
+# dist
+reactlibapp/static/dist
