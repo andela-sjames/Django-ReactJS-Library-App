@@ -16,9 +16,11 @@ class UserSerializer(serializers.ModelSerializer):
 class GoogleUserSerializer(serializers.ModelSerializer):
     """GoogleUser Model serializer class."""
 
+
     class Meta:
         model = GoogleUser
         fields = ('google_id', 'app_user', 'appuser_picture')
+        depth = 1
 
 
 class AuthorSerializer(serializers.ModelSerializer):

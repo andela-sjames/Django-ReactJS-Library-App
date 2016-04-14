@@ -21,6 +21,19 @@
     font-family: 'Kaushan Script', cursive;
 }
 
+/*#header-text {
+    color: #4A90E2;
+    font-family: "Lato", sans-serif;
+}*/
+.cont {
+    display: flex;
+    flex-direction: row;
+}
+
+.item {
+    flex: auto;
+}
+
 .ui.block.header {
     font-family: 'Kaushan Script', cursive;
     background: #4A90E2;

@@ -1,4 +1,6 @@
+
 from django.http import Http404
+from django.contrib.auth.models import User
 
 from rest_framework import status
 from rest_framework import filters
@@ -6,9 +8,27 @@ from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView, ListAPIView
 
 from libraryapi.setpagination import LimitOffsetpage
-from libraryapp.models import Category, Author, Book, History, Interest, Quote
+from libraryapp.models import Category, Author, Book, History, Interest, Quote, GoogleUser
 from libraryapi.serializers import CategorySerializer, AuthorSerializer, BookSerializer,\
-    HistorySerializer, InterestSerializer, QuoteSerializer
+    HistorySerializer, InterestSerializer, QuoteSerializer, GoogleUserSerializer
+
+
+class GoogleUserView(GenericAPIView):
+    """List Google User by Id."""
+
+    model = GoogleUser
+    serializer_class = GoogleUserSerializer
+
+    def get(self, request):
+        id = self.request.user.id
+        app_user = User.objects.get(id=id)
+        try:
+            google_user = GoogleUser.objects.get(app_user=app_user)
+        except GoogleUser.DoesNotExist:
+            raise Http404
+
+        serializer = GoogleUserSerializer(google_user)
+        return Response(serializer.data)
 
 
 class CategoryListView(ListAPIView):

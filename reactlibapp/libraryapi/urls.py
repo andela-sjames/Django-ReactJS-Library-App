@@ -4,6 +4,9 @@ from libraryapi import views, usertoken
 
 
 urlpatterns = [
+    url(r'^appuser/$', views.GoogleUserView.as_view(),
+        name='app_user'),
+
     url(r'^categories/$', views.CategoryListView.as_view(),
         name='apicategory'),
 

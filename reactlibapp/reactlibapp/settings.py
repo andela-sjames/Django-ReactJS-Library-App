@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -77,16 +78,27 @@ TEMPLATES = [
 WSGI_APPLICATION = 'reactlibapp.wsgi.application'
 
 
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(os.path.dirname(__file__), 'test.db')
+        }
+    }
+
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'LibraryApp',
+        'USER': 'Administrator',
+        'PASSWORD': 'administrator',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -134,7 +146,6 @@ SWAGGER_SETTINGS = {
     "title": "moments-bucketlist API ",
     "description": " A web API for creating Buckelist, i.e list of stuffs you want to do before you die.",
 }
-
 
 
 # Static files (CSS, JavaScript, Images)
