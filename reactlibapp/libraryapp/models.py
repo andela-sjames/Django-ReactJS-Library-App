@@ -33,8 +33,27 @@ class Author(BaseInfo):
 
     name = models.CharField(max_length=200)
 
+    class Meta:
+        """Define odering below."""
+
+        ordering = ['name']
+
     def __unicode__(self):
         return "{}" .format(self.name)
+
+
+class Category(BaseInfo):
+    """Book category model defined."""
+
+    name = models.CharField(max_length=200)
+
+    class Meta:
+        """Define odering below."""
+
+        ordering = ['name']
+
+    def __unicode__(self):
+        return "Category : {}" .format(self.name)
 
 
 class Book(BaseInfo):
@@ -46,8 +65,8 @@ class Book(BaseInfo):
     edition = models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
     isbn = models.CharField(max_length=50)
-    author = models.ForeignKey('Author', on_delete=models.CASCADE)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    author = models.ManyToManyField(Author)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def _check_status(self):
         if self.quantity <= 0:
@@ -55,6 +74,11 @@ class Book(BaseInfo):
         else:
             return "Available"
     status = property(_check_status)
+
+    class Meta:
+        """Define odering below."""
+
+        ordering = ['title']
 
     def __unicode__(self):
         return "Book title: {}" .format(self.title)
@@ -66,7 +90,7 @@ class Review(BaseInfo):
     comment = models.TextField()
     # ratings needs to be implemented here.
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return "Review by user : {}" .format(self.user)
@@ -90,7 +114,7 @@ class History(BaseInfo):
 
     exptdreturn_date = property(_expected_return_date)
 
-    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
@@ -100,21 +124,12 @@ class History(BaseInfo):
         return "History for user : {}" .format(self.user)
 
 
-class Category(BaseInfo):
-    """Book category model defined."""
-
-    name = models.CharField(max_length=200)
-
-    def __unicode__(self):
-        return "Category : {}" .format(self.name)
-
-
 class Interest(BaseInfo):
     """User Interest Model defined."""
 
     done = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('-created_at',)
@@ -122,6 +137,7 @@ class Interest(BaseInfo):
     def __unicode__(self):
         return "User {} interested in book {}" .format(self.user.username,
                                                        self.book.title)
+
 
 class Quote(models.Model):
     """Model used to define homepage quotes"""

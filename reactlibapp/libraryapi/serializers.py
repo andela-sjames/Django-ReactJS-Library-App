@@ -28,8 +28,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = '__all__'
-        exclude = ('created_at', 'updated_at')
+        fields = ('name', )
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -37,21 +36,19 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = '__all__'
-        exclude = ('created_at', 'updated_at')
+        fields = ('name', )
 
 
 class BookSerializer(serializers.ModelSerializer):
     """Book Model serializer class."""
 
     author = AuthorSerializer(many=True, read_only=True)
-    category = CategorySerializer(many=True, read_only=True)
 
     class Meta:
         model = Book
-        fields = ('title', 'description', 'quantiy', 'edition', 'publisher',
+        fields = ('title', 'description', 'quantity', 'edition', 'status', 'publisher',
                   'isbn', 'author', 'category')
-        exclude = ('created_at', 'updated_at')
+        depth = 1
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -63,7 +60,6 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('comment', 'user', 'book')
-        exclude = ('created_at', 'updated_at')
 
 
 class InterestSerializer(serializers.ModelSerializer):
@@ -75,7 +71,6 @@ class InterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Interest
         fields = ('done', 'user', 'book')
-        exclude = ('created_at', 'updated_at')
 
 
 class HistorySerializer(serializers.ModelSerializer):
@@ -88,7 +83,6 @@ class HistorySerializer(serializers.ModelSerializer):
         model = History
         fields = ('lending_date', 'return_date',
                   'returned', 'exptdreturn_date', 'book', 'user')
-        exclude = ('created_at', 'updated_at')
 
 
 class QuoteSerializer(serializers.ModelSerializer):

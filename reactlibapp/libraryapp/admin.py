@@ -1,6 +1,13 @@
+
 from django.contrib import admin
 from libraryapp.models import Author, Book, Review, History, GoogleUser, \
     Category, Interest, Quote
+
+
+class AuthorInline(admin.TabularInline):
+    """Inline class defined for m2m field."""
+
+    model = Book.author.through
 
 
 class BooksAdmin(admin.ModelAdmin):
@@ -23,9 +30,15 @@ class BooksAdmin(admin.ModelAdmin):
             'fields': ('created_at', 'updated_at')
         }),
         ("Relationship", {
-            'fields': ('author', 'category')
+            'fields': ('category',)
         })
     )
+
+    inlines = [
+        AuthorInline,
+    ]
+
+    exclude = ('author',)
 
 
 class AuthorsAdmin(admin.ModelAdmin):
@@ -43,6 +56,10 @@ class AuthorsAdmin(admin.ModelAdmin):
             'fields': ('created_at', 'updated_at')
         }),
     )
+
+    inlines = [
+        AuthorInline,
+    ]
 
 
 class HistoryAdmin(admin.ModelAdmin):
