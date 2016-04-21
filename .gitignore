@@ -71,9 +71,6 @@ reactlibapp/static/node_modules
 # ignore bower components
 /bower_components
 
-# escape database
-db.sqlite3
-
 # staticfiles
 reactlibapp/staticfiles
 
