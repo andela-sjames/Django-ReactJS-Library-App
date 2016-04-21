@@ -20,6 +20,7 @@ lib64/
 parts/
 sdist/
 var/
+.env
 *.egg-info/
 .installed.cfg
 *.egg
@@ -60,3 +61,18 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+# escape env.yml file
+*.env.*
+
+# ignore node modules
+reactlibapp/static/node_modules
+
+# ignore bower components
+/bower_components
+
+# staticfiles
+reactlibapp/staticfiles
+
+# dist
+reactlibapp/static/dist
