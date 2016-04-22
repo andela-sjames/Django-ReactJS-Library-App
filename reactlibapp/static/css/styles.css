@@ -17,17 +17,21 @@
 
 #title {
     color: #4A90E2;
-/*    margin-top: 10px;*/
     font-family: 'Kaushan Script', cursive;
+    /*position: relative;
+    left: 15px;*/
 }
 
-/*#header-text {
+#h-text {
     color: #4A90E2;
     font-family: "Lato", sans-serif;
-}*/
+    position: relative;
+    top: 6px;
+}
 .cont {
-    display: flex;
+    display: inline-flex !important;
     flex-direction: row;
+    width: 22% !important;
 }
 
 .item {
@@ -42,6 +46,7 @@
 
 #head {
     background: white;
+    padding-left: 30px;
 }
 
 .footer-title {
@@ -61,4 +66,12 @@
     left:0;
     background: white;
     border-radius:0;
+}
+
+.ui.grid>[class*="four column"].row>.column {
+     width: 22%!important;
+}
+#pix {
+    /*position: relative;
+    left: 4px;*/
 }

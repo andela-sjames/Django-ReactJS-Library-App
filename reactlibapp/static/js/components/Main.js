@@ -1,6 +1,7 @@
 var React = require('react');
 require('../../css/styles.css')
 var axios = require('axios')
+require('jquery')
 
 var Header = React.createClass({
     render: function(){
@@ -13,8 +14,8 @@ var Header = React.createClass({
                             <h1 id="title">CuriousMind</h1>
                         </div>
                         <div className="right floated column cont">
-                            <div className="item"><span id="title">Logged in as {this.props.username}</span></div>
-                            <div className="item"><img src={this.props.image} className="ui mini circular image"/></div>
+                            <div className="item"><h4 id="h-text">Logged in as {this.props.username}</h4></div>
+                            <div id="pix" className="item"><img src={this.props.image} className="ui mini circular image"/></div>
                         </div>
                     </div>
                 </div>
@@ -59,11 +60,14 @@ var Main = React.createClass({
     },
 
     componentDidMount: function() {
-        return this.getUserDetail()
+        $('.menu .item')
+          .tab()
+        ;
+        this.getUserDetail()
             .then(this.getResult)
               .catch(function (response) {
                 console.log(response);
-            });
+        });
     },
 
 
