@@ -1,5 +1,8 @@
 var React = require('react');
-require('../../css/main.css')
+require('../../css/main.css');
+var Books = require('./Books');
+var Categories = require('./Categories');
+var Authors = require('./Authors');
 
 
 // var styles = {
@@ -27,13 +30,13 @@ var Home = React.createClass({
                     </div>
                     <div>
                         <div className="ui bottom attached tab segment active" data-tab="Books">
-                          Books component
+                          <Books />
                         </div>
                         <div className="ui bottom attached tab segment" data-tab="Categories">
-                          Categories component
+                          <Categories />
                         </div>
                         <div className="ui bottom attached tab segment" data-tab="Authors">
-                          Authors component
+                          <Authors />
                         </div>
                         <div className="ui bottom attached tab segment" data-tab="Interest">
                           Interest component
