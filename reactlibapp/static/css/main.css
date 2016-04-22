@@ -25,9 +25,6 @@ body {
     min-height:100%;
 }
 
-#content {
-    padding-bottom:100px; /* Height of the footer element */
-}
 
 #footer {
     width:100%;
@@ -101,10 +98,23 @@ p#quotesDisplay {
   background-color: #4A90E2;
 }
 
-#space {
+.space {
   height: 60px;
+}
+
+.spacetop {
+  height: 30px;
+}
+
+.spacebtm {
+  height: 20px;
 }
 
 .signin {
   margin-top: 37px;
+}
+
+.content {
+  padding-left: 33px;
+  padding-right: 33px;
 }
