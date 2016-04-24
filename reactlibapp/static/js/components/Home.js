@@ -5,15 +5,6 @@ var Categories = require('./Categories');
 var Authors = require('./Authors');
 
 
-// var styles = {
-
-//     header: {
-//         fontSize: 45,
-//         color: '#fff',
-//         fontWeight: 100,
-//       },
-// }
-
 var Home = React.createClass({
 
     render: function() {

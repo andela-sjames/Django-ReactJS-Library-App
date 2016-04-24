@@ -1,12 +1,37 @@
 var React = require('react');
 require('../../css/styles.css')
+var axios = require('axios')
+
+
+function BookItem(props){
+    console.log(props.data);
+    return(
+        <div>Hey....</div>
+    )
+}
+
+function Details(props) {
+    var sections = []
+        if(props.data.results !== undefined){
+            props.data.results.forEach(function(item, i){
+                sections.push(<BookItem data={item} key={i}/>)
+            });
+        }
+
+    return (
+        <div>
+
+            {sections}
+
+        </div>
+    )
+}
 
 var Books = React.createClass({
 
     getInitialState: function() {
         return {
-            username: '',
-            image_url: ''
+            data: []
         };
     },
 
@@ -15,10 +40,8 @@ var Books = React.createClass({
     },
 
     getSetResult: function(response) {
-        this.setState({
-
-        });
-    }
+        this.setState({ data: response.data});
+    },
 
     componentDidMount: function() {
         this.getBookDetail()
@@ -30,9 +53,7 @@ var Books = React.createClass({
 
     render: function() {
         return (
-            <div>
-                I have a lot of books
-            </div>
+            <Details data={this.state.data}/>
         );
     }
 

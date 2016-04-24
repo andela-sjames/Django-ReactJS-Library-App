@@ -1,11 +1,10 @@
 var React = require('react');
 require('../../css/styles.css')
 var axios = require('axios')
-require('jquery')
+// require('jquery')
 
 var Header = React.createClass({
     render: function(){
-        console.log(this.props);
         return (
             <div id="head" className="ui block header">
                 <div className="ui grid">
