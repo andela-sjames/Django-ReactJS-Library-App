@@ -1,2 +1,2 @@
 # Django-ReactJS-Library-App
-An app to manage Amity library books.
+An app to manage Amity library books using ReactJS.
