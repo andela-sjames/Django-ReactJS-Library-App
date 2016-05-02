@@ -1,6 +1,10 @@
-from django.shortcuts import render
+
 from django.views.generic.base import TemplateView, View
-from django.http import HttpResponse, HttpResponseNotAllowed
+from django.http import (
+    HttpResponse,
+    HttpResponseNotAllowed,
+    HttpResponseRedirect)
+from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 
@@ -12,6 +16,12 @@ from .models import GoogleUser
 class HomeView(TemplateView):
 
     template_name = "libraryapp/main.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            return HttpResponseRedirect(
+                reverse_lazy('dashboard'))
+        return super(HomeView, self).dispatch(request, *args, **kwargs)
 
 
 class GoogleLoginView(View):
