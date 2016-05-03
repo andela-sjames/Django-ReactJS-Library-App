@@ -49,16 +49,6 @@ function onSignIn(googleUser) {
                     console.log(error.responseText)
                 },
         });
-
-
-
-
-
-    console.log('id_token: ' + id_token);
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail());
 }
 
 function onFailure(error) {
@@ -83,5 +73,3 @@ function renderButton() {
         'onfailure': onFailure
       });
     }
-
-//url: "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token,

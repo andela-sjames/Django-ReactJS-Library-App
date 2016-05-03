@@ -26,7 +26,6 @@ class HomeView(TemplateView):
 
 class GoogleLoginView(View):
 
-
     def get(self, request, *args, **kwargs):
 
         user_id = request.GET['sub']
