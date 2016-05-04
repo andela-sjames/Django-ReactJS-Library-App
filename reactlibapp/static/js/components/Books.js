@@ -6,7 +6,16 @@ var axios = require('axios')
 function BookItem(props){
     console.log(props.data);
     return(
-        <div>Hey....</div>
+        <div>
+            <table class="ui celled table">
+                <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Status</th>
+                      <th>Notes</th>
+                    </tr>
+                </thead>
+        </div>
     )
 }
 
