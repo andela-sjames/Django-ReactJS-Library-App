@@ -6,16 +6,17 @@ var axios = require('axios')
 function BookItem(props){
     console.log(props.data);
     return(
-        <div>
-            <table class="ui celled table">
-                <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Status</th>
-                      <th>Notes</th>
-                    </tr>
-                </thead>
-        </div>
+        <tbody>
+            <tr>
+                <td>{props.data.title}</td>
+                <td>{props.data.quantity}</td>
+                <td>{props.data.edition}</td>
+                <td>{props.data.status}</td>
+                <td>{props.data.publisher}</td>
+                <td>
+                </td>
+            </tr>
+       </tbody>
     )
 }
 
@@ -28,11 +29,19 @@ function Details(props) {
         }
 
     return (
-        <div>
-
+        <table className="ui celled table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Edition</th>
+                <th>Status</th>
+                <th>Punblisher</th>
+                <th>To Read</th>
+            </tr>
+            </thead>
             {sections}
-
-        </div>
+        </table>
     )
 }
 
@@ -62,6 +71,7 @@ var Books = React.createClass({
 
     render: function() {
         return (
+
             <Details data={this.state.data}/>
         );
     }
