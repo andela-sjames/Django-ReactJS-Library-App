@@ -1,6 +1,6 @@
 var React = require('react');
-require('../../css/styles.css')
-var axios = require('axios')
+require('../../css/styles.css');
+var axios = require('axios');
 
 
 function BookItem(props){
@@ -13,7 +13,9 @@ function BookItem(props){
                 <td>{props.data.edition}</td>
                 <td>{props.data.status}</td>
                 <td>{props.data.publisher}</td>
-                <td>
+                <td >
+                    <input type="checkbox" name="toRead"/>&nbsp;
+                    <label>Add to read list</label>
                 </td>
             </tr>
        </tbody>

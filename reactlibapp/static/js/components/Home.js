@@ -16,7 +16,7 @@ var Home = React.createClass({
                         <a className="item active" data-tab="Books">Books</a>
                         <a className="item" data-tab="Categories">Categories</a>
                         <a className="item" data-tab="Authors">Authors</a>
-                        <a className="item" data-tab="Interest">Interest</a>
+                        <a className="item" data-tab="Interest">My To ReadList</a>
                         <a className="item" data-tab="History">History</a>
                     </div>
                     <div>
