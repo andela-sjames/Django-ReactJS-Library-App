@@ -76,3 +76,9 @@ reactlibapp/staticfiles
 
 # dist
 reactlibapp/static/dist
+
+# virtual environment
+/venv
+
+# test database
+/reactlibapp/reactlibapp/test.db
