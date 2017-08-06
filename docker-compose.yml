@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  postgres:
+    restart: always
+    image: postgres
+    container_name: react_lib_db
+  web:
+    container_name: react_lib_web
+    build: ./reactlibapp
+    env_file:
+      - .env
+    volumes:
+      - .:/yeet
+    ports: 
+      - "8000:8000"
+    depends_on:
+      - postgres
