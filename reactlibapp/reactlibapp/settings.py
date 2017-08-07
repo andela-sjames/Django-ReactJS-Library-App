@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^u($$ydx__!2j_nh%pjh05_(krwn_v3&drldjko+s1_%838co&'
+SECRET_KEY = '^u($$ydx__!2j_nh%pjh05_(krwn_v3&drldjkos1_%838co&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,6 +78,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'reactlibapp.wsgi.application'
 
 
+# Database
+# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+DATABASES = {
+     'default': {
+          'ENGINE': 'django.db.backends.postgresql_psycopg2',
+          'NAME': os.environ.get('DB_NAME'),
+          'USER': os.environ.get('DB_USER'),
+          'PASSWORD': os.environ.get('DB_PASS'),
+          'HOST': os.environ.get('DB_SERVICE'),
+          'PORT': os.environ.get('DB_PORT'),
+          'TEST': {
+            'CHARSET': None, 
+            'COLLATION': None,
+            'NAME': os.path.join(os.path.dirname(__file__), 'test.db'), 
+            'MIRROR': None
+          }
+      },
+ }
+
 if 'test' in sys.argv:
     DATABASES = {
         'default': {
@@ -85,17 +104,6 @@ if 'test' in sys.argv:
             'NAME': os.path.join(os.path.dirname(__file__), 'test.db')
         }
     }
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(os.path.dirname(__file__), 'test.db')
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
