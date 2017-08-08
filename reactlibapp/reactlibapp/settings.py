@@ -104,16 +104,6 @@ if 'test' in sys.argv:
             'NAME': os.path.join(os.path.dirname(__file__), 'test.db')
         }
     }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'LibraryApp',
-#         'USER': 'Administrator',
-#         'PASSWORD': 'administrator',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
