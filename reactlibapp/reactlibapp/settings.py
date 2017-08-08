@@ -14,14 +14,18 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import sys
 
+import dotenv
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+dotenv.load()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^u($$ydx__!2j_nh%pjh05_(krwn_v3&drldjkos1_%838co&'
+
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -104,6 +108,7 @@ if 'test' in sys.argv:
             'NAME': os.path.join(os.path.dirname(__file__), 'test.db')
         }
     }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
