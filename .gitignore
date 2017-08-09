@@ -82,3 +82,8 @@ reactlibapp/static/dist
 
 # test database
 /reactlibapp/reactlibapp/test.db
+
+/reactlibapp/.env
+
+# ignore editor related files
+.vscode
