@@ -24,6 +24,7 @@ dotenv.load()
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -81,6 +82,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'reactlibapp.wsgi.application'
 
 
+# Database
+# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+DATABASES = {
+     'default': {
+          'ENGINE': 'django.db.backends.postgresql_psycopg2',
+          'NAME': os.environ.get('DB_NAME'),
+          'USER': os.environ.get('DB_USER'),
+          'PASSWORD': os.environ.get('DB_PASS'),
+          'HOST': os.environ.get('DB_SERVICE'),
+          'PORT': os.environ.get('DB_PORT'),
+          'TEST': {
+            'CHARSET': None, 
+            'COLLATION': None,
+            'NAME': os.path.join(os.path.dirname(__file__), 'test.db'), 
+            'MIRROR': None
+          }
+      },
+ }
+
 if 'test' in sys.argv:
     DATABASES = {
         'default': {
@@ -88,20 +108,6 @@ if 'test' in sys.argv:
             'NAME': os.path.join(os.path.dirname(__file__), 'test.db')
         }
     }
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASS'),
-        'HOST': os.getenv('DB_SERVICE'),
-        'PORT': os.getenv('DB_PORT')
-    }
-}
 
 
 # Internationalization

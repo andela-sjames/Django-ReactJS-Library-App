@@ -16,10 +16,19 @@ class ModelSetupTestCase(TestCase):
             username='Johndoe',
             email='johndoe@doe.com')
 
-        self.google_user1 = GoogleUser.objects.create(
-            facebook_id=1,
-            contrib_user=self.user1)
+        # self.google_user1 = GoogleUser.objects.create(
+        #     facebook_id=1,
+        #     contrib_user=self.user1)
 
 
 class TestUserCreation(ModelSetupTestCase):
-    pass
+    def test_user_exist(self):
+        John = User.objects.get(first_name='John')
+        self.assertTrue(John)
+
+    def test_user_created(self):
+        John = User.objects.get(first_name='John')
+        self.assertEqual(John.first_name, 'John')
+        self.assertEqual(John.last_name, 'doe')
+        self.assertEqual(John.username, 'Johndoe')
+        self.assertEqual(John.email, 'johndoe@doe.com')
