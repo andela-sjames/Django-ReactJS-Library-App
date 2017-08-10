@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e 
+
 function setup_client() {
   # navigate into the client folder to run webpack
   cd client
@@ -33,16 +35,17 @@ function export_env() {
   export DB_NAME=postgres
 }
 
-function docker() {
-  # TODO: @gentlefella fix plz
+# this needs to be redesigned though. 
+function exec_docker() {
 
-  if [ $1 == "start" ]; then
-    collect_static
+  if [ "$2" == "start" ]; then
+    setup_client
     docker-compose up
-  elif [ $1 == "stop" ]; then
+  elif [ "$2" == "stop" ]; then
     docker-compose down
   else
     echo "Enter an argument for docker: (start or stop)"
+    echo "$HELP_STRING"
   fi
 }
 
@@ -56,19 +59,58 @@ function local_serve() {
   setup_client & python manage.py runserver
 }
 
-if [ $1 == "docker" ]; then
-  export_env
-  docker $2
-elif [ $1 == "local" ]; then
-  export SECRET_KEY=django-react-library-app
-  if [ $2 == "production" ]; then
+function run_local() {
+  if [ "$2" == "production" ]; then
     export NODE_ENV=production
-  elif [ $2 == "test" ]; then
+  elif [ "$2" == "test" ]; then
     export NODE_ENV=test
   else
     export NODE_ENV=development
   fi
   local_serve
-else
-  echo "Please specify an environment: (docker or local)"
+}
+
+
+set +e
+
+read -d '' HELP_STRING <<'EOF'
+
+Usage:
+  ./start_app <command>
+
+commands:
+  docker
+  local
+  help
+
+sub-commands:
+  docker:
+    start
+    stop
+
+  local:
+    production
+    test
+
+example: 
+  ./start_app docker start
+  ./start_app docker stop
+  ./start_app local production
+  ./start_app local test
+  ./start_app local 
+  ./start_app help
+
+EOF
+
+set -e
+
+case "$1" in
+    local)   export SECRET_KEY=django-react-library-app; run_local $2; ;;
+    docker)  export_env; exec_docker $2 ;;
+    help)    show_help=true;  ;;
+    * )      echo "Unrecognized command '$1'."; show_help=true; ;;
+esac
+
+if [[ "$show_help" == "true" ]]; then
+    echo "$HELP_STRING"
 fi
