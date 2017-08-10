@@ -9,7 +9,8 @@
     "prebuild": "rm -rf ../static/{css,js,img}",
     "prewatch": "npm run prebuild",
     "test": "jest --config jest.json",
-    "pretest": "rm -rf coverage"
+    "pretest": "rm -rf coverage",
+    "report": "codecov"
   },
   "repository": {
     "type": "git",
