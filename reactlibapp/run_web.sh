@@ -18,10 +18,5 @@ until postgres_ready; do
   sleep 1
 done
 
-
-# prepare init migration
-su -m djangoreactapp -c "python manage.py makemigrations"  
-# migrate db, so we have the latest db schema
-su -m djangoreactapp -c "python manage.py migrate"  
-# start development server on public ip interface, on port 8000
-su -m djangoreactapp -c "python manage.py runserver 0.0.0.0:8000" 
+# get node installed 
+su -m djangoreactapp -c "./start_app.sh local"

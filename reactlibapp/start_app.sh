@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e 
 
@@ -35,13 +35,11 @@ function export_env() {
   export DB_NAME=postgres
 }
 
-# this needs to be redesigned though. 
 function exec_docker() {
 
-  if [ "$2" == "start" ]; then
-    setup_client
+  if [ "$1" == "start" ]; then
     docker-compose up
-  elif [ "$2" == "stop" ]; then
+  elif [ "$1" == "stop" ]; then
     docker-compose down
   else
     echo "Enter an argument for docker: (start or stop)"
@@ -60,9 +58,9 @@ function local_serve() {
 }
 
 function run_local() {
-  if [ "$2" == "production" ]; then
+  if [ "$1" == "production" ]; then
     export NODE_ENV=production
-  elif [ "$2" == "test" ]; then
+  elif [ "$1" == "test" ]; then
     export NODE_ENV=test
   else
     export NODE_ENV=development
@@ -106,8 +104,8 @@ set -e
 
 case "$1" in
     local)   export SECRET_KEY=django-react-library-app; run_local $2; ;;
-    docker)  export_env; exec_docker $2 ;;
-    help)    show_help=true;  ;;
+    docker)  export_env; exec_docker $2; ;;
+    help)    show_help=true; ;;
     * )      echo "Unrecognized command '$1'."; show_help=true; ;;
 esac
 
