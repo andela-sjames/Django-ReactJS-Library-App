@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js -p",
-    "watch": "webpack --config webpack.config.dev.js -w --progress --colors",
+    "watch": "webpack-dev-server --config webpack.config.dev.js --progress --colors",
     "prebuild": "rm -rf ../static && mkdir ../static",
     "prewatch": "npm run prebuild",
     "test": "echo \"No tests yet!\" && exit 0"
@@ -52,6 +52,8 @@
     "redux-devtools-extension": "2.13.2",
     "redux-immutable-state-invariant": "2.0.0",
     "redux-mock-store": "1.2.3",
-    "sass-lint": "1.10.2"
+    "sass-lint": "1.10.2",
+    "webpack-bundle-tracker": "0.2.0",
+    "webpack-dev-server": "2.7.1"
   }
 }

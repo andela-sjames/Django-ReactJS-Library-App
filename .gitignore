@@ -67,12 +67,14 @@ target/
 
 # ignore node modules
 reactlibapp/client/node_modules
+reactlibapp/client/webpack-stats.json
 
 # ignore bower components
 /bower_components
 
 # staticfiles
 /reactlibapp/static
+/reactlibapp/static/dummy.md
 reactlibapp/staticfiles
 
 # dist

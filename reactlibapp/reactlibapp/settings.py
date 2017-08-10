@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'libraryapp.apps.LibraryappConfig',
     'libraryapi.apps.LibraryapiConfig',
+    'webpack_loader'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -173,3 +174,11 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': '/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'client/webpack-stats.json'),
+        # 'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}
