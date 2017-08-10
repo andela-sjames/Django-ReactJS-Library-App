@@ -6,7 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js -p",
     "watch": "webpack-dev-server --config webpack.config.dev.js --progress --colors",
-    "prebuild": "rm -rf ../static && mkdir ../static",
+    "prebuild": "rm -rf ../static/{css,js,img}",
     "prewatch": "npm run prebuild",
     "test": "echo \"No tests yet!\" && exit 0"
   },
@@ -23,12 +23,15 @@
   "dependencies": {
     "@types/react": "16.0.1",
     "@types/react-dom": "15.5.2",
+    "@types/react-redux": "5.0.0",
+    "@types/react-router-dom": "4.0.7",
     "awesome-typescript-loader": "3.2.2",
     "axios": "0.16.2",
     "css-loader": "0.28.4",
     "csso-loader": "0.3.1",
     "extract-text-webpack-plugin": "3.0.0",
     "file-loader": "0.11.2",
+    "localforage": "1.5.0",
     "muicss": "0.9.20",
     "node-sass": "4.5.3",
     "react": "15.6.1",
@@ -39,6 +42,7 @@
     "react-router-dom": "4.1.2",
     "react-tap-event-plugin": "2.0.1",
     "redux": "3.7.2",
+    "redux-persist": "4.3.1",
     "redux-thunk": "2.2.0",
     "sass-loader": "6.0.6",
     "source-map-loader": "0.2.1",
@@ -47,10 +51,13 @@
     "webpack": "3.5.2"
   },
   "devDependencies": {
+    "@types/redux-immutable-state-invariant": "2.0.0",
+    "@types/redux-logger": "3.0.0",
     "react-addons-test-utils": "15.6.0",
     "redux-devtools": "3.4.0",
     "redux-devtools-extension": "2.13.2",
     "redux-immutable-state-invariant": "2.0.0",
+    "redux-logger": "3.0.6",
     "redux-mock-store": "1.2.3",
     "sass-lint": "1.10.2",
     "webpack-bundle-tracker": "0.2.0",

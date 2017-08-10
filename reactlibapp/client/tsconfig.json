@@ -4,11 +4,13 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
+    "skipLibCheck": true,
     "target": "es5",
     "jsx": "react"
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "!./node_modules/**/*"
   ],
   "exclude": [
     "node_modules",

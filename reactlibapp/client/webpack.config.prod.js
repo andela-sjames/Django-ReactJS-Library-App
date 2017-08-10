@@ -2,6 +2,15 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const ExtractAppCSS = new ExtractTextPlugin({
+  filename: 'css/app.css',
+  allChunks: true
+});
+const ExtractVendorCSS = new ExtractTextPlugin({
+  filename: 'css/vendor.css',
+  allChunks: true
+});
+
 module.exports = {
   devtool: 'source-map',
   resolve: {
@@ -21,10 +30,8 @@ module.exports = {
         return typeof module.context === 'string' && module.context.indexOf('node_modules') >= 0;
       }
     }),
-    new ExtractTextPlugin({
-      filename: 'css/main.css',
-      allChunks: true
-    }),
+    ExtractAppCSS,
+    ExtractVendorCSS,
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         screw_ie8: true,
@@ -55,14 +62,14 @@ module.exports = {
       { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
+        loader: ExtractAppCSS.extract({
           fallback: 'style-loader',
           use: 'css-loader?sourceMap!csso-loader!sass-loader'
         })
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
+        loader: ExtractVendorCSS.extract({
           fallback: 'style-loader',
           use: 'css-loader?sourceMap!csso-loader'
         })

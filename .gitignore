@@ -74,7 +74,6 @@ reactlibapp/client/webpack-stats.json
 
 # staticfiles
 /reactlibapp/static
-/reactlibapp/static/dummy.md
 reactlibapp/staticfiles
 
 # dist

@@ -1,3 +1,3 @@
 ### dummy placeholder for static folder
 
-This file will be replaced by Webpack-generated static assets
+This file will be populated by Webpack-generated static assets
