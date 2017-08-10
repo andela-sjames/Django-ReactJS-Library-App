@@ -66,12 +66,13 @@ target/
 *.env.*
 
 # ignore node modules
-reactlibapp/static/node_modules
+reactlibapp/client/node_modules
 
 # ignore bower components
 /bower_components
 
 # staticfiles
+/reactlibapp/static
 reactlibapp/staticfiles
 
 # dist
@@ -87,3 +88,4 @@ reactlibapp/static/dist
 
 # ignore editor related files
 .vscode
+.DS_Store
