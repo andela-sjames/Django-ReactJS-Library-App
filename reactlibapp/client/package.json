@@ -8,7 +8,8 @@
     "watch": "webpack-dev-server --config webpack.config.dev.js --progress --colors",
     "prebuild": "rm -rf ../static/{css,js,img}",
     "prewatch": "npm run prebuild",
-    "test": "echo \"No tests yet!\" && exit 0"
+    "test": "jest --config jest.json",
+    "pretest": "rm -rf coverage"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,10 @@
     "url": "https://github.com/andela-sjames/Django-ReactJS-Library-App/issues"
   },
   "homepage": "https://github.com/andela-sjames/Django-ReactJS-Library-App#readme",
+  "engines": {
+    "node": "7.10.1",
+    "npm": "4.2.0"
+  },
   "dependencies": {
     "@types/react": "16.0.1",
     "@types/react-dom": "15.5.2",
@@ -51,8 +56,20 @@
     "webpack": "3.5.2"
   },
   "devDependencies": {
+    "@types/enzyme": "2.8.5",
+    "@types/expect": "1.20.1",
+    "@types/jest": "20.0.6",
+    "@types/jsdom": "11.0.1",
     "@types/redux-immutable-state-invariant": "2.0.0",
     "@types/redux-logger": "3.0.0",
+    "@types/redux-mock-store": "0.0.9",
+    "@types/sinon": "2.3.3",
+    "codecov": "2.3.0",
+    "enzyme": "2.9.1",
+    "expect": "1.20.2",
+    "jest": "20.0.4",
+    "jsdom": "11.1.0",
+    "moxios": "0.4.0",
     "react-addons-test-utils": "15.6.0",
     "redux-devtools": "3.4.0",
     "redux-devtools-extension": "2.13.2",
@@ -60,6 +77,8 @@
     "redux-logger": "3.0.6",
     "redux-mock-store": "1.2.3",
     "sass-lint": "1.10.2",
+    "sinon": "3.2.0",
+    "ts-jest": "20.0.10",
     "webpack-bundle-tracker": "0.2.0",
     "webpack-dev-server": "2.7.1"
   }

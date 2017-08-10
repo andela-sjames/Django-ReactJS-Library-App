@@ -15,5 +15,6 @@
   "exclude": [
     "node_modules",
     "**/*.spec.ts"
-  ]
+  ],
+  "types": ["jest", "expect"]
 }

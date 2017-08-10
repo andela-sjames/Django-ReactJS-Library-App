@@ -65,19 +65,12 @@ target/
 # escape env.yml file
 *.env.*
 
-# ignore node modules
+# ignore client-generated files
 reactlibapp/client/node_modules
+reactlibapp/client/coverage
 reactlibapp/client/webpack-stats.json
-
-# ignore bower components
-/bower_components
-
-# staticfiles
-/reactlibapp/static
+reactlibapp/static
 reactlibapp/staticfiles
-
-# dist
-reactlibapp/static/dist
 
 # virtual environment
 /venv
