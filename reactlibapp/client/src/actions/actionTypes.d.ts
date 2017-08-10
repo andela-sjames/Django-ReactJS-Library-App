@@ -1,7 +1,7 @@
 interface BaseAction {
-  type: string
+  type?: string
 }
 
 export interface PersistAction extends BaseAction {
-  payload: object
+  payload?: object
 }
