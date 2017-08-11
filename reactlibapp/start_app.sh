@@ -68,7 +68,6 @@ function run_local() {
   local_serve
 }
 
-
 set +e
 
 read -d '' HELP_STRING <<'EOF'
@@ -111,4 +110,5 @@ esac
 
 if [[ "$show_help" == "true" ]]; then
     echo "$HELP_STRING"
+    exit 0
 fi
