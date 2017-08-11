@@ -1,24 +1,34 @@
 #!/bin/bash
 
+set -e
+
 OPTIND=1
 TESTED_CLIENT=0
 TESTED_SERVER=0
 TESTS_FAILED=0
 SHOULD_REPORT=0
 
-show_help () {
-  echo "\nThis script is a testing and coverage reporting utility\n"
-  echo "Options:"
-  echo "\t-h:\tDisplay this help menu"
-  echo "\t-c:\tRun client tests"
-  echo "\t-s:\tRun server tests"
-  echo "\t-r:\tSubmit coverage report to a coverage analysis tool\n"
-}
+read -d '' HELP_STRING <<'EOF'
+  "This script is a testing and coverage reporting utility"
+  "Options:"
+    "-h:    Display this help menu"
+    "-c:    Run client tests"
+    "-s:    Run server tests"
+    "-r:    Submit coverage report to a coverage analysis tool"
+
+  example:
+    ./run_tests.sh -h
+    ./run_tests.sh -c
+    ./run_tests.sh -s
+    ./run_tests.sh -r
+
+EOF
+
 
 while getopts "hcsrR:" opt; do
   case "$opt" in
   h)
-    show_help
+    echo "$HELP_STRING"
     exit 0
     ;;
   c)
@@ -47,7 +57,7 @@ shift $((OPTIND-1))
 [ "$1" = "--" ] && shift
 
 if [ $TESTED_CLIENT -eq 0 -a $TESTED_SERVER -eq 0 ]; then
-  show_help
+  echo "$HELP_STRING"
   exit 1
 fi
 
