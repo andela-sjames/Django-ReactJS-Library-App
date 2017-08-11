@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 OPTIND=1
 TESTED_CLIENT=0
 TESTED_SERVER=0
@@ -24,6 +22,16 @@ read -d '' HELP_STRING <<'EOF'
 
 EOF
 
+set -e
+
+function export_env() {
+    export SECRET_KEY=django-react-library-app
+    export DB_USER=postgres
+    export DB_PASS=postgres
+    export DB_SERVICE=postgres
+    export DB_PORT=5432
+    export DB_NAME=postgres
+}
 
 while getopts "hcsrR:" opt; do
   case "$opt" in
@@ -42,6 +50,7 @@ while getopts "hcsrR:" opt; do
     ;;
   s)
     TESTED_SERVER=1
+    export_env
     coverage run --source libraryapp manage.py test
     if [ $? -gt 0 ]; then
       TESTS_FAILED=1
@@ -74,6 +83,7 @@ if [ $SHOULD_REPORT -eq 1 ]; then
 fi
 
 if [ $TESTS_FAILED -eq 1 ]; then
+  # https://github.com/ryanoasis/public-bash-scripts/blob/master/unix-color-codes.sh
   echo "\n\n\033[31mSome tests failed.\033[0m\n"; exit 1
 else
   echo "\n\n\033[32mAll tests passed!\033[0m\n"; exit 0
