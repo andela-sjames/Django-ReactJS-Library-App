@@ -22,6 +22,13 @@ sub-commands:
 
   stop:
     docker                    Stops the application running in a Docker container
+  
+  test:
+    Options:
+      -h:                    Display this help menu
+      -c:                    Run client tests
+      -s:                    Run server tests
+      -r:                    Submit coverage report to a coverage analysis tool
 
 example: 
   ./app start docker
@@ -55,7 +62,7 @@ function start() {
 }
 
 function test_app() {
-  ./run_tests.sh "$1"
+  ./run_tests.sh "$@"
 }
 
 function stop() {
