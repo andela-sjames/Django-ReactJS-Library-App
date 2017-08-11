@@ -8,6 +8,9 @@ SHOULD_REPORT=0
 
 read -d '' HELP_STRING <<'EOF'
   "This script is a testing and coverage reporting utility"
+  Usage:
+    ./run_tests.sh <Options>
+
   "Options:"
     "-h:    Display this help menu"
     "-c:    Run client tests"

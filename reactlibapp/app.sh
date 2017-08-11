@@ -3,13 +3,13 @@
 set +e
 
 read -d '' HELP_STRING <<'EOF'
-
 Usage:
   ./app <command>
 
 commands:
   start   Starts the applicatiom
   stop    Stops the application
+  test    Test the application
 
 sub-commands:
   start:
@@ -54,6 +54,10 @@ function start() {
   fi
 }
 
+function test_app() {
+  ./run_tests.sh "$1"
+}
+
 function stop() {
   if [ "$1" == "docker" ]; then
     docker-compose down
@@ -69,6 +73,7 @@ function stop() {
 case "$1" in
   start)  shift; start $@; ;;
   stop)   stop $2; ;;
+  test)   shift; test_app $@; ;;
   help)   show_help=true; ;;
   * )     echo "Unrecognized command '$1'."; show_help=true; ;;
 esac
