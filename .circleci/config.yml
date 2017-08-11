@@ -18,10 +18,8 @@ jobs:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:
           command: |
-            curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+            curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
             sudo apt-get install -y nodejs
-            which node
-            which npm
       - run:
           command: |
             python3 -m venv venv

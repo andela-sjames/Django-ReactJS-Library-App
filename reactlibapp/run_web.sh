@@ -18,5 +18,12 @@ until postgres_ready; do
   sleep 1
 done
 
-# get node installed 
-su -m djangoreactapp -c "./start_app.sh local"
+export SECRET_KEY=django-react-library-app
+export DB_USER=postgres
+export DB_PASS=postgres
+export DB_SERVICE=postgres
+export DB_PORT=5432
+export DB_NAME=postgres
+
+# Start app
+./launch.sh
