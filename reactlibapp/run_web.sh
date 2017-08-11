@@ -18,12 +18,5 @@ until postgres_ready; do
   sleep 1
 done
 
-export SECRET_KEY=django-react-library-app
-export DB_USER=postgres
-export DB_PASS=postgres
-export DB_SERVICE=postgres
-export DB_PORT=5432
-export DB_NAME=postgres
-
 # Start app
 ./launch.sh
