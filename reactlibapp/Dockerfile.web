@@ -22,6 +22,7 @@ RUN usermod -aG docker djangoreactapp
 RUN chown -R djangoreactapp:$(id -gn djangoreactapp) ~/
 RUN chown -R djangoreactapp:$(id -gn djangoreactapp) ~/
 RUN chown -R djangoreactapp:$(id -gn djangoreactapp) /reactlibapp/
+ENV PYTHONUNBUFFERED 1
 
 RUN chmod +x ./run_web.sh && chmod +x ./launch.sh
 USER djangoreactapp
