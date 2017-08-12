@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.config.prod.js -p",
+    "build-development": "webpack --config webpack.config.dev.js --progress --colors",
     "watch": "webpack-dev-server --config webpack.config.dev.js --progress --colors",
     "prebuild": "rm -rf ../static/{css,js,img}",
     "prewatch": "npm run prebuild",

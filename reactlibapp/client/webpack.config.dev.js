@@ -12,29 +12,35 @@ module.exports = {
       debug: true
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
+    new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify('development'),
+      BASE_URL: JSON.stringify('http://0.0.0.0:8000/'),
+    }
+  }),
     new BundleTracker({filename: './webpack-stats.json'})
   ],
   entry: [
-    'webpack-dev-server/client?http://localhost:9000',
+    'webpack-dev-server/client?http://0.0.0.0:9000',
     'webpack/hot/only-dev-server',
     './src/index.tsx'
   ],
   target: 'web',
   output: {
-    path: path.join(__dirname, '../static'),
+    path: path.join(__dirname, '../static/'),
     filename: 'js/[name].js',
-    publicPath: 'http://localhost:9000/'
+    publicPath: 'http://0.0.0.0:9000/'
   },
   devServer: {
-    publicPath: 'http://localhost:9000/',
+    host: "0.0.0.0",
+    publicPath: 'http://0.0.0.0:9000/',
     headers: { "Access-Control-Allow-Origin": "*" },
     compress: true,
     port: 9000,
     // TODO: Discuss API routing and requests with @gentlefella
     // proxy: {
     //   '/api': {
-    //     target: 'http://localhost:8000',
+    //     target: 'http://0.0.0.0:8000',
     //     secure: false,
     //     pathRewrite: {'^/api' : ''}
     //   }

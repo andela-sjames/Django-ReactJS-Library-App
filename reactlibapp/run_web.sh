@@ -19,4 +19,4 @@ until postgres_ready; do
 done
 
 # Start app
-./launch.sh
+./launch.sh dockerdev

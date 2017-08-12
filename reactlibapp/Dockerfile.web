@@ -1,18 +1,17 @@
 FROM python:3.6.2
 
-WORKDIR /reactlibapp
-ADD requirements.txt /reactlibapp/
-RUN pip3 install -r requirements.txt
-
-# update and install broken dependencies before proceeding
-RUN apt-get update
-RUN apt-get -f install
-ONBUILD COPY ./client/package.json /reactlibapp/client/
+RUN export DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get -y install build-essential curl
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
 RUN apt-get install -y nodejs
-ONBUILD RUN cd /reactlibapp/client/ && npm install
+RUN nodejs -v && npm -v
 
-ADD run_web.sh /reactlibapp/
+# Requirements have to be pulled and installed here, otherwise caching won't work
+ADD requirements.txt /reactlibapp/
+ADD . /reactlibapp/
+
+WORKDIR /reactlibapp
+RUN pip3 install -r requirements.txt && cd /reactlibapp/client/ && npm install && npm run build-development
 
 # create user and add to docker group
 RUN adduser --disabled-password --gecos '' djangoreactapp
@@ -22,12 +21,9 @@ RUN usermod -aG docker djangoreactapp
 # set permission on files for docker sake
 RUN chown -R djangoreactapp:$(id -gn djangoreactapp) ~/
 RUN chown -R djangoreactapp:$(id -gn djangoreactapp) ~/
-
-ONBUILD COPY . /reactlibapp/
-RUN chown -R djangoreactapp:$(id -gn djangoreactapp) /reactlibapp/client/
+RUN chown -R djangoreactapp:$(id -gn djangoreactapp) /reactlibapp/
 
 RUN chmod +x ./run_web.sh && chmod +x ./launch.sh
-
 USER djangoreactapp
 
 ENTRYPOINT ["./run_web.sh"]
