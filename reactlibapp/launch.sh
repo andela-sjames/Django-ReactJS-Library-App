@@ -34,8 +34,6 @@ function start_app_local () {
   setup_server && setup_client & python manage.py runserver 0.0.0.0:8000
 }
 
-
-
 case "$1" in
   production)  export NODE_ENV=production;  start_app_local; ;;
   test)   export NODE_ENV=test; start_app_local; ;;
@@ -43,7 +41,7 @@ case "$1" in
   * )    export NODE_ENV=development; start_app_local; ;;
 esac
 
-# does not apply yo dockerdev
+# does not apply to dockerdev
 # run client setup and start server in parallel
 # this allows webpack-dev-server and the Django server to run concurrently
 # if in production, setup_client will exit once building is done
