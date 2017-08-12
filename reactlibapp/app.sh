@@ -31,13 +31,13 @@ sub-commands:
       -r:                    Submit coverage report to a coverage analysis tool
 
 example: 
-  ./app start docker
-  ./app start docker fresh
-  ./app stop docker
-  ./app start local
-  ./app start local production
-  ./app start local test
-  ./app help
+  ./app.sh start docker
+  ./app.sh start docker fresh
+  ./app.sh stop docker
+  ./app.sh start local
+  ./app.sh start local production
+  ./app.sh start local test
+  ./app.sh help
 
 EOF
 
