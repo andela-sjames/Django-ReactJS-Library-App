@@ -4,9 +4,8 @@
   "description": "Amity Library App",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.config.prod.js -p",
-    "build-development": "webpack --config webpack.config.dev.js --progress --colors",
-    "watch": "webpack-dev-server --config webpack.config.dev.js --progress --colors",
+    "build": "webpack --config webpack.config.prod.ts -p",
+    "watch": "webpack-dev-server --config webpack.config.dev.ts --progress --colors",
     "prebuild": "rm -rf ../static/{css,js,img}",
     "prewatch": "npm run prebuild",
     "test": "jest --config jest.json",
@@ -32,6 +31,8 @@
     "@types/react-dom": "15.5.2",
     "@types/react-redux": "5.0.0",
     "@types/react-router-dom": "4.0.7",
+    "@types/webpack": "3.0.8",
+    "@types/webpack-env": "1.13.0",
     "awesome-typescript-loader": "3.2.2",
     "axios": "0.16.2",
     "css-loader": "0.28.4",
@@ -78,9 +79,9 @@
     "redux-immutable-state-invariant": "2.0.0",
     "redux-logger": "3.0.6",
     "redux-mock-store": "1.2.3",
-    "sass-lint": "1.10.2",
     "sinon": "3.2.0",
     "ts-jest": "20.0.10",
+    "ts-node": "3.3.0",
     "webpack-bundle-tracker": "0.2.0",
     "webpack-dev-server": "2.7.1"
   }

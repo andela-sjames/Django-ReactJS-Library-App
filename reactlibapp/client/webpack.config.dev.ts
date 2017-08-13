@@ -1,8 +1,8 @@
-const path = require('path');
-const webpack = require('webpack');
+import * as path from 'path';
+import * as webpack from 'webpack';
 const BundleTracker = require('webpack-bundle-tracker');
 
-module.exports = {
+export default {
   devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
@@ -16,8 +16,6 @@ module.exports = {
     new BundleTracker({filename: './webpack-stats.json'})
   ],
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:9000',
-    'webpack/hot/only-dev-server',
     './src/index.tsx'
   ],
   target: 'web',
@@ -29,7 +27,7 @@ module.exports = {
   devServer: {
     host: "0.0.0.0",
     publicPath: 'http://0.0.0.0:9000/',
-    headers: { "Access-Control-Allow-Origin": "*" },
+    headers: { 'Access-Control-Allow-Origin': '*' },
     compress: true,
     port: 9000,
     // TODO: Discuss API routing and requests with @gentlefella
@@ -52,9 +50,11 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
-        query: {
-          tsconfig: 'tsconfig.json'
+        use: {
+          loader: 'awesome-typescript-loader',
+          options: {
+            transpileOnly: true
+          }
         }
       },
       {

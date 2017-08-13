@@ -1,6 +1,6 @@
-const path = require('path');
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+import * as path from 'path';
+import * as webpack from 'webpack';
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const ExtractAppCSS = new ExtractTextPlugin({
   filename: 'css/app.css',
@@ -11,7 +11,7 @@ const ExtractVendorCSS = new ExtractTextPlugin({
   allChunks: true
 });
 
-module.exports = {
+export default {
   devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
@@ -22,7 +22,7 @@ module.exports = {
       debug: false
     }),
     new webpack.EnvironmentPlugin({ NODE_ENV: 'production' }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendors',
       filename: 'js/vendor.js',
@@ -40,11 +40,7 @@ module.exports = {
       mangle: {
         screw_ie8: true
       },
-      output: {
-        comments: false,
-        screw_ie8: true
-      },
-      minimize: true,
+      comments: false,
       sourceMap: true
     })
   ],

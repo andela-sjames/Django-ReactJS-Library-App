@@ -4,8 +4,6 @@
 ./static/js/
 ./static/css/
 ./static/img/
-Dockerfile.node
-Dockerfile.web
 Dockerfile
 .coverage
 .env_sample

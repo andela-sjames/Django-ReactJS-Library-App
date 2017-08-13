@@ -15,6 +15,7 @@ sub-commands:
   start:
     docker                    Starts the application in a Docker container
       fresh (optional)        Rebuilds the Docker image from scratch
+      build (optional)        Rebuilds the Docker image using caches where possible
     local:                    Starts the application in the local environment
       production              Starts the application locally in production mode
       test                    Starts the application locally in test mode
@@ -33,6 +34,7 @@ sub-commands:
 example: 
   ./app.sh start docker
   ./app.sh start docker fresh
+  ./app.sh start docker build
   ./app.sh stop docker
   ./app.sh start local
   ./app.sh start local production
@@ -48,6 +50,9 @@ function start() {
     if [ "$2" == "fresh" ]; then
       docker-compose rm -f
       docker-compose build --no-cache
+      docker-compose up
+    elif [ "$2" == "build" ]; then
+      docker-compose build
       docker-compose up
     else
       docker-compose up

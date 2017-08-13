@@ -3,6 +3,7 @@
     "outDir": "../static/js",
     "sourceMap": true,
     "noImplicitAny": true,
+    "downlevelIteration": true,
     "module": "commonjs",
     "skipLibCheck": true,
     "target": "es5",
