@@ -12,12 +12,7 @@ module.exports = {
       debug: true
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: JSON.stringify('development'),
-      BASE_URL: JSON.stringify('http://0.0.0.0:8000/'),
-    }
-  }),
+    new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
     new BundleTracker({filename: './webpack-stats.json'})
   ],
   entry: [
@@ -55,8 +50,18 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
-      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+      {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
+        query: {
+          tsconfig: 'tsconfig.json'
+        }
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader'
+      },
       {
         test: /\.scss$/,
         loader: ['style-loader', 'css-loader', 'sass-loader']

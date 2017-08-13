@@ -58,8 +58,18 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
-      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+      {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
+        query: {
+          tsconfig: 'tsconfig.json'
+        }
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader'
+      },
       {
         test: /\.scss$/,
         loader: ExtractAppCSS.extract({
