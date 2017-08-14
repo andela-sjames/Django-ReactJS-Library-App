@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'libraryapp.apps.LibraryappConfig',
     'libraryapi.apps.LibraryapiConfig',
+    'webpack_loader'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -74,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'libraryapp.context_processors.set_environment',
             ],
         },
     },
@@ -172,3 +174,11 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': '/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'client/webpack-stats.json'),
+        # 'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}

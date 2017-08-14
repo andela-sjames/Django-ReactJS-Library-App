@@ -11,8 +11,10 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/yeet
+      - ./reactlibapp:/app
+      - /app/client/node_modules/
     ports: 
       - "8000:8000"
+      - "9000:9000"
     depends_on:
       - postgres

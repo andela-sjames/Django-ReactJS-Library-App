@@ -20,7 +20,7 @@ from libraryapp import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', views.HomeView.as_view(), name='homepage'),
+    url(r'^$', views.SPAView.as_view(), name='homepage'),
     url(r'^libraryapp/', include('libraryapp.urls')),
     url(r'^api/', include('libraryapi.urls'))
 
