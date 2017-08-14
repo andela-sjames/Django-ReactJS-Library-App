@@ -11,19 +11,6 @@ from django.contrib.auth import login
 from .models import GoogleUser
 
 
-
-
-class HomeView(TemplateView):
-
-    template_name = "libraryapp/main.html"
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
-            return HttpResponseRedirect(
-                reverse_lazy('dashboard'))
-        return super(HomeView, self).dispatch(request, *args, **kwargs)
-
-
 class GoogleLoginView(View):
 
 
@@ -75,6 +62,6 @@ class GoogleLoginView(View):
             return HttpResponse("success", content_type="text/plain")
 
 
-class DashBoardView(TemplateView):
+class SPAView(TemplateView):
 
-    template_name = 'libraryapp/dashboard.html'
+    template_name = 'libraryapp/main.html'

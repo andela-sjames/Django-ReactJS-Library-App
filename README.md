@@ -1,5 +1,6 @@
 # Django-ReactJS-Library-App
 An app to manage Amity library books using ReactJS.
+[![CircleCI](https://circleci.com/gh/andela-sjames/Django-ReactJS-Library-App/tree/develop.svg?style=svg)](https://circleci.com/gh/andela-sjames/Django-ReactJS-Library-App/tree/develop)
 
 ## Getting Started
 

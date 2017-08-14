@@ -14,14 +14,18 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import sys
 
+import dotenv
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+dotenv.load()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^u($$ydx__!2j_nh%pjh05_(krwn_v3&drldjko+s1_%838co&'
+
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,6 +48,7 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'libraryapp.apps.LibraryappConfig',
     'libraryapi.apps.LibraryapiConfig',
+    'webpack_loader'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -70,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'libraryapp.context_processors.set_environment',
             ],
         },
     },
@@ -77,6 +83,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'reactlibapp.wsgi.application'
 
+
+# Database
+# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+DATABASES = {
+     'default': {
+          'ENGINE': 'django.db.backends.postgresql_psycopg2',
+          'NAME': os.environ.get('DB_NAME'),
+          'USER': os.environ.get('DB_USER'),
+          'PASSWORD': os.environ.get('DB_PASS'),
+          'HOST': os.environ.get('DB_SERVICE'),
+          'PORT': os.environ.get('DB_PORT'),
+          'TEST': {
+            'CHARSET': None, 
+            'COLLATION': None,
+            'NAME': os.path.join(os.path.dirname(__file__), 'test.db'), 
+            'MIRROR': None
+          }
+      },
+ }
 
 if 'test' in sys.argv:
     DATABASES = {
@@ -86,26 +111,6 @@ if 'test' in sys.argv:
         }
     }
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(os.path.dirname(__file__), 'test.db')
-    }
-}
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'LibraryApp',
-#         'USER': 'Administrator',
-#         'PASSWORD': 'administrator',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -169,3 +174,11 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': '/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'client/webpack-stats.json'),
+        # 'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}

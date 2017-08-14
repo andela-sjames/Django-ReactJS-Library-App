@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "../static/js",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "downlevelIteration": true,
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "target": "es5",
+    "jsx": "react"
+  },
+  "include": [
+    "./src/**/*",
+    "!./node_modules/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+  "types": ["jest", "expect"]
+}

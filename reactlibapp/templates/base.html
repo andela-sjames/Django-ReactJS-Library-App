@@ -1,74 +1,40 @@
-{% load staticfiles %}
+{% if environment == 'production' %}
+    {% load staticfiles %}
+{% else %}
+    {% load render_bundle from webpack_loader %}
+{% endif %}
 
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css" />
+        {% if environment == 'production' %}
+            <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/vendor.css' %}" />
+            <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/app.css' %}" />
+        {% endif %}
+	</head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="google-signin-client_id" content="450087630844-n6lfapnuddba615f4kqsuo4b9tontsd6.apps.googleusercontent.com">
-
-    <title>{% block title %}Andela Library{% endblock %}</title>
-
-     <link href="{% static 'bower_components/semantic/dist/semantic.min.css' %}" rel="stylesheet" type="text/css" media="screen" />
-
-     <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css" media="screen" />
-
-     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-
-     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
-
-     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-
-     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-    {% block main %}
+	<body>
+		{% block main %}
 
 
 
-    {% endblock main %}
+        {% endblock main %}
+        
+        <div id="app-background"></div>
 
-    <div class="ui basic modal">
-    <i class="close icon"></i>
-        <div class="header">
-            <center><P>Something is not right..</P></center>
-        </div>
-          <div class="image content">
-            <div class="image">
-              <i class="warning icon"></i>
-            </div>
-            <div class="description">
-              <center><p>Please sign in with your andela account?</p></center>
-            </div>
-          </div>
-    </div>
-
-{% block base_js %}
-     <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
-     <script src="{% static 'bower_components/semantic/dist/semantic.min.js' %}"></script>
-     <script src="{% static 'bower_components/typed.js/dist/typed.min.js' %}"></script>
-     <script src="{% static 'js/google_user.js' %}"></script>
-     <script src="{% static 'js/transition.js' %}"></script>
-     <script src="{% static 'dist/index_bundle.js' %}"></script>
-
-
-{% endblock %}
-</body>
-
+        {% block base_js %}
+            {% if environment == 'production' %}
+                <script src="{% static 'js/vendor.js' %}"></script>
+                <script src="{% static 'js/app.js' %}"></script>
+            {% else %}
+                {% render_bundle 'main' %}
+            {% endif %}
+        {% endblock %}
+	</body>
 </html>

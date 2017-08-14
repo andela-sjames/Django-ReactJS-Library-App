@@ -1,0 +1,9 @@
+./client/node_modules/
+./client/coverage/
+./client/webpack-stats.json
+./static/js/
+./static/css/
+./static/img/
+Dockerfile
+.coverage
+.env_sample

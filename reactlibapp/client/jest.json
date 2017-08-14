@@ -1,0 +1,38 @@
+{
+  "transform": {
+    "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+  },
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js"
+  ],
+  "testMatch": [
+    "**/__tests__/**/*.(spec|test).ts?(x)",
+    "**/?(*.)(spec|test).ts?(x)"
+  ],
+  "setupFiles": [
+    "<rootDir>/__tests__/testSetup.ts"
+  ],
+  "collectCoverage": true,
+  "coverageDirectory": "<rootDir>/coverage/",
+  "coveragePathIgnorePatterns": [
+    "<rootDir>/src/store/",
+    "<rootDir>/__tests__/",
+    "<rootDir>/src/utils/",
+    "<rootDir>/node_modules/"
+  ],
+  "mapCoverage": true,
+  "unmockedModulePathPatterns": [
+    "react",
+    "enzyme"
+  ],
+  "moduleNameMapper": {
+    "\\.(png)$": "<rootDir>/__tests__/__mocks__/fileMock.ts"
+  },
+  "bail": true,
+  "verbose": true,
+  "roots": [
+    "__tests__/"
+  ]
+}
