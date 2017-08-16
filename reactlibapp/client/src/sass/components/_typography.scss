@@ -1,0 +1,61 @@
+// ==========================================================================
+// Library app typography
+// ==========================================================================
+
+body {
+  color: $primary-text-color;
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+
+  @media #{'only screen and #{$medium}'} {
+    font-size: 12px;
+  }
+
+  @media #{'only screen and #{$large}'} {
+    font-size: 14px;
+  }
+}
+
+.upper {
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 3em;
+  margin: 1em 0;
+}
+
+h2 {
+  font-size: 2.25em;
+  margin: .75em 0;
+}
+
+h3 {
+  font-size: 1.75em;
+  margin: .583em;
+}
+
+h4 {
+  font-size: 1.5em;
+  margin: .5em;
+}
+
+h5 {
+  font-size: 1.25em;
+  margin: .417em;
+}
+
+h6 {
+  font-size: 1em;
+  margin: .333em;
+}

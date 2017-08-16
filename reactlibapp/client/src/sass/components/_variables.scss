@@ -1,0 +1,30 @@
+// ==========================================================================
+// Library app variables
+// ==========================================================================
+//
+// Table of Contents:
+//
+//  1. Colors
+//  2. Media Queries
+
+
+
+// 1. Colors
+// ==========================================================================
+$black-100: #000;
+$primary-color: #231dc2;
+$dark-primary-color: #0a21a8;
+$light-primary-color: #3359df;
+$primary-text-color: #fff;
+$secondary-color: #ffaf30;
+$dark-secondary-color: #fc9b00;
+$light-secondary-color: #ffc363;
+$secondary-text-color: #212121;
+
+// 2. Media Queries
+// ==========================================================================
+$small: '(max-width : 600px)';
+$medium: '(min-width : 600px) and (max-width : 1024px)';
+$large: '(min-width : 1024px)';
+$mobile: '(orientation : portrait)';
+$desktop: '(orientation : landscape)';
