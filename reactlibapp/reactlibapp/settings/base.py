@@ -83,35 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'reactlibapp.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-DATABASES = {
-     'default': {
-          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-          'NAME': os.environ.get('DB_NAME'),
-          'USER': os.environ.get('DB_USER'),
-          'PASSWORD': os.environ.get('DB_PASS'),
-          'HOST': os.environ.get('DB_SERVICE'),
-          'PORT': os.environ.get('DB_PORT'),
-          'TEST': {
-            'CHARSET': None, 
-            'COLLATION': None,
-            'NAME': os.path.join(os.path.dirname(__file__), 'test.db'), 
-            'MIRROR': None
-          }
-      },
- }
-
-if 'test' in sys.argv:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(os.path.dirname(__file__), 'test.db')
-        }
-    }
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
