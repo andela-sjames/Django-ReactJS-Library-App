@@ -14,7 +14,7 @@ const ExtractVendorCSS = new ExtractTextPlugin({
 export default {
   devtool: 'source-map',
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
+    extensions: ['.js', '.tsx', '.ts', '.d.ts'],
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({

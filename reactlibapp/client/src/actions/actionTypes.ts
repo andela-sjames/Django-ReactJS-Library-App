@@ -2,3 +2,8 @@
 export const persist = {
   RESTORE_STORE: 'persist/REHYDRATE'
 }
+
+export const auth = {
+  SUCCESS: 'AUTHENTICATION_SUCCESS',
+  FAILURE: 'AUTHENTICATION_FAILURE'
+}
