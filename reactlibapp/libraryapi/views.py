@@ -72,6 +72,7 @@ class GoogleRegisterView(APIView):
                                      app_user=userproxy,
                                      appuser_picture=idinfo['picture'])
             google_user.save()
+            serializer = GoogleUserSerializer(google_user)
 
         # automatically get token for the created/returning user and log them in:
         body = self.get_oauth_token(userproxy)
