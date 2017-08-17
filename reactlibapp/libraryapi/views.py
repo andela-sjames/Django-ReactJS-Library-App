@@ -1,3 +1,7 @@
+import dotenv
+dotenv.load()
+
+from oauth2client import client
 
 from django.http import Http404
 from django.contrib.auth.models import User
@@ -8,9 +12,82 @@ from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView, ListAPIView
 
 from libraryapi.setpagination import LimitOffsetpage
-from libraryapp.models import Category, Author, Book, History, Interest, Quote, GoogleUser
-from libraryapi.serializers import CategorySerializer, AuthorSerializer, BookSerializer,\
-    HistorySerializer, InterestSerializer, QuoteSerializer, GoogleUserSerializer
+from libraryapp.models import (
+    Category, Author, 
+    Book, History, 
+    Interest, Quote, 
+    GoogleUser)
+from libraryapi.serializers import (
+    CategorySerializer, AuthorSerializer, 
+    BookSerializer, HistorySerializer, 
+    InterestSerializer, QuoteSerializer, 
+    GoogleUserSerializer)
+
+from libraryapp.models import GoogleUser
+
+class VerifyGoogleAuthView(APIView):
+    
+    def get(self, request, *args, **kwargs):
+
+        # token should be passed as an object {'idtoken' : id_token }
+        # to this view
+        token = request.GET['idtoken']
+        CLIENT_ID = os.getenv('CLIENT_ID')
+
+        try:
+            idinfo = client.verify_id_token(token, CLIENT_ID)
+
+            if 'hd' not in idinfo:
+                return Response("Invalid parameters given")
+
+            if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+                return Response("Wrong issuer.")
+
+            if idinfo['hd'] != 'andela.com' and \
+                idinfo['email_verified'] != "true" and \
+                idinfo['aud'] != CLIENT_ID
+
+                return Response("Invalid parameters given") # this should be handled later
+
+        except crypt.AppIdentityError:
+            return Response("Invalid Token")
+
+
+        user_id = idinfo['sub'] # this should be removed when done with code logic. 
+        token_exp = idinfo['exp']
+
+
+        # check if it is a returning user
+        try:
+            google_user = GoogleUser.objects.get(google_id=idinfo['sub'])
+            user = User.objects.get(id=google_user.app_user.id)
+            # yeah it's a returning user. 
+            return Response("success", content_type="text/plain")
+
+         except GoogleUser.DoesNotExist:
+            # proceed to create the user
+
+            user = User(
+                username=idinfo['name'],
+                email=idinfo["email"],
+                first_name=idinfo['given_name'],
+                last_name=idinfo['family_name']
+            )
+            user.save()
+
+            google_user = GoogleUser(google_id=idinfo['sub'],
+                                     app_user=user,
+                                     appuser_picture=idinfo['picture'])
+
+            google_user.save()
+
+            # automatically get token for the created user/log them in:
+            jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+            jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+            payload = jwt_payload_handler(google_user)
+            token = jwt_encode_handler(payload)
+
+            return Response("success", content_type="text/plain")
 
 
 class GoogleUserView(GenericAPIView):
