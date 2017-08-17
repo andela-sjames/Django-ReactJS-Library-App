@@ -44,7 +44,8 @@
   display: flex;
   padding: 0;
 
-  * {
+  .logo-container,
+  .text-container {
     @include center-contents;
   }
 

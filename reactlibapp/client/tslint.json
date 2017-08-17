@@ -34,7 +34,7 @@
     "no-this-assignment": [true, {
       "allow-destructuring": true
     }],
-    "no-unused-variable": [true, "react"],
+    "no-unused-variable": [true, {"ignore-pattern": "react"}],
     "no-var-requires": false,
     "object-literal-sort-keys": false,
     "object-literal-shorthand": false,

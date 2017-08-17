@@ -11,7 +11,7 @@ const svgDefPath = `M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-1
 export interface ISignInButtonProps { signIn: Function }
 
 export class SignInButton extends React.Component<ISignInButtonProps> {
-  onClick = (event: any) => {
+  onSignInClick = (event: any) => {
     event.preventDefault();
     this.props.signIn();
   }
@@ -40,7 +40,7 @@ export class SignInButton extends React.Component<ISignInButtonProps> {
 
   render() {
     return (
-      <a id="signin-button" className="mui-btn btn-with-logo" onClick={this.onClick}>
+      <a id="signin-button" className="mui-btn btn-with-logo" onClick={this.onSignInClick}>
         <div className="logo-container">
           {this.renderGoogleLogo()}
         </div>
