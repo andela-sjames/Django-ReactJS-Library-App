@@ -2,7 +2,7 @@ export default function fadeIn(
   id: string,
   duration: number = 1000,
   targetOpacity: number = 1,
-  framerate: number = 60
+  framerate: number = 60,
 ) {
   const element: HTMLElement = document.getElementById(id);
   const millisecondsPerFrame = Math.floor(1000 / framerate);
@@ -16,10 +16,11 @@ export default function fadeIn(
     last = new Date().getTime();
 
     if (Number(element.style.opacity) < targetOpacity) {
-      (
-        window.requestAnimationFrame &&
-        requestAnimationFrame(tick)
-      ) || setTimeout(tick, millisecondsPerFrame);
+      if (typeof window.requestAnimationFrame === 'function') {
+        requestAnimationFrame(tick);
+      } else {
+        setTimeout(tick, millisecondsPerFrame);
+      }
     } else {
       element.style.opacity = targetOpacity.toString();
     }

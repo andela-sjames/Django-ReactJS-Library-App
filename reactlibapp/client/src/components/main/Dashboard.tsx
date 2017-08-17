@@ -4,18 +4,18 @@ import { connect } from 'react-redux';
 import { signOut } from '../../actions/authActions';
 import { ThunkDispatch } from '../../types';
 
-export interface DashboardProps {
+export interface IDashboardProps {
   compiler: string;
   framework: string;
   stateContainer: string;
 }
 
-export interface ConnectedDashboardProps extends DashboardProps {
+export interface IConnectedDashboardProps extends IDashboardProps {
   signOut: Function;
 }
 
-export class Dashboard extends React.Component<ConnectedDashboardProps> {
-  onClick = (event:any) => {
+export class Dashboard extends React.Component<IConnectedDashboardProps> {
+  onSignOutClick = (event: any) => {
     event.preventDefault();
     this.props.signOut();
   }
@@ -26,14 +26,14 @@ export class Dashboard extends React.Component<ConnectedDashboardProps> {
         <h1>This app is under construction</h1>
         <h4>Built with {this.props.compiler}, {this.props.framework} and {this.props.stateContainer}</h4>
         <br />
-        <a className="mui-btn" onClick={this.onClick}>Sign Out</a>
+        <a id="signout-button" className="mui-btn" onClick={this.onSignOutClick}>Sign Out</a>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch:ThunkDispatch) => ({
-  signOut: () => dispatch(signOut())
-})
+const mapDispatchToProps = (dispatch: ThunkDispatch) => ({
+  signOut: () => dispatch(signOut()),
+});
 
-export default connect<any, any, DashboardProps>(undefined, mapDispatchToProps)(Dashboard);
+export default connect<any, any, IDashboardProps>(undefined, mapDispatchToProps)(Dashboard);

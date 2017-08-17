@@ -3,5 +3,5 @@ import Animate from './animations';
 
 export {
   lazyLoad,
-  Animate
-}
+  Animate,
+};

@@ -2,11 +2,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { State } from '../../types';
 
-export interface ProtectedProps { isAuthenticated: boolean; className?: string; }
+export interface IProtectedProps { isAuthenticated: boolean; className?: string; }
 
-export class Protected extends React.Component<ProtectedProps> {
+export class Protected extends React.Component<IProtectedProps> {
   render() {
     const children = React.Children.toArray(this.props.children);
+
     return (
       <div className={this.props.className}>
         {this.props.isAuthenticated
@@ -19,7 +20,7 @@ export class Protected extends React.Component<ProtectedProps> {
 }
 
 const mapStateToProps = (state: State) => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect<any, any, { className?: string }>(mapStateToProps)(Protected);

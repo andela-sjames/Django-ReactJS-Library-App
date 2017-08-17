@@ -7,9 +7,9 @@ import Dashboard from './main/Dashboard';
 
 import { lazyLoad, Animate } from '../utils';
 
-export interface AppProps { compiler: string; framework: string; stateContainer: string }
+export interface IAppProps { compiler: string; framework: string; stateContainer: string }
 
-export class App extends React.Component<AppProps> {
+export class App extends React.Component<IAppProps> {
   componentDidMount() {
     lazyLoad(`https://source.unsplash.com/${screen.width}x${screen.height}/?library,books`)
       .then((dataURI) => {
@@ -18,20 +18,20 @@ export class App extends React.Component<AppProps> {
         background.style.backgroundSize = 'cover';
         background.style.backgroundPosition = '50% 50%';
         background.style.backgroundSize = 'fixed';
-  
+
         Animate.fadeIn('app-background', 1500);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
 
   render() {
     return (
-      <div className='app'>
+      <div className="app">
         <Navbar />
         <Protected className="main">
-          <Dashboard compiler='TypeScript' framework='React' stateContainer='Redux'/>
+          <Dashboard compiler="TypeScript" framework="React" stateContainer="Redux"/>
           <AuthPage />
         </Protected>
       </div>

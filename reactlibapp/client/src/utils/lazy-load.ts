@@ -6,7 +6,7 @@ export default function lazyLoad(url: string) {
     xhr.open('GET', url, true);
     xhr.responseType = 'arraybuffer';
 
-    xhr.onload = function() {
+    xhr.onload = () => {
       const mimetype = xhr.getResponseHeader('content-type');
       const array = new Uint8Array(xhr.response);
       let raw = '';
@@ -14,11 +14,11 @@ export default function lazyLoad(url: string) {
         raw += String.fromCharCode(charCode);
       });
       resolve(`data:${mimetype};base64,${btoa(raw)}`);
-    }
+    };
 
-    xhr.onerror = function() {
+    xhr.onerror = () => {
       reject(`Could not retrieve ${url}`);
-    }
+    };
 
     xhr.send();
   });

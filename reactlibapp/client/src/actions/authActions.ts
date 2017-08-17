@@ -3,25 +3,25 @@ import { auth } from './actionTypes';
 import { Dispatch } from '../types';
 
 export const signUp = () => (
-  (dispatch:Dispatch) => (
+  (dispatch: Dispatch) => (
     dispatch({
-      type: auth.SUCCESS
+      type: auth.SUCCESS,
     })
   )
-)
+);
 
 export const signIn = () => (
-  (dispatch:Dispatch) => (
+  (dispatch: Dispatch) => (
     dispatch({
-      type: auth.SUCCESS
+      type: auth.SUCCESS,
     })
   )
-)
+);
 
 export const signOut = () => (
-  (dispatch:Dispatch) => (
+  (dispatch: Dispatch) => (
     dispatch({
-      type: auth.FAILURE
+      type: auth.FAILURE,
     })
   )
-)
+);

@@ -8,8 +8,9 @@
     "watch": "webpack-dev-server --config webpack.config.dev.ts --progress --colors",
     "prebuild": "rm -rf ../static/{css,js,img}",
     "prewatch": "npm run prebuild",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
+    "pretest": "rm -rf coverage && npm run lint",
     "test": "jest --config jest.json",
-    "pretest": "rm -rf coverage",
     "report": "codecov"
   },
   "repository": {
@@ -57,6 +58,7 @@
     "sass-loader": "6.0.6",
     "source-map-loader": "0.2.1",
     "style-loader": "0.18.2",
+    "tslib": "1.7.1",
     "typescript": "2.4.2",
     "webpack": "3.5.2"
   },
@@ -84,6 +86,8 @@
     "sinon": "3.2.0",
     "ts-jest": "20.0.10",
     "ts-node": "3.3.0",
+    "tslint": "5.6.0",
+    "tslint-react": "3.2.0",
     "webpack-bundle-tracker": "0.2.0",
     "webpack-dev-server": "2.7.1"
   }

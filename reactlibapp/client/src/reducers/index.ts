@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import authReducer from './authReducer';
-import persistReducer from './persistReducer';
+import auth from './authReducer';
+import persist from './persistReducer';
 
 const appReducer = combineReducers({
-  auth: authReducer,
-  persist: persistReducer
+  auth,
+  persist,
 });
 
 export default appReducer;
