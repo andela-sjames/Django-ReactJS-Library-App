@@ -132,6 +132,14 @@ SWAGGER_SETTINGS = {
     "description": " A web API for creating Buckelist, i.e list of stuffs you want to do before you die.",
 }
 
+JWT_AUTH = {
+
+    'JWT_SECRET_KEY': SECRET_KEY,
+    'JWT_EXPIRATION_DELTA': timedelta(seconds=3600),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=3),
+
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/

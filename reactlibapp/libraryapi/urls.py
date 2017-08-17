@@ -7,8 +7,8 @@ urlpatterns = [
     url(r'^appuser/$', views.GoogleUserView.as_view(),
         name='app_user'),
 
-    url(r'^auth/verify/$' views.GoogleLoginView.as_view(),
-        name='verify')
+    url(r'^auth/verify/$', views.GoogleLoginView.as_view(),
+        name='auth_verify')
 
     url(r'^auth/refresh/$',
         'rest_framework_jwt.views.refresh_jwt_token',
