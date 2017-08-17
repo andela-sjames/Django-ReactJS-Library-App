@@ -8,7 +8,7 @@ def resolve_google_oauth(request):
     # token should be passed as an object {'idtoken' : id_token }
     # to this view
     token = request.GET['idtoken']
-    CLIENT_ID = os.getenv('CLIENT_ID')
+    CLIENT_ID = dotenv.get('CLIENT_ID')
 
     try:
         idinfo = client.verify_id_token(token, CLIENT_ID)
@@ -21,7 +21,7 @@ def resolve_google_oauth(request):
 
         if idinfo['hd'] != 'andela.com' and \
             idinfo['email_verified'] != "true" and \
-            idinfo['aud'] != CLIENT_ID
+            idinfo['aud'] != CLIENT_ID:
 
             return Response("Invalid parameters given") # this should be handled later
 

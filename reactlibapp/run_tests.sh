@@ -34,6 +34,7 @@ function export_env() {
     export DB_SERVICE=postgres
     export DB_PORT=5432
     export DB_NAME=postgres
+    export CLIENT_ID=somecrazy
 }
 
 while getopts "hcsrR:" opt; do

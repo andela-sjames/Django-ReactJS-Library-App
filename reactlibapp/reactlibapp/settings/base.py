@@ -19,7 +19,6 @@ from datetime import timedelta
 import dotenv
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 dotenv.load()
 
 # Quick-start development settings - unsuitable for production

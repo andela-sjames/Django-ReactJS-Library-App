@@ -16,7 +16,7 @@ urlpatterns = [
         name='app_user'),
 
     url(r'^auth/register/$', views.GoogleRegisterView.as_view(),
-        name='auth_register')
+        name='auth_register'),
 
     url(r'^auth/refresh/$', refresh_jwt_token,
         name='auth_refresh'),
