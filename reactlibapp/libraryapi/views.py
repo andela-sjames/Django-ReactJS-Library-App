@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 from rest_framework import status
 from rest_framework import filters
@@ -17,28 +18,41 @@ from libraryapi.serializers import (
     CategorySerializer, AuthorSerializer, 
     BookSerializer, HistorySerializer, 
     InterestSerializer, QuoteSerializer, 
-    GoogleUserSerializer)
+    GoogleUserSerializer, UserSerializer)
 
 from libraryapp.models import GoogleUser
 from libraryapi.utils import resolve_google_oauth
 
 
-class VerifyGoogleAuthView(GenericAPIView):
+class GoogleRegisterView(GenericAPIView):
     
-    serializer_class = GoogleUserSerializer
+    serializer_class = UserSerializer
+
+    def get_oauth_token(user):
+        jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+        jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+        payload = jwt_payload_handler(user)
+        token = jwt_encode_handler(payload)
+
+        serializer = UserSerializer(user)
+
+        body = {
+            'token': token,
+            'user': serializer.data,
+        }
+
+        return body
 
     def get(self, request):
         
         idinfo = resolve_google_oauth(request)
 
-        # check if it is a returning user
+        # check if it is a returning user.
         try:
             google_user = GoogleUser.objects.get(google_id=idinfo['sub'])
             user = User.objects.get(id=google_user.app_user.id)
-            # yeah it's a returning user. 
-            return Response("success", content_type="text/plain")
 
-            except GoogleUser.DoesNotExist:
+        except GoogleUser.DoesNotExist:
             # proceed to create the user
 
             user = User(
@@ -48,26 +62,15 @@ class VerifyGoogleAuthView(GenericAPIView):
                 last_name=idinfo['family_name']
             )
             user.save()
-
             google_user = GoogleUser(google_id=idinfo['sub'],
-                                        app_user=user,
-                                        appuser_picture=idinfo['picture'])
-
+                                     app_user=user,
+                                     appuser_picture=idinfo['picture'])
             google_user.save()
-            serializer = GoogleUserSerializer(google_user)
 
-            # automatically get token for the created user/log them in:
-            jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
-            jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-            payload = jwt_payload_handler(google_user)
-            token = jwt_encode_handler(payload)
 
-            body = {
-                'token': token,
-                'user': serializer.data,
-            }
-
-            return Response(body, status=status.HTTP_201_CREATED)
+        # automatically get token for the created/returning user and log them in:
+        body = self.get_oauth_token(user)
+        return Response(body, status=status.HTTP_201_CREATED)
 
 
 class GoogleUserView(GenericAPIView):

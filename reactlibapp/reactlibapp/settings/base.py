@@ -14,6 +14,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 import sys
 
+from datetime import timedelta
+
 import dotenv
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -133,12 +135,11 @@ SWAGGER_SETTINGS = {
 }
 
 JWT_AUTH = {
-
-    'JWT_SECRET_KEY': SECRET_KEY,
-    'JWT_EXPIRATION_DELTA': timedelta(seconds=3600),
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    'libraryapi.authentication.jwt_response_payload_handler',
+    'JWT_EXPIRATION_DELTA': timedelta(days=1),
     'JWT_ALLOW_REFRESH': True,
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=3),
-
 }
 
 # Static files (CSS, JavaScript, Images)

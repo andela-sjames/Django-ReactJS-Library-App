@@ -14,7 +14,7 @@ def resolve_google_oauth(request):
         idinfo = client.verify_id_token(token, CLIENT_ID)
 
         if 'hd' not in idinfo:
-            return Response("Invalid parameters given")
+            return Response("Invalid parameters given") # this should be handled later
 
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
             return Response("Wrong issuer.")
