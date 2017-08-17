@@ -27,7 +27,7 @@ body,
 }
 
 body {
-  background: $black-100;
+  background: $black;
 
   @media #{'only screen and #{$medium}'} {
     font-size: 12px;
@@ -41,7 +41,7 @@ body {
 #app-background-overlay {
   @include full-page(-5, .6);
 
-  background: $black-100;
+  background: $black;
 }
 
 #app-background {
@@ -49,12 +49,9 @@ body {
 }
 
 .centered-container {
-  align-items: center;
-  display: flex;
+  @include center-contents;
   flex-direction: column;
   height: 100%;
-  justify-content: center;
-  text-align: center;
   width: 100%;
 }
 

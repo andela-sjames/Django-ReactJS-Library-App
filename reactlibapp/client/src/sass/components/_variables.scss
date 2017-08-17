@@ -6,12 +6,13 @@
 //
 //  1. Colors
 //  2. Media Queries
+//  3. Typography
 
 
 
 // 1. Colors
 // ==========================================================================
-$black-100: #000;
+$black: #000;
 $primary-color: #231dc2;
 $dark-primary-color: #0a21a8;
 $light-primary-color: #3359df;
@@ -25,6 +26,13 @@ $secondary-text-color: #212121;
 // ==========================================================================
 $small: '(max-width : 600px)';
 $medium: '(min-width : 600px) and (max-width : 1024px)';
-$large: '(min-width : 1024px)';
+$large: '(min-width : 1024px) and (max-width : 1440px)';
+$extra-large: '(min-width : 1440px)';
 $mobile: '(orientation : portrait)';
 $desktop: '(orientation : landscape)';
+
+// 3. Typography
+// ==========================================================================
+$font-small: 10px;
+$font-medium: 12px;
+$font-large: 14px;

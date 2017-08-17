@@ -5,29 +5,28 @@
 body {
   color: $primary-text-color;
   font-family: 'Roboto', sans-serif;
-  font-size: 10px;
+  font-size: $font-small;
   font-weight: 300;
 
   @media #{'only screen and #{$medium}'} {
-    font-size: 12px;
+    font-size: $font-medium;
   }
 
   @media #{'only screen and #{$large}'} {
-    font-size: 14px;
+    font-size: $font-large;
   }
+}
+
+.shadowed {
+  text-shadow: 2px 5px 5px rgba($black, .5);
+}
+
+.small-caps {
+  font-variant: small-caps;
 }
 
 .upper {
   text-transform: uppercase;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 400;
 }
 
 h1 {

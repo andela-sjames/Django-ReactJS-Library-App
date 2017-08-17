@@ -26,7 +26,7 @@ export class Dashboard extends React.Component<ConnectedDashboardProps> {
         <h1>This app is under construction</h1>
         <h4>Built with {this.props.compiler}, {this.props.framework} and {this.props.stateContainer}</h4>
         <br />
-        <h4 onClick={this.onClick}>Sign Out</h4>
+        <a className="mui-btn" onClick={this.onClick}>Sign Out</a>
       </div>
     );
   }

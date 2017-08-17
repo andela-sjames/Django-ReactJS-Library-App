@@ -2,7 +2,7 @@ import * as React from 'react';
 import Protected from './auth/Protected';
 
 import { Navbar } from './common/Navbar';
-import AuthPage from './auth/AuthPage';
+import { AuthPage } from './auth/AuthPage';
 import Dashboard from './main/Dashboard';
 
 import { lazyLoad, Animate } from '../utils';

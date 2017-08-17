@@ -11,3 +11,10 @@
   top: 0;
   z-index: $z-index;
 }
+
+@mixin center-contents {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}

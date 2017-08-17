@@ -27,6 +27,7 @@
     "npm": "4.2.0"
   },
   "dependencies": {
+    "@types/extract-text-webpack-plugin": "2.1.0",
     "@types/react": "16.0.1",
     "@types/react-dom": "15.5.2",
     "@types/react-redux": "5.0.0",
