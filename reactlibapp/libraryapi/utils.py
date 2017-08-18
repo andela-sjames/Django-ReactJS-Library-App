@@ -22,13 +22,13 @@ def resolve_google_oauth(request):
             return unauthorized('Wrong Issuer')
 
         if idinfo['hd'] != 'andela.com' and \
-            idinfo['email_verified'] != "true" and \
+            idinfo['email_verified'] != 'true' and \
             idinfo['aud'] != CLIENT_ID:
 
-            return unauthorized("Invalid parameters given")
+            return unauthorized('Invalid parameters given')
 
     except crypt.AppIdentityError:
-        return unauthorized("Invalid Token")
+        return unauthorized('Invalid Token')
 
 
     return idinfo

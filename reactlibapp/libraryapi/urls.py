@@ -10,7 +10,6 @@ from rest_framework_jwt.views import (
     obtain_jwt_token)
 
 
-
 urlpatterns = [
     url(r'^appuser/$', views.GoogleUserView.as_view(),
         name='app_user'),
