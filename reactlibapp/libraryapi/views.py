@@ -5,7 +5,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework import filters
 from rest_framework.response import Response
-from rest_framework.generics import GenericAPIView, ListAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView, CreateAPIView
 from rest_framework_jwt.settings import api_settings
 
 from libraryapi.setpagination import LimitOffsetpage
@@ -24,7 +24,7 @@ from libraryapp.models import GoogleUser
 from libraryapi.utils import resolve_google_oauth
 
 
-class GoogleRegisterView(GenericAPIView):
+class GoogleRegisterView(CreateAPIView):
     
     serializer_class = UserSerializer
 
@@ -35,13 +35,14 @@ class GoogleRegisterView(GenericAPIView):
         token = jwt_encode_handler(payload)
 
         serializer = UserSerializer(user)
+        headers = self.get_success_headers(serializer.data)
 
         body = {
             'token': token,
             'user': serializer.data,
         }
 
-        return body
+        return body, headers
 
     def get(self, request):
         
@@ -69,8 +70,8 @@ class GoogleRegisterView(GenericAPIView):
 
 
         # automatically get token for the created/returning user and log them in:
-        body = self.get_oauth_token(user)
-        return Response(body, status=status.HTTP_201_CREATED)
+        body, headers = self.get_oauth_token(user)
+        return Response(body, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class GoogleUserView(GenericAPIView):

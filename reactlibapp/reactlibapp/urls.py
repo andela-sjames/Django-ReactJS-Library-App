@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.SPAView.as_view(), name='homepage'),
     url(r'^libraryapp/', include('libraryapp.urls')),
-    url(r'^api/', include('libraryapi.urls'))
+    url(r'^api/v1/', include('libraryapi.urls'))
 
 ]
