@@ -4,10 +4,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from libraryapi import views
 
 
-from rest_framework_jwt.views import (
-    refresh_jwt_token, 
-    verify_jwt_token, 
-    obtain_jwt_token)
+from rest_framework_jwt.views import refresh_jwt_token, verify_jwt_token
 
 
 urlpatterns = [
@@ -40,7 +37,6 @@ urlpatterns = [
 
     url(r'^quotes/$', views.QuotesListView.as_view(),
         name='apiquotes'),
-
 ]
 
 

@@ -28,7 +28,7 @@ class GoogleRegisterView(CreateAPIView):
     
     serializer_class = UserSerializer
 
-    def get_oauth_token(user):
+    def get_oauth_token(self, user):
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
         jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
         payload = jwt_payload_handler(user)
@@ -67,7 +67,6 @@ class GoogleRegisterView(CreateAPIView):
                                      app_user=user,
                                      appuser_picture=idinfo['picture'])
             google_user.save()
-
 
         # automatically get token for the created/returning user and log them in:
         body, headers = self.get_oauth_token(user)
