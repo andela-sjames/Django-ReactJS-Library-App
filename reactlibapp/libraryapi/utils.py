@@ -19,7 +19,7 @@ def resolve_google_oauth(request):
             return not_allowed()
 
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-            return unauthorized('Wrong Issuer'):
+            return unauthorized('Wrong Issuer')
 
         if idinfo['hd'] != 'andela.com' and \
             idinfo['email_verified'] != "true" and \
