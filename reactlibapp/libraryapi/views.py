@@ -5,7 +5,9 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework import filters
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from rest_framework.generics import GenericAPIView, ListAPIView, CreateAPIView
+from rest_framework.views import APIView
 from rest_framework_jwt.settings import api_settings
 
 from libraryapi.setpagination import LimitOffsetpage
@@ -22,11 +24,12 @@ from libraryapi.serializers import (
 
 from libraryapp.models import GoogleUser
 from libraryapi.utils import resolve_google_oauth
+from libraryapi.errors import unauthorized
 
 
-class GoogleRegisterView(CreateAPIView):
+class GoogleRegisterView(APIView):
     
-    serializer_class = UserSerializer
+    permission_classes = (AllowAny,)
 
     def get_oauth_token(self, user):
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -35,18 +38,24 @@ class GoogleRegisterView(CreateAPIView):
         token = jwt_encode_handler(payload)
 
         serializer = UserSerializer(user)
-        headers = self.get_success_headers(serializer.data)
+        # headers = self.get_success_headers(serializer.data)
 
         body = {
             'token': token,
             'user': serializer.data,
         }
 
-        return body, headers
+        return body
 
-    def get(self, request):
+    def post(self, request, format=None):
         
         idinfo = resolve_google_oauth(request)
+
+        try:
+            if type(idinfo.data) == type(dict()):
+                return Response(idinfo.data)
+        except Exception as e:
+            pass
 
         # check if it is a returning user.
         try:
@@ -69,8 +78,8 @@ class GoogleRegisterView(CreateAPIView):
             google_user.save()
 
         # automatically get token for the created/returning user and log them in:
-        body, headers = self.get_oauth_token(user)
-        return Response(body, status=status.HTTP_201_CREATED, headers=headers)
+        body = self.get_oauth_token(user)
+        return Response(body, status=status.HTTP_201_CREATED)
 
 
 class GoogleUserView(GenericAPIView):

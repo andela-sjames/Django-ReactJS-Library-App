@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 
-def unauthorized(message='please authenticate with your token'):
+def unauthorized(message):
     ''' User is unauthorised to perform action.'''
     body = {'status': 401, 'error': 'unauthorized', 'message': message}
     return Response(body, status=status.HTTP_401_UNAUTHORIZED)

@@ -1,7 +1,6 @@
-import dotenv
-dotenv.load()
+import os
 
-from oauth2client import client
+from oauth2client import client, crypt
 from rest_framework.response import Response
 
 from libraryapi.errors import not_allowed, unauthorized
@@ -9,8 +8,10 @@ from libraryapi.errors import not_allowed, unauthorized
 def resolve_google_oauth(request):
     # token should be passed as an object {'idtoken' : id_token }
     # to this view
-    token = request.GET['idtoken']
-    CLIENT_ID = dotenv.get('CLIENT_ID')
+    token = request.data.get('idtoken')
+    CLIENT_ID = os.environ.get('CLIENT_ID')
+
+    token.replace(" ", "")
 
     try:
         idinfo = client.verify_id_token(token, CLIENT_ID)
