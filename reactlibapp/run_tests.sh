@@ -81,13 +81,13 @@ if [ $SHOULD_REPORT -eq 1 ]; then
   fi
 
   if [ $TESTED_SERVER -eq 1 ]; then
-    echo "\nPlease configure a coverage analysis solution for the server"
+    echo -e "\nPlease configure a coverage analysis solution for the server"
   fi
 fi
 
 if [ $TESTS_FAILED -eq 1 ]; then
   # https://github.com/ryanoasis/public-bash-scripts/blob/master/unix-color-codes.sh
-  echo "\n\n\033[31mSome tests failed.\033[0m\n"; exit 1
+  echo -e "\n\n\033[31mSome tests failed.\033[0m\n"; exit 1
 else
-  echo "\n\n\033[32mAll tests passed!\033[0m\n"; exit 0
+  echo -e "\n\n\033[32mAll tests passed!\033[0m\n"; exit 0
 fi

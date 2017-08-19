@@ -1,44 +1,10 @@
-// TODO: Move these to _variables.scss in next commit
-$black-100: #000;
-$primary-color: #231dc2;
-$dark-primary-color: #0a21a8;
-$light-primary-color: #3359df;
-$primary-text-color: #fff;
-$secondary-color: #ffaf30;
-$dark-secondary-color: #fc9b00;
-$light-secondary-color: #ffc363;
-$secondary-text-color: #212121;
+@charset 'UTF-8';
 
-html,
-#app,
-body,
-.main {
-  box-sizing: border-box;
-  height: 100%;
-  min-height: 562px;
-}
+@import 'components/mixins';
+@import 'components/variables';
 
-body {
-  background: $black-100;
-  color: $primary-text-color;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-}
+@import 'components/typography';
+@import 'components/layout';
 
-#app-background {
-  bottom: 0;
-  left: 0;
-  opacity: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: -1;
-}
-
-.main {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-}
+@import 'components/navbar';
+@import 'components/buttons';

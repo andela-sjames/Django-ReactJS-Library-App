@@ -1,0 +1,68 @@
+// ==========================================================================
+// Library app layout
+// ==========================================================================
+
+* {
+  box-sizing: border-box;
+}
+
+.hide-on-mobile {
+  @media #{$mobile} {
+    display: none;
+  }
+}
+
+.hide-on-desktop {
+  @media #{$desktop} {
+    display: none;
+  }
+}
+
+html,
+#app,
+body,
+.app {
+  height: 100%;
+  min-height: 562px;
+}
+
+body {
+  background: $black;
+
+  @media #{'only screen and #{$medium}'} {
+    font-size: 12px;
+  }
+
+  @media #{'only screen and #{$large}'} {
+    font-size: 14px;
+  }
+}
+
+#app-background-overlay {
+  @include full-page(-5, .6);
+
+  background: $black;
+}
+
+#app-background {
+  @include full-page(-10, 0);
+}
+
+.centered-container {
+  @include center-contents;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5%;
+  position: relative;
+
+  .main {
+    flex-grow: 1;
+    height: 90%;
+  }
+}

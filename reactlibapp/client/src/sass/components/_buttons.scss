@@ -1,0 +1,59 @@
+// ==========================================================================
+// Library app buttons
+// ==========================================================================
+
+.mui-btn {
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba($black, .5);
+
+  &:active,
+  &:hover,
+  &:focus {
+    box-shadow: 2px 5px 5px rgba($black, .5);
+  }
+}
+
+@mixin btn-with-logo($base-height, $separator-width) {
+  height: calc(3 * #{$base-height});
+
+  .logo-container {
+    width: calc(3 * #{$base-height});
+
+    svg {
+      height: calc(2 * #{$base-height});
+      width: calc(2 * #{$base-height});
+    }
+  }
+
+  .separator {
+    border-left: $separator-width solid $primary-color;
+  }
+
+  .text-container {
+    font-size: $base-height;
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 0 $base-height;
+    text-transform: none;
+  }
+}
+
+.mui-btn.btn-with-logo {
+  @include btn-with-logo(14px, 1px);
+
+  display: flex;
+  padding: 0;
+
+  .logo-container,
+  .text-container {
+    @include center-contents;
+  }
+
+  @media #{'only screen and #{$medium}'} {
+    @include btn-with-logo(16px, 1.5px);
+  }
+
+  @media #{'only screen and #{$large}'} {
+    @include btn-with-logo(18px, 2px);
+  }
+}

@@ -1,12 +1,11 @@
 import * as localForage from 'localforage';
-import { persistStore } from 'redux-persist';
+import { persistStore, autoRehydrate } from 'redux-persist';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { autoRehydrate } from 'redux-persist';
 import appReducer from '../reducers';
 
 let middleware = [thunk];
-let composer:any;
+let composer: any;
 
 if (process.env.NODE_ENV === 'production') {
   composer = require('redux').compose;
@@ -21,7 +20,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const store = composer(
   applyMiddleware(...middleware),
-  autoRehydrate()
+  autoRehydrate(),
 )(createStore)(appReducer);
 
 persistStore(store, {storage: localForage});

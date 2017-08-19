@@ -15,7 +15,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: pip-{{ .Branch }}-{{ checksum "reactlibapp/requirements.txt" }}
+      - restore_cache:
+          key: npm-{{ .Branch }}-{{ checksum "reactlibapp/client/package.json" }}
       - run:
           command: |
             curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
@@ -25,13 +27,17 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             cd reactlibapp
-            pip install -r requirements.txt
+            pip3 install -r requirements.txt
             cd client
             npm install
       - save_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: pip-{{ .Branch }}-{{ checksum "reactlibapp/requirements.txt" }}
           paths:
             - "venv"
+      - save_cache:
+          key: npm-{{ .Branch }}-{{ checksum "reactlibapp/client/package.json" }}
+          paths:
+            - "reactlibapp/client/node_modules"
       - run:
           command: |
             . venv/bin/activate

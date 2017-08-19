@@ -1,13 +1,39 @@
 import * as React from 'react';
+import Protected from './auth/Protected';
 
-export interface AppProps { compiler: string; framework: string; stateContainer: string }
+import { Navbar } from './common/Navbar';
+import { AuthPage } from './auth/AuthPage';
+import Dashboard from './main/Dashboard';
 
-export class App extends React.Component<AppProps, undefined> {
+import { lazyLoad, Animate } from '../utils';
+
+export interface IAppProps { compiler: string; framework: string; stateContainer: string }
+
+export class App extends React.Component<IAppProps> {
+  componentDidMount() {
+    lazyLoad(`https://source.unsplash.com/${screen.width}x${screen.height}/?library,books`)
+      .then((dataURI) => {
+        const background: HTMLElement = document.getElementById('app-background');
+        background.style.backgroundImage = `url(${dataURI})`;
+        background.style.backgroundSize = 'cover';
+        background.style.backgroundPosition = '50% 50%';
+        background.style.backgroundSize = 'fixed';
+
+        Animate.fadeIn('app-background', 1500);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
     return (
-      <div className='main'>
-        <h1>This app is under construction</h1>
-        <h4>Built with {this.props.compiler}, {this.props.framework} and {this.props.stateContainer}</h4>
+      <div className="app">
+        <Navbar />
+        <Protected className="main">
+          <Dashboard compiler="TypeScript" framework="React" stateContainer="Redux"/>
+          <AuthPage />
+        </Protected>
       </div>
     );
   }
