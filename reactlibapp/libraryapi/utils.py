@@ -1,3 +1,4 @@
+# resource: https://developers.google.com/identity/sign-in/web/backend-auth
 import os
 
 from oauth2client import client, crypt

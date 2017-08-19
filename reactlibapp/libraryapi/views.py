@@ -38,7 +38,6 @@ class GoogleRegisterView(APIView):
         token = jwt_encode_handler(payload)
 
         serializer = UserSerializer(user)
-        # headers = self.get_success_headers(serializer.data)
 
         body = {
             'token': token,
