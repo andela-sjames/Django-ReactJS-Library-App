@@ -39,6 +39,7 @@ example:
   ./app.sh start local
   ./app.sh start local production
   ./app.sh start local test
+  ./app.sh test -csr
   ./app.sh help
 
 EOF

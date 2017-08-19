@@ -23,6 +23,10 @@ class GoogleUser(models.Model):
                                     on_delete=models.CASCADE)
     appuser_picture = models.TextField()
 
+    def check_diff(self):
+        """Method defined to check model field difference."""
+        pass
+
     def __unicode__(self):
         return "%s %s" % (self.app_user.first_name,
                           self.app_user.last_name)

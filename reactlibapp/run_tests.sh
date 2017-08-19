@@ -34,6 +34,7 @@ function export_env() {
     export DB_SERVICE=postgres
     export DB_PORT=5432
     export DB_NAME=postgres
+    export CLIENT_ID=somecrazy
 }
 
 while getopts "hcsrR:" opt; do
@@ -54,7 +55,7 @@ while getopts "hcsrR:" opt; do
   s)
     TESTED_SERVER=1
     export_env
-    coverage run --source libraryapp manage.py test
+    coverage run --source libraryapp,libraryapi manage.py test
     if [ $? -gt 0 ]; then
       TESTS_FAILED=1
     fi
