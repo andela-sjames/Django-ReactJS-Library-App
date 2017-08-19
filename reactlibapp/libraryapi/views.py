@@ -61,6 +61,8 @@ class GoogleRegisterView(APIView):
             google_user = GoogleUser.objects.get(google_id=idinfo['sub'])
             user = User.objects.get(id=google_user.app_user.id)
 
+            # check diff in user object and update here including pix
+
         except GoogleUser.DoesNotExist:
             # proceed to create the user
 

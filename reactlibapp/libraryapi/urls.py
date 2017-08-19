@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^auth/refresh/$', refresh_jwt_token,
         name='auth_refresh'),
 
-    url(r'^auth/verify/', verify_jwt_token,
+    url(r'^auth/verify/$', verify_jwt_token,
         name='auth_verify'),
 
     url(r'^categories/$', views.CategoryListView.as_view(),

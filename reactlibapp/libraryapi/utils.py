@@ -7,9 +7,9 @@ from rest_framework.response import Response
 from libraryapi.errors import not_allowed, unauthorized
 
 def resolve_google_oauth(request):
-    # token should be passed as an object {'idtoken' : id_token }
+    # token should be passed as an object {'ID_Token' : id_token }
     # to this view
-    token = request.data.get('idtoken')
+    token = request.data.get('ID_Token')
     CLIENT_ID = os.environ.get('CLIENT_ID')
 
     token.replace(" ", "")
