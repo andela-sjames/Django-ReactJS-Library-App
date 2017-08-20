@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+from likert_field.models import LikertField
 
 
 class UserProxy(User):
@@ -131,11 +132,11 @@ class Book(BaseInfo):
         return "Book title: {}" .format(self.title)
 
 
-class Review(BaseInfo):
+class Ratings(BaseInfo):
     """Book review model defined."""
 
     comment = models.TextField()
-    # ratings needs to be implemented here.
+    score = LikertField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
 

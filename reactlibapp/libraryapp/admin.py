@@ -1,7 +1,7 @@
 
 from django.contrib import admin
-from libraryapp.models import Author, Book, Review, History, GoogleUser, \
-    Category, Interest, Quote
+from libraryapp.models import Author, Book, Interest, History, GoogleUser, \
+    Category, Ratings, Quote
 
 
 class AuthorInline(admin.TabularInline):
@@ -83,7 +83,7 @@ class HistoryAdmin(admin.ModelAdmin):
     )
 
 
-class ReviewsAdmin(admin.ModelAdmin):
+class RatingsAdmin(admin.ModelAdmin):
     """Review admin model class defined."""
 
     search_fields = ['^comment']
@@ -156,7 +156,7 @@ class QuoteAdmin(admin.ModelAdmin):
 
 admin.site.register(Book, BooksAdmin)
 admin.site.register(Author, AuthorsAdmin)
-admin.site.register(Review, ReviewsAdmin)
+admin.site.register(Ratings, RatingsAdmin)
 admin.site.register(History, HistoryAdmin)
 admin.site.register(GoogleUser, GoogleUserAdmin)
 admin.site.register(Category, CategoryUserAdmin)
