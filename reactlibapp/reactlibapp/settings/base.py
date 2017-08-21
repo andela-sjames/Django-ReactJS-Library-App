@@ -51,7 +51,6 @@ INSTALLED_APPS = (
     'libraryapp.apps.LibraryappConfig',
     'libraryapi.apps.LibraryapiConfig',
     'webpack_loader',
-    'likert_field',
 )
 
 MIDDLEWARE_CLASSES = (
