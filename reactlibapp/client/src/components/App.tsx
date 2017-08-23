@@ -7,9 +7,7 @@ import Dashboard from './main/Dashboard';
 
 import { lazyLoad, Animate } from '../utils';
 
-export interface IAppProps { compiler: string; framework: string; stateContainer: string }
-
-export class App extends React.Component<IAppProps> {
+export class App extends React.Component {
   componentDidMount() {
     lazyLoad(`https://source.unsplash.com/${screen.width}x${screen.height}/?library,books`)
       .then((dataURI) => {
@@ -30,7 +28,7 @@ export class App extends React.Component<IAppProps> {
     return (
       <div className="app">
         <Navbar />
-        <Protected className="main">
+        <Protected className="main" wait={true}>
           <Dashboard compiler="TypeScript" framework="React" stateContainer="Redux"/>
           <AuthPage />
         </Protected>

@@ -1,11 +1,46 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { State } from '../../types';
+import { State, ThunkDispatch } from '../../types';
 
-export interface IProtectedProps { isAuthenticated: boolean; className?: string; }
+import { Preloader } from '../common/Preloader';
+import { signIn } from '../../actions/authActions';
 
-export class Protected extends React.Component<IProtectedProps> {
-  render() {
+declare var gapi: any;
+
+export interface IProtectedProps {
+  className?: string;
+  wait?: boolean;
+}
+
+export interface IConnectedProtectedProps extends IProtectedProps {
+  isAuthenticated: boolean;
+  email?: string;
+  signIn: Function;
+}
+
+export class Protected extends React.Component<IConnectedProtectedProps> {
+  componentDidMount() {
+    if (this.shouldWait()) {
+      const googleAuth = gapi.auth2.getAuthInstance();
+      this.props.signIn(googleAuth.currentUser.get());
+    }
+  }
+
+  shouldWait = () => {
+    const { isAuthenticated, email, wait } = this.props;
+
+    return (wait && email && !isAuthenticated);
+  }
+
+  renderPreloader = () => {
+    return (
+      <div className="centered-container">
+        <Preloader />
+      </div>
+    );
+  }
+
+  renderChildren = () => {
     const children = React.Children.toArray(this.props.children);
 
     return (
@@ -17,10 +52,23 @@ export class Protected extends React.Component<IProtectedProps> {
       </div>
     );
   }
+
+  render() {
+    if (this.shouldWait()) {
+      return this.renderPreloader();
+    }
+
+    return this.renderChildren();
+  }
 }
 
 const mapStateToProps = (state: State) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  email: state.auth.email,
 });
 
-export default connect<any, any, { className?: string }>(mapStateToProps)(Protected);
+const mapDispatchToProps = (dispatch: ThunkDispatch) => ({
+  signIn: (googleUser: any) => dispatch(signIn(googleUser)),
+});
+
+export default connect<any, any, IProtectedProps>(mapStateToProps, mapDispatchToProps)(Protected);

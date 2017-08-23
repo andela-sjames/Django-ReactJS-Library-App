@@ -3,6 +3,7 @@
 // ==========================================================================
 
 body {
+  background: $black;
   color: $primary-text-color;
   font-family: 'Roboto', sans-serif;
   font-size: $font-small;
@@ -49,20 +50,20 @@ h2 {
 
 h3 {
   font-size: 1.75em;
-  margin: .583em;
+  margin: .583em 0;
 }
 
 h4 {
   font-size: 1.5em;
-  margin: .5em;
+  margin: .5em 0;
 }
 
 h5 {
   font-size: 1.25em;
-  margin: .417em;
+  margin: .417em 0;
 }
 
 h6 {
   font-size: 1em;
-  margin: .333em;
+  margin: .333em 0;
 }

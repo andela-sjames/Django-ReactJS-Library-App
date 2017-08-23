@@ -4,11 +4,11 @@ import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const ExtractAppCSS = new ExtractTextPlugin({
   filename: 'css/app.css',
-  allChunks: true
+  allChunks: true,
 });
 const ExtractVendorCSS = new ExtractTextPlugin({
   filename: 'css/vendor.css',
-  allChunks: true
+  allChunks: true,
 });
 
 export default {
@@ -19,74 +19,69 @@ export default {
   plugins: [
     new webpack.LoaderOptionsPlugin({
       minimize: true,
-      debug: false
+      debug: false,
     }),
     new webpack.EnvironmentPlugin({ NODE_ENV: 'production' }),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendors',
       filename: 'js/vendor.js',
-      minChunks: function(module) {
-        return typeof module.context === 'string' && module.context.indexOf('node_modules') >= 0;
-      }
+      minChunks: (module) => (typeof module.context === 'string' && module.context.indexOf('node_modules') >= 0),
     }),
     ExtractAppCSS,
     ExtractVendorCSS,
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         screw_ie8: true,
-        warnings: false
+        warnings: false,
       },
       mangle: {
-        screw_ie8: true
+        screw_ie8: true,
       },
       comments: false,
-      sourceMap: true
-    })
+      sourceMap: true,
+    }),
   ],
   entry: [
-    './src/index.tsx'
+    './src/index.tsx',
   ],
   target: 'web',
   output: {
     path: path.join(__dirname, '../static'),
-    filename: 'js/app.js'
+    filename: 'js/app.js',
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader',
-        query: {
-          tsconfig: 'tsconfig.json'
-        }
       },
       {
         enforce: 'pre',
         test: /\.js$/,
-        loader: 'source-map-loader'
+        loader: 'source-map-loader',
       },
       {
         test: /\.scss$/,
         loader: ExtractAppCSS.extract({
           fallback: 'style-loader',
-          use: 'css-loader?sourceMap!csso-loader!sass-loader'
-        })
+          use: 'css-loader?sourceMap!csso-loader!sass-loader',
+        }),
       },
       {
         test: /\.css$/,
         loader: ExtractVendorCSS.extract({
           fallback: 'style-loader',
-          use: 'css-loader?sourceMap!csso-loader'
-        })
+          use: 'css-loader?sourceMap!csso-loader',
+        }),
       },
       {
         test: /\.(jpg|png|svg|gif)$/,
         loader: 'file-loader',
         query: {
-          name: 'img/[name].[ext]'
-        }
-      }
-    ]
-  }
+          name: 'img/[name].[ext]',
+        },
+      },
+    ],
+  },
 };
