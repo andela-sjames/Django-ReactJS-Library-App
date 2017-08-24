@@ -14,24 +14,26 @@ class UserProxy(User):
     """
     class Meta:
         proxy = True
+        auto_created = True
 
-     def check_diff(self, idinfo):
-         """Check for differences between request/idinfo and model data.
+    def check_diff(self, idinfo):
+        """
+        Check for differences between request/idinfo and model data.
+
             Args:
                 idinfo: data passed in from post method.
-        """"
-
-            data = {
+        """
+        data = {
                 "username": idinfo['name'],
                 "email" : idinfo["email"],
                 "first_name" :idinfo['given_name'],
                 "last_name" :idinfo['family_name']
             }
             
-            for field in data:
-                if getattr(self, field) != data[field] and data[field] != '':
-                    setattr(self, field, data[field])
-            self.save()
+        for field in data:
+            if getattr(self, field) != data[field] and data[field] != '':
+                setattr(self, field, data[field])
+        self.save()
 
 class BaseInfo(models.Model):
     """Base class containing all models common information."""
@@ -57,7 +59,7 @@ class GoogleUser(models.Model):
         """Check for differences between request/idinfo and model data.
             Args:
                 idinfo: data passed in from post method.
-        """"
+        """
         data = {
                 "appuser_picture": idinfo['picture']
             }
