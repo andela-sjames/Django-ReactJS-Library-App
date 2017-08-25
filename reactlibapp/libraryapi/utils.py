@@ -23,11 +23,15 @@ def resolve_google_oauth(request):
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
             return unauthorized('Wrong Issuer')
 
-        if idinfo['hd'] != 'andela.com' and \
-            idinfo['email_verified'] != 'true' and \
+        if idinfo['hd'] != 'andela.com' or \
+            idinfo['email_verified'] != 'true' or \
             idinfo['aud'] != CLIENT_ID:
-
             return unauthorized('Invalid parameters given')
+
+        if idinfo['hd'] == 'andela.com' and \
+            idinfo['email_verified'] == 'true' and \
+            idinfo['aud'] == CLIENT_ID:
+            return idinfo
 
     except crypt.AppIdentityError:
         return unauthorized('Invalid Token')

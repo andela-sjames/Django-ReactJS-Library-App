@@ -30,18 +30,21 @@ To install the project follow the following steps
   `git clone https://github.com/andela-sjames/Django-ReactJS-Library-App.git`
 
 - Navigate in to the root directory of the project and run the command below to create your local Python environment:
+- Project uses python 3
 
-  `virtualenv venv`
+  `virtualenv -p python3 env`
 
-- Navigate into the *reactlibapp* directory and run the following command to install the front-end project dependencies:
+- Navigate into the *reactlibapp* directory and run this command to start the project:
 
-  `npm install && bower install`
+  `./app.sh start local`
 
-- The project should now be setup and ready for demonstration. To launch the project run the command below:
+- The project has a command line tool that simplify development:
+-  use `./app.sh help` to see usage
 
-  `python manage.py runserver`
+- The resources used by the application is documented via swagger, to view that navigate to:
+  `http://localhost:8000/docs`
 
-At this point you can open up your browser and visit http://localhost:8000 to see the application running.
+At this point you can open up your browser and visit `http://localhost:8000` to see the application running.
 
 *P.S*: To run a production instance of the application in development using `gunicorn`, follow the steps below:
 - cd reactlibapp
@@ -77,6 +80,10 @@ TBD
 ## Authors
 
 * [Samuel James](https://github.com/andela-sjames) - *Initial work*
+* [Bolaji Olajide](https://github.com/BolajiOlajide)
+* [Princess Jewel Essien](https://github.com/andela-pessien)
+* [Moyosore Sosan](https://github.com/andela-msosan)
+* [Azeez Olaniran](https://github.com/andela-aolaniran)
 
 See also the list of [contributors](https://github.com/andela-sjames/Django-ReactJS-Library-App/contributors) who participate in this project.
 
