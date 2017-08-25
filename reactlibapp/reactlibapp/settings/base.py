@@ -129,11 +129,6 @@ REST_FRAMEWORK = {
     'MAX_PAGINATE_BY': 100             # Maximum limit allowed when using `?page_size=xxx`.
 }
 
-SWAGGER_SETTINGS = {
-    "title": "moments-bucketlist API ",
-    "description": " A web API for creating Buckelist, i.e list of stuffs you want to do before you die.",
-}
-
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER':
     'libraryapi.authentication.jwt_response_payload_handler',
