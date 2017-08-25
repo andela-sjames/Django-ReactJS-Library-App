@@ -15,7 +15,7 @@ from libraryapp.models import (
     Category, Author, 
     Book, History, 
     Interest, Quote, 
-    GoogleUser)
+    GoogleUser, UserProxy)
 from libraryapi.serializers import (
     CategorySerializer, AuthorSerializer, 
     BookSerializer, HistorySerializer, 
@@ -31,13 +31,13 @@ class GoogleRegisterView(APIView):
     
     permission_classes = (AllowAny,)
 
-    def get_oauth_token(self, user):
+    def get_oauth_token(self, userproxy):
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
         jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-        payload = jwt_payload_handler(user)
+        payload = jwt_payload_handler(userproxy)
         token = jwt_encode_handler(payload)
 
-        serializer = UserSerializer(user)
+        serializer = UserSerializer(userproxy)
 
         body = {
             'token': token,
@@ -59,27 +59,27 @@ class GoogleRegisterView(APIView):
         # check if it is a returning user.
         try:
             google_user = GoogleUser.objects.get(google_id=idinfo['sub'])
-            user = User.objects.get(id=google_user.app_user.id)
-
-            # check diff in user object and update here including pix
+            google_user.check_diff(idinfo)
+            userproxy = UserProxy.objects.get(id=google_user.app_user.id)
+            userproxy.check_diff(idinfo)
 
         except GoogleUser.DoesNotExist:
             # proceed to create the user
 
-            user = User(
+            userproxy = UserProxy(
                 username=idinfo['name'],
                 email=idinfo["email"],
                 first_name=idinfo['given_name'],
                 last_name=idinfo['family_name']
             )
-            user.save()
+            userproxy.save()
             google_user = GoogleUser(google_id=idinfo['sub'],
-                                     app_user=user,
+                                     app_user=userproxy,
                                      appuser_picture=idinfo['picture'])
             google_user.save()
 
         # automatically get token for the created/returning user and log them in:
-        body = self.get_oauth_token(user)
+        body = self.get_oauth_token(userproxy)
         return Response(body, status=status.HTTP_201_CREATED)
 
 

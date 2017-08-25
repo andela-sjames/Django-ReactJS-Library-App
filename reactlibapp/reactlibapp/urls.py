@@ -16,12 +16,18 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from rest_framework_swagger.views import get_swagger_view
+schema_view = get_swagger_view(title='Library App API')
+
 from libraryapp import views
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^xyz-admin/', include(admin.site.urls)),
     url(r'^$', views.SPAView.as_view(), name='homepage'),
     url(r'^libraryapp/', include('libraryapp.urls')),
-    url(r'^api/v1/', include('libraryapi.urls'))
+    url(r'^api/v1/', include('libraryapi.urls')),
+]
 
+urlpatterns += [
+    url(r'^docs/$', schema_view),
 ]
