@@ -22,7 +22,7 @@ schema_view = get_swagger_view(title='Library App API')
 from libraryapp import views
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^xyz-admin/', include(admin.site.urls)),
     url(r'^$', views.SPAView.as_view(), name='homepage'),
     url(r'^libraryapp/', include('libraryapp.urls')),
     url(r'^api/v1/', include('libraryapi.urls')),
