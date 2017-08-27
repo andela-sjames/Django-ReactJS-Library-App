@@ -11,3 +11,9 @@ N/A
 N/A
 
 #### What are the relevant github issues?
+
+#### Any new frontend dependency?
+N/A
+
+#### Any new backend dependency?
+N/A

@@ -131,11 +131,11 @@ class Book(BaseInfo):
         return "Book title: {}" .format(self.title)
 
 
-class Review(BaseInfo):
+class Ratings(BaseInfo):
     """Book review model defined."""
 
     comment = models.TextField()
-    # ratings needs to be implemented here.
+    score = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
 

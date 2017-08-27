@@ -50,7 +50,7 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'libraryapp.apps.LibraryappConfig',
     'libraryapi.apps.LibraryapiConfig',
-    'webpack_loader'
+    'webpack_loader',
 )
 
 MIDDLEWARE_CLASSES = (
