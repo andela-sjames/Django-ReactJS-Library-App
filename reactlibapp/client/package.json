@@ -8,8 +8,9 @@
     "watch": "webpack-dev-server --config webpack.config.dev.ts --progress --colors",
     "prebuild": "rm -rf ../static/{css,js,img}",
     "prewatch": "npm run prebuild",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
+    "pretest": "rm -rf coverage && npm run lint",
     "test": "jest --config jest.json",
-    "pretest": "rm -rf coverage",
     "report": "codecov"
   },
   "repository": {
@@ -27,6 +28,7 @@
     "npm": "4.2.0"
   },
   "dependencies": {
+    "@types/extract-text-webpack-plugin": "2.1.0",
     "@types/react": "16.0.1",
     "@types/react-dom": "15.5.2",
     "@types/react-redux": "5.0.0",
@@ -37,6 +39,7 @@
     "axios": "0.16.2",
     "css-loader": "0.28.4",
     "csso-loader": "0.3.1",
+    "es6-promise": "4.1.1",
     "extract-text-webpack-plugin": "3.0.0",
     "file-loader": "0.11.2",
     "localforage": "1.5.0",
@@ -55,6 +58,7 @@
     "sass-loader": "6.0.6",
     "source-map-loader": "0.2.1",
     "style-loader": "0.18.2",
+    "tslib": "1.7.1",
     "typescript": "2.4.2",
     "webpack": "3.5.2"
   },
@@ -73,7 +77,7 @@
     "jest": "20.0.4",
     "jsdom": "11.1.0",
     "moxios": "0.4.0",
-    "react-addons-test-utils": "15.6.0",
+    "react-test-renderer": "15.6.1",
     "redux-devtools": "3.4.0",
     "redux-devtools-extension": "2.13.2",
     "redux-immutable-state-invariant": "2.0.0",
@@ -82,6 +86,8 @@
     "sinon": "3.2.0",
     "ts-jest": "20.0.10",
     "ts-node": "3.3.0",
+    "tslint": "5.6.0",
+    "tslint-react": "3.2.0",
     "webpack-bundle-tracker": "0.2.0",
     "webpack-dev-server": "2.7.1"
   }

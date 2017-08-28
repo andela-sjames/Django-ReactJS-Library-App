@@ -1,0 +1,68 @@
+// ==========================================================================
+// Library app typography
+// ==========================================================================
+
+body {
+  color: $primary-text-color;
+  font-family: 'Roboto', sans-serif;
+  font-size: $font-small;
+  font-weight: 300;
+
+  @media #{'only screen and #{$medium}'} {
+    font-size: $font-medium;
+  }
+
+  @media #{'only screen and #{$large}'} {
+    font-size: $font-large;
+  }
+}
+
+.shadowed {
+  text-shadow: 2px 5px 5px rgba($black, .5);
+}
+
+.small-caps {
+  font-variant: small-caps;
+}
+
+.upper {
+  text-transform: uppercase;
+}
+
+nav {
+  font-size: 1.2em;
+}
+
+.cursive {
+  font-family: 'Indie Flower', 'cursive';
+}
+
+h1 {
+  font-size: 3em;
+  margin: 1em 0;
+}
+
+h2 {
+  font-size: 2.25em;
+  margin: .75em 0;
+}
+
+h3 {
+  font-size: 1.75em;
+  margin: .583em;
+}
+
+h4 {
+  font-size: 1.5em;
+  margin: .5em;
+}
+
+h5 {
+  font-size: 1.25em;
+  margin: .417em;
+}
+
+h6 {
+  font-size: 1em;
+  margin: .333em;
+}

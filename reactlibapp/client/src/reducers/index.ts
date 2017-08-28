@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import persistReducer from './persistReducer';
+import auth from './authReducer';
+import persist from './persistReducer';
 
 const appReducer = combineReducers({
-  persistReducer
+  auth,
+  persist,
 });
 
 export default appReducer;

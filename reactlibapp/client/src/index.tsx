@@ -1,31 +1,32 @@
-/** React/Redux **/
+/* React/Redux */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-/** MUI **/
+/* MUI */
 import 'muicss/dist/css/mui.css';
 import 'muicss/dist/js/mui.js';
-/** Proprietary Styles **/
+/* Proprietary Styles */
 import './sass/app.scss';
-/** Redux Store **/
+/* Redux Store */
 import store from './store';
-/** Main application component **/
+/* Main application component */
 import { App } from './components/App';
 
-function startApp(App: any) {
+const startApp = (AppComponent: any) => {
   ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
-        <App compiler='TypeScript' framework='React' stateContainer='Redux' />
+        <AppComponent compiler="TypeScript" framework="React" stateContainer="Redux" />
       </BrowserRouter>
     </Provider>,
-    document.getElementById('app')
+    document.getElementById('app'),
   );
-}
+};
+
 startApp(App);
 
 if (module.hot) {
-  module.hot.accept("./components/App", () => { startApp(require("./components/App").App); } );
+  module.hot.accept('./components/App', () => { startApp(require('./components/App').App); });
 }

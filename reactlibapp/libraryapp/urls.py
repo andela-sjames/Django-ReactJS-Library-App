@@ -3,7 +3,5 @@ from libraryapp import views
 
 
 urlpatterns = [
-
     url(r'^$', views.SPAView.as_view()),
-
 ]
