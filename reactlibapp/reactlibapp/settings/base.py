@@ -53,7 +53,7 @@ INSTALLED_APPS = (
     'webpack_loader',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -62,7 +62,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-)
+    'libraryapi.jwt_authentication.jwt_authentication_middleware',
+]
 
 ROOT_URLCONF = 'reactlibapp.urls'
 
