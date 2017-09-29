@@ -14,23 +14,18 @@ export const signIn = (googleUser: any) => (
         });
       })
       .catch((err) => {
-        console.error(err);
+        dispatch({
+          type: auth.SIGNIN_FAILURE,
+        });
       })
   )
 );
 
-export const silentSignIn = () => {
-  const googleAuth = gapi.auth2.getAuthInstance();
-
-  if (googleAuth.isSignedIn.get()) {
-    googleAuth.signIn();
-  }
-};
-
 export const signOut = () => (
   (dispatch: Dispatch) => {
     const googleAuth = gapi.auth2.getAuthInstance();
-    googleAuth.signOut().then(() => {
+
+    return googleAuth.signOut().then(() => {
       dispatch({
         type: auth.SIGNOUT_SUCCESS,
       });

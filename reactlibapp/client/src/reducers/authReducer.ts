@@ -1,8 +1,8 @@
 import { auth, persist } from '../actions/actionTypes';
 
-import { Action } from '../types';
+import { IAction } from '../types';
 
-export default function authReducer(state: object = {}, action: Action = { type: '' }) {
+export default function authReducer(state: object = {}, action: IAction = { type: '' }) {
   switch (action.type) {
     case persist.RESTORE_STORE:
       return {

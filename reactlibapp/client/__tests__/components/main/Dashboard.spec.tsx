@@ -39,7 +39,7 @@ describe('Dashboard component', () => {
   it('displays text reactively', () => {
     dashboard.setProps({
       compiler: 'Babel',
-      stateContainer: 'Flux'
+      stateContainer: 'Flux',
     });
     expect(dashboard.find('h4').text()).toBe('Built with Babel, React and Flux');
   });

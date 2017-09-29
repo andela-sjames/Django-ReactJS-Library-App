@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { State, ThunkDispatch } from '../../types';
+import { IState, ThunkDispatch } from '../../types';
 
 import { Preloader } from '../common/Preloader';
 import { signIn } from '../../actions/authActions';
@@ -62,7 +62,7 @@ export class Protected extends React.Component<IConnectedProtectedProps> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: IState) => ({
   isAuthenticated: state.auth.isAuthenticated,
   email: state.auth.email,
 });

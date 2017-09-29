@@ -1,16 +1,17 @@
-export interface State {
+export interface IState {
   auth: {
     isAuthenticated?: boolean,
     email: string,
   },
-};
+}
 
-export type Dispatch = (action: Action) => void;
+export type Dispatch = (action: IAction) => void;
 export type ThunkDispatch = (actionCreator: Function) => void;
 
-export interface Action {
+export interface IAction {
   type: string,
   payload?: {
-    auth?: object,
+    auth?: IState.auth,
+    email?: string,
   },
-};
+}

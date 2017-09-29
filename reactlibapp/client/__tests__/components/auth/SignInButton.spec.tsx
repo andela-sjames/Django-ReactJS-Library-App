@@ -1,19 +1,27 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
+import simulant from 'simulant';
 
 import { SignInButton } from '../../../src/components/auth/SignInButton';
 
 describe('SignInButton component', () => {
   let signInButton;
   const signInSpy = sinon.spy(() => {});
+  const div = document.createElement('div');
 
   const props = {
-    signIn: signInSpy
+    signIn: signInSpy,
   };
 
   beforeEach(() => {
-    signInButton = mount(<SignInButton {...props} />);
+    document.body.appendChild(div);
+    signInButton = mount(<SignInButton {...props} />, { attachTo: div });
+  });
+
+  afterEach(() => {
+    signInButton.detach();
+    document.body.removeChild(div);
   });
 
   it('renders without crashing', () => {
@@ -28,7 +36,6 @@ describe('SignInButton component', () => {
   });
 
   it('renders the Google sign-in button correctly', () => {
-    console.log(signInButton.html());
     expect(signInButton.find('.logo-container > svg.g-logo').length).toBe(1);
     expect(signInButton.find('svg > defs > path#a').length).toBe(1);
     expect(signInButton.find('svg > clipPath > [xlinkHref="#a"]').length).toBe(1);
@@ -45,7 +52,7 @@ describe('SignInButton component', () => {
       expect(signInButton.instance().onSignInClick.notCalled).toBe(true);
       expect(signInButton.props().signIn.notCalled).toBe(true);
 
-      signInButton.find('#signin-button').simulate('click');
+      simulant.fire(document.body.querySelector('#signin-button'), 'click');
 
       expect(signInButton.instance().onSignInClick.calledOnce).toBe(true);
       expect(signInButton.props().signIn.calledOnce).toBe(true);

@@ -1,6 +1,11 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
+import * as dotenv from 'dotenv';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
+
+dotenv.config({
+  path: '../.env',
+});
 
 const ExtractAppCSS = new ExtractTextPlugin({
   filename: 'css/app.css',
@@ -21,7 +26,10 @@ export default {
       minimize: true,
       debug: false,
     }),
-    new webpack.EnvironmentPlugin({ NODE_ENV: 'production' }),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'production',
+      CLIENT_ID: process.env.CLIENT_ID,
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendors',
