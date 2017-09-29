@@ -16,7 +16,6 @@ class UserSerializer(serializers.ModelSerializer):
 class GoogleUserSerializer(serializers.ModelSerializer):
     """GoogleUser Model serializer class."""
 
-
     class Meta:
         model = GoogleUser
         fields = ('google_id', 'app_user', 'appuser_picture')
@@ -58,7 +57,7 @@ class RatingSerializer(serializers.ModelSerializer):
     book = BookSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Ratings
+        # model = Ratings
         fields = ('comment', 'user', 'book', 'score')
 
 
