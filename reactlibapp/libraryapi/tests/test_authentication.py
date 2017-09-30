@@ -42,7 +42,7 @@ class ApiRegistrationTestCase(APITestCase):
             
             # These seven fields are only included when the user has granted the "profile" and
             "email": "testuser@andela.com",
-            "email_verified": "true",
+            "email_verified": True,
             "name" : "Test User",
             "picture": "https://lh4.googleusercontent.com/-kYgzyAWpZzJ/ABCDEFGHI/AAAJKLMNOP/tIXL9Ir44LE/s99-c/photo.jpg",
             "given_name": "Test",
@@ -75,7 +75,7 @@ class ApiRegistrationTestCase(APITestCase):
             
             # These seven fields are only included when the user has granted the "profile" and
             "email": "testuser@themuse.com",
-            "email_verified": "false",
+            "email_verified": False,
             "name" : "Test User",
             "picture": "https://lh4.googleusercontent.com/-kYgzyAWpZzJ/ABCDEFGHI/AAAJKLMNOP/tIXL9Ir44LE/s99-c/photo.jpg",
             "given_name": "Test",
