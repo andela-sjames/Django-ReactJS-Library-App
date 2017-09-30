@@ -1,6 +1,11 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
+import * as dotenv from 'dotenv';
 const BundleTracker = require('webpack-bundle-tracker');
+
+dotenv.config({
+  path: '../.env',
+});
 
 export default {
   devtool: 'source-map',
@@ -9,74 +14,70 @@ export default {
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({
-      debug: true
+      debug: true,
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
-    new BundleTracker({filename: './webpack-stats.json'})
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
+      CLIENT_ID: process.env.CLIENT_ID,
+    }),
+    new BundleTracker({filename: './webpack-stats.json'}),
   ],
   entry: [
-    './src/index.tsx'
+    './src/index.tsx',
   ],
   target: 'web',
   output: {
     path: path.join(__dirname, '../static/'),
     filename: 'js/[name].js',
-    publicPath: 'http://0.0.0.0:9000/'
+    publicPath: 'http://0.0.0.0:9000/',
   },
   devServer: {
-    host: "0.0.0.0",
+    host: '0.0.0.0',
     publicPath: 'http://0.0.0.0:9000/',
     headers: { 'Access-Control-Allow-Origin': '*' },
     compress: true,
     port: 9000,
-    // TODO: Discuss API routing and requests with @gentlefella
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://0.0.0.0:8000',
-    //     secure: false,
-    //     pathRewrite: {'^/api' : ''}
-    //   }
-    // },
+    proxy: {
+      '/api': {
+        target: 'http://0.0.0.0:8000',
+        secure: false,
+      },
+    },
     clientLogLevel: 'none',
     hot: true,
     inline: true,
     historyApiFallback: true,
     watchOptions: {
-      ignored: /node_modules/
-    }
+      ignored: /node_modules/,
+    },
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: {
-          loader: 'awesome-typescript-loader',
-          options: {
-            transpileOnly: true
-          }
-        }
+        loader: 'awesome-typescript-loader',
       },
       {
         enforce: 'pre',
         test: /\.js$/,
-        loader: 'source-map-loader'
+        loader: 'source-map-loader',
       },
       {
         test: /\.scss$/,
-        loader: ['style-loader', 'css-loader', 'sass-loader']
+        loader: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.css$/,
-        loader: ['style-loader', 'css-loader']
+        loader: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(jpg|png|svg|gif)$/,
         loader: 'file-loader',
         query: {
-          name: 'img/[name].[ext]'
-        }
-      }
-    ]
-  }
+          name: 'img/[name].[ext]',
+        },
+      },
+    ],
+  },
 };

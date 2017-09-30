@@ -26,18 +26,6 @@ body,
   min-height: 562px;
 }
 
-body {
-  background: $black;
-
-  @media #{'only screen and #{$medium}'} {
-    font-size: 12px;
-  }
-
-  @media #{'only screen and #{$large}'} {
-    font-size: 14px;
-  }
-}
-
 #app-background-overlay {
   @include full-page(-5, .6);
 
