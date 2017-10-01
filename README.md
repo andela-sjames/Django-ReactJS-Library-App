@@ -47,8 +47,7 @@ To install the project follow the following steps
 At this point you can open up your browser and visit `http://localhost:8000` to see the application running.
 
 *P.S*: To run a production instance of the application in development using `gunicorn`, follow the steps below:
-- cd reactlibapp
-- run the command: `gunicorn reactlibapp.wsgi --bind 127.0.0.1:8000`
+- run the command: `gunicorn reactlibapp.wsgi --bind 127.0.0.1:8000 --pythonpath=reactlibapp`
 
 ## Running the tests
 

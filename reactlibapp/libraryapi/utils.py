@@ -24,12 +24,12 @@ def resolve_google_oauth(request):
             return unauthorized('Wrong Issuer')
 
         if idinfo['hd'] != 'andela.com' or \
-            idinfo['email_verified'] != 'true' or \
+            idinfo['email_verified'] != True or \
             idinfo['aud'] != CLIENT_ID:
             return unauthorized('Invalid parameters given')
 
         if idinfo['hd'] == 'andela.com' and \
-            idinfo['email_verified'] == 'true' and \
+            idinfo['email_verified'] == True and \
             idinfo['aud'] == CLIENT_ID:
             return idinfo
 

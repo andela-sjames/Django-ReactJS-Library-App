@@ -7,9 +7,19 @@ import { AuthPage } from '../../../src/components/auth/AuthPage';
 
 describe('AuthPage component', () => {
   let authPage;
+  const div = document.createElement('div');
 
   beforeEach(() => {
-    authPage = mount(<Provider store={newMockStore()}><AuthPage /></Provider>);
+    document.body.appendChild(div);
+    authPage = mount(
+      <Provider store={newMockStore()}><AuthPage /></Provider>,
+      { attachTo: div },
+    );
+  });
+
+  afterEach(() => {
+    authPage.detach();
+    document.body.removeChild(div);
   });
 
   it('renders without crashing', () => {
