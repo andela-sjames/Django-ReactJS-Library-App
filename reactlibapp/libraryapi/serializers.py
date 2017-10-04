@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from libraryapp.models import Book, Author, GoogleUser, Ratings, History,\
+from libraryapi.models import Book, Author, GoogleUser, Ratings, History,\
     Category, Interest, Quote
 
 from rest_framework import serializers

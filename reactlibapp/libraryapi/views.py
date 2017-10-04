@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 from rest_framework_jwt.settings import api_settings
 
 from libraryapi.setpagination import LimitOffsetpage
-from libraryapp.models import (
+from libraryapi.models import (
     Category, Author, 
     Book, History, 
     Interest, Quote, 
@@ -22,7 +22,7 @@ from libraryapi.serializers import (
     InterestSerializer, QuoteSerializer, 
     GoogleUserSerializer, UserSerializer)
 
-from libraryapp.models import GoogleUser
+from libraryapi.models import GoogleUser
 from libraryapi.utils import resolve_google_oauth
 from libraryapi.errors import unauthorized
 
