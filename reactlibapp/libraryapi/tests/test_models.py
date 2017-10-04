@@ -7,10 +7,10 @@ class ModelSetupTestCase(TestCase):
     def setUp(self):
         self.client = Client()
 
-        User.objects.create(
+        user = User.objects.create(
             first_name='John',
             last_name='doe',
-            username='johndoe',                                                                                                                 
+            username='johndoe',
             email='johndoe@doe.com')
 
         author = models.Author.objects.create(
@@ -21,18 +21,28 @@ class ModelSetupTestCase(TestCase):
         category = models.Category.objects.create(
             name='Fiction'
         )
-        # cate = models.Category.objects.get(name='Fiction')
-        # import pdb; pdb.set_trace()
-        # models.Book.objects.create(
-        #     title="Ade in kukuvi land",
-        #     description='The adventure of Ade, son of Baba',
-        #     category=category,
-        #     quantity=4,
-        #     edition='first edition',
-        #     publisher='Amity publishers',
-        #     isbn='4994-993-FGTS-8MF',
-        #     author=my_author
-        # )
+
+        book = models.Book.objects.create(
+            title="Ade in kukuvi land",
+            description='The adventure of Ade, son of Baba',
+            category=category,
+            quantity=4,
+            edition='first edition',
+            publisher='Amity publishers',
+            isbn='4994-993-FGTS-8MF'
+        )
+
+        my_book = models.Book.objects.get(pk=1)
+        my_book.author.add(my_author)
+
+        rating = models.Ratings.objects.create(
+          comment="This book is nice",
+          score=4,
+          user=user,
+          book=book,
+
+        )
+
         # self.google_user = models.GoogleUser.objects.create(
         #     facebook_id=1,
         #     contrib_user=self.user)
@@ -67,9 +77,10 @@ class TestAuthorCreation(ModelSetupTestCase):
         self.assertTrue(authors.exists())
 
     def test_author_has_necessary_fiels(self):
-        fields = ['name']
-        for field in fields:
-            self.assertIn(field, fields)
+        necessary_fileds = ['name']
+        all_fields = [field.name for field in models.Author._meta.get_fields()]
+        for field in necessary_fileds:
+            self.assertIn(field, all_fields)
 
     def test_author_does_not_exist(self):
         with self.assertRaises(models.Author.DoesNotExist):
@@ -86,9 +97,10 @@ class TestCategoryCreation(ModelSetupTestCase):
         self.assertTrue(categories.exists())
 
     def test_category_has_necessary_fiels(self):
-        fields = ['name']
-        for field in fields:
-            self.assertIn(field, fields)
+        necessary_fileds = ['name']
+        all_fields = [field.name for field in models.Category._meta.get_fields()]
+        for field in necessary_fileds:
+            self.assertIn(field, all_fields)
 
     def test_category_does_not_exist(self):
         with self.assertRaises(models.Category.DoesNotExist):
@@ -96,4 +108,46 @@ class TestCategoryCreation(ModelSetupTestCase):
 
     def test_category_created(self):
         chinua = models.Category.objects.get(name='Fiction')
-        self.assertEqual(china.name, 'Fiction')
+        self.assertEqual(chinua.name, 'Fiction')
+
+
+class TestBookCreation(ModelSetupTestCase):
+    def test_book_model_exist(self):
+        books = models.Book.objects.all()
+        self.assertTrue(books.exists())
+
+    def test_book_has_necessary_fiels(self):
+        necessary_fileds = ['title', 'description', 'quantity', 'edition', 'publisher', 'isbn', 'author', 'category']
+        all_fields = [field.name for field in models.Book._meta.get_fields()]
+        for field in necessary_fileds:
+            self.assertIn(field, all_fields)
+
+    def test_book_created_with_valid_author(self):
+        my_book = models.Book.objects.get(pk='1')
+        self.assertEqual(my_book.title, 'Ade in kukuvi land')
+        # self.assertEqual(my_book.author, 'Chinua Achebe')
+
+    def test_category_does_not_exist(self):
+        with self.assertRaises(models.Book.DoesNotExist):
+            models.Book.objects.get(title='Rich Dad, Poor Dad')
+
+
+class TestRatingsCreation(ModelSetupTestCase):
+    def test_book_model_exist(self):
+        ratings = models.Ratings.objects.all()
+        self.assertTrue(ratings.exists())
+
+    def test_book_has_necessary_fiels(self):
+        necessary_fileds = ['comment', 'score', 'user', 'book']
+        all_fields = [field.name for field in models.Ratings._meta.get_fields()]
+        for field in necessary_fileds:
+            self.assertIn(field, all_fields)
+
+    def test_Ratings_created_with_valid_author(self):
+        my_ratings = models.Ratings.objects.get(pk='1')
+        self.assertEqual(my_ratings.comment, 'This book is nice')
+        self.assertEqual(my_ratings.score, 4)
+
+    def test_category_does_not_exist(self):
+        with self.assertRaises(models.Ratings.DoesNotExist):
+            models.Ratings.objects.get(book=8)
