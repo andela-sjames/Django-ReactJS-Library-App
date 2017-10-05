@@ -17,13 +17,13 @@ class ModelSetupTestCase(TestCase):
             name='Chinua Achebe'
         )
 
-        my_author = models.Author.objects.get(name="Chinua Achebe")
+        my_author = models.Author.objects.get(name='Chinua Achebe')
         category = models.Category.objects.create(
             name='Fiction'
         )
 
         book = models.Book.objects.create(
-            title="Ade in kukuvi land",
+            title='Ade in kukuvi land',
             description='The adventure of Ade, son of Baba',
             category=category,
             quantity=4,
@@ -36,7 +36,7 @@ class ModelSetupTestCase(TestCase):
         my_book.author.add(my_author)
 
         rating = models.Ratings.objects.create(
-          comment="This book is nice",
+          comment='This book is nice',
           score=4,
           user=user,
           book=book,
@@ -46,6 +46,17 @@ class ModelSetupTestCase(TestCase):
         history = models.History.objects.create(
           book=book,
           user=user
+        )
+
+        interest = models.Interest.objects.create(
+            done=True,
+            user=user,
+            book=book
+        )
+
+        quote = models.Quote.objects.create(
+            author='Nelson Mandela',
+            statement='It always seems impossible until it\'s done'
         )
         # self.google_user = models.GoogleUser.objects.create(
         #     facebook_id=1,
@@ -177,3 +188,45 @@ class TestHistoryCreation(ModelSetupTestCase):
     def test_history_does_not_exist(self):
         with self.assertRaises(models.History.DoesNotExist):
             models.History.objects.get(book=5)
+
+
+class TestInterestCreation(ModelSetupTestCase):
+    def test_interest_model_exist(self):
+        interest = models.Interest.objects.all()
+        self.assertTrue(interest.exists())
+
+    def test_interest_has_necessary_fiels(self):
+        necessary_fileds = ['done', 'user', 'book']
+        all_fields = [field.name for field in models.Interest._meta.get_fields()]
+        for field in necessary_fileds:
+            self.assertIn(field, all_fields)
+
+    def test_interest_created(self):
+        my_interest = models.Interest.objects.get(pk='1')
+        self.assertEqual(my_interest.done, True)
+        self.assertEqual(my_interest.user.last_name, 'Doe')
+
+    def test_interest_does_not_exist(self):
+        with self.assertRaises(models.Interest.DoesNotExist):
+            models.Interest.objects.get(book=3)
+
+
+class TestQuoteCreation(ModelSetupTestCase):
+    def test_quote_model_exist(self):
+        quote = models.Quote.objects.all()
+        self.assertTrue(quote.exists())
+
+    def test_quote_has_necessary_fiels(self):
+        necessary_fileds = ['author', 'statement']
+        all_fields = [field.name for field in models.Quote._meta.get_fields()]
+        for field in necessary_fileds:
+            self.assertIn(field, all_fields)
+
+    def test_quote_created(self):
+        my_quote = models.Quote.objects.get(pk='1')
+        self.assertEqual(my_quote.author, 'Nelson Mandela')
+        self.assertEqual(my_quote.statement, 'It always seems impossible until it\'s done')
+
+    def test_quote_does_not_exist(self):
+        with self.assertRaises(models.Quote.DoesNotExist):
+            models.Quote.objects.get(author='Gadafi')
