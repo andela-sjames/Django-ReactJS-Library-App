@@ -9,7 +9,7 @@ class ModelSetupTestCase(TestCase):
 
         user = User.objects.create(
             first_name='John',
-            last_name='doe',
+            last_name='Doe',
             username='johndoe',
             email='johndoe@doe.com')
 
@@ -43,6 +43,10 @@ class ModelSetupTestCase(TestCase):
 
         )
 
+        history = models.History.objects.create(
+          book=book,
+          user=user
+        )
         # self.google_user = models.GoogleUser.objects.create(
         #     facebook_id=1,
         #     contrib_user=self.user)
@@ -62,7 +66,7 @@ class TestUserCreation(ModelSetupTestCase):
     def test_user_is_created(self):
         john = User.objects.get(first_name='John')
         self.assertEqual(john.first_name, 'John')
-        self.assertEqual(john.last_name, 'doe')
+        self.assertEqual(john.last_name, 'Doe')
         self.assertEqual(john.username, 'johndoe')
         self.assertEqual(john.email, 'johndoe@doe.com')
 
@@ -151,3 +155,25 @@ class TestRatingsCreation(ModelSetupTestCase):
     def test_category_does_not_exist(self):
         with self.assertRaises(models.Ratings.DoesNotExist):
             models.Ratings.objects.get(book=8)
+
+
+class TestHistoryCreation(ModelSetupTestCase):
+    def test_history_model_exist(self):
+        history = models.History.objects.all()
+        self.assertTrue(history.exists())
+
+    def test_history_has_necessary_fiels(self):
+        necessary_fileds = ['book', 'user']
+        all_fields = [field.name for field in models.History._meta.get_fields()]
+        for field in necessary_fileds:
+            self.assertIn(field, all_fields)
+
+    def test_history_created(self):
+        my_history = models.History.objects.get(pk='1')
+        self.assertEqual(my_history.user.first_name, 'John')
+        self.assertEqual(my_history.user.last_name, 'Doe')
+        self.assertEqual(my_history.book.category.name, 'Fiction')
+
+    def test_history_does_not_exist(self):
+        with self.assertRaises(models.History.DoesNotExist):
+            models.History.objects.get(book=5)
