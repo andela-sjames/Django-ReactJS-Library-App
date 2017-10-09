@@ -9,6 +9,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.generics import GenericAPIView, ListAPIView, CreateAPIView
 from rest_framework.views import APIView
 from rest_framework_jwt.settings import api_settings
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from libraryapi.setpagination import LimitOffsetpage
 from libraryapi.models import (
@@ -90,6 +92,7 @@ class GoogleUserView(GenericAPIView):
     serializer_class = GoogleUserSerializer
 
     def get(self, request):
+        # import pdb;pdb.set_trace()
         id = self.request.user.id
         app_user = User.objects.get(id=id)
         try:
@@ -117,6 +120,8 @@ class AuthorListView(ListAPIView):
     model = Author
     serializer_class = AuthorSerializer
     pagination_class = LimitOffsetpage
+    authentication_classes = (JSONWebTokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
     filter_fields = ('name',)
     queryset = Author.objects.all()
 
