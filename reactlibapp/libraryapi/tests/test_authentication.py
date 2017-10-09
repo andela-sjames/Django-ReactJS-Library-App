@@ -98,5 +98,7 @@ class ApiRegistrationTestCase(APITestCase):
 
     def test_request_middleware(self):
         url = reverse_lazy('apiauthors')
-        response = self.client.get(url, HTTP_AUTHORIZATION='JWT {}'.format(self.token))
-        self.assertEqual(response.wsgi_request.user.email, 'testuser@andela.com')
+        response = self.client.get(url,
+                                   HTTP_AUTHORIZATION='JWT {}'.format(self.token))
+        self.assertEqual(
+            response.wsgi_request.user.email, 'testuser@andela.com')
