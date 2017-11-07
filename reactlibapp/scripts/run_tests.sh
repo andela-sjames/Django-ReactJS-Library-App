@@ -51,15 +51,15 @@ while getopts "hcsrR:" opt; do
     ;;
   c)
     TESTED_CLIENT=1
-    cd client
+    cd ../client
     npm test
     if [ $? -gt 0 ]; then
       TESTS_FAILED=1
     fi
-    cd ..
     ;;
   s)
     TESTED_SERVER=1
+    cd ..
     export_env
     coverage run --source libraryapp,libraryapi manage.py test
     if [ $? -gt 0 ]; then
