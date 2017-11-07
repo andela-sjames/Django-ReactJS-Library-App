@@ -4,11 +4,11 @@ import * as dotenv from 'dotenv';
 const BundleTracker = require('webpack-bundle-tracker');
 
 dotenv.config({
-  path: '../.env',
+  path: '../../.env',
 });
 
 export default {
-  devtool: 'source-map',
+  devtool: 'cheap-module-eval-source-map',
   resolve: {
     extensions: ['.js', '.tsx', '.ts', '.d.ts'],
   },

@@ -41,7 +41,7 @@ jobs:
       - run:
           command: |
             . venv/bin/activate
-            cd reactlibapp
+            cd reactlibapp/scripts
             chmod +x run_tests.sh
             ./run_tests.sh -csr
       - store_artifacts:
