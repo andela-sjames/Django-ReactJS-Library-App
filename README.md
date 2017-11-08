@@ -34,9 +34,11 @@ To install the project follow the following steps
 
   `virtualenv -p python3 env`
 
-- Navigate into the *reactlibapp* directory and run this command to start the project:
+- Navigate into the `reactlibapp/scripts` directory and run this command to start the project:
 
   `./app.sh start local`
+
+- Or just call the help menu ./app.sh help from the `scripts` folder to see the available options for Docker.
 
 - The project has a command line tool that simplify development:
 -  use `./app.sh help` to see usage
