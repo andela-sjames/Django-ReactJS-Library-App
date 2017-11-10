@@ -48,6 +48,7 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: tr1
+
   deploy-heroku:
     docker:
       - image: circleci/python:3.6.2
@@ -67,14 +68,14 @@ jobs:
             heroku run python reactlibapp/manage.py makemigrations --settings=reactlibapp.settings --app library-app-staging
             heroku run python reactlibapp/manage.py migrate --settings=reactlibapp.settings --app library-app-staging
             heroku restart            
- workflows:
-   version: 2
-   build-deploy:
-     jobs:
-       - build
-       - deploy-heroku:
-           requires:
-             - build
-           filters:
-             branches:
-               only: master
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy-heroku:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
