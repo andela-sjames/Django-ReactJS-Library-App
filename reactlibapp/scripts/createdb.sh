@@ -1,4 +1,5 @@
 #!/bin/bash
+# reference: http://www.yolinux.com/TUTORIALS/LinuxTutorialPostgreSQL.html
 
 read -d '' HELP_STRING <<'EOF'
   "Script used to create DB_USER, DB_PASS and DB_NAME for your app."
