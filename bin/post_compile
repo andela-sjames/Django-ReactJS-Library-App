@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+# The post_compile hook is run by heroku-buildpack-python
+
+echo "-----> I'm post-compile hook"
+
+# Work around Heroku bug whereby pylibmc isn't available during
+# compile phase. See: https://github.com/heroku/heroku-buildpack-python/issues/57
+# reference: https://github.com/nigma/heroku-django-cookbook/blob/master/README.md
+# reference: https://github.com/bionikspoon/annotation-tool-heroku-buildpack-python
+
+export MEMCACHE_SERVERS='' MEMCACHIER_SERVERS=''
+
+if [ -f bin/install_nodejs ]; then
+    echo "-----> Running install_nodejs"
+    chmod +x bin/install_nodejs
+    bin/install_nodejs
+
+    if [ -f bin/get_js_static ]; then
+        echo "-----> Running get_js_static"
+        chmod +x bin/get_js_static
+        bin/get_js_static
+    fi
+
+fi
+
+if [ -f bin/run_collectstatic ]; then
+    echo "-----> Running run_collectstatic"
+    chmod +x bin/run_collectstatic
+    bin/run_collectstatic
+fi
+
+echo "-----> Post-compile done"
