@@ -87,3 +87,5 @@ reactlibapp/staticfiles
 Fingerprint
 libapp_secret
 libapp_secret.pub
+
+reactlibapp/venv
