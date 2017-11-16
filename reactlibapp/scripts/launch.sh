@@ -6,7 +6,7 @@ set -e
 set -o pipefail
 
 # print each step of your code to the terminal
-# set -x
+set -x
 
 function setup_client() {
   # navigate into the client folder to run webpack
@@ -65,5 +65,4 @@ esac
 # if in production, setup_client will exit once building is done
 # this means you need to wait for webpack's initial output before attempting
 # to launch the app in a browser
-# setup_server && setup_client & cd .. && python manage.py runserver 0.0.0.0:8000
-setup_server
+setup_server && setup_client & cd .. && python manage.py runserver 0.0.0.0:8000
