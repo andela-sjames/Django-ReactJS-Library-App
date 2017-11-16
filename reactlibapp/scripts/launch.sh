@@ -28,9 +28,27 @@ function setup_client() {
   cd ..
 }
 
+function auto_venv() {
+  echo 'Automating virtual environment activation'
+  # check if a virtualenvironment has already been created before
+  if ! [ -d "venv" ]; then
+    # create a virtualenvironment with Python 3
+    virtualenv --python=python3 venv
+  fi
+
+  source venv/bin/activate
+  echo 'Yo!'
+}
+
 function setup_server() {
   # run any pending migrations
   cd ..
+  echo 'Do you need me to automate virtual environment?'
+  echo 'Enter y for yes, n for no'
+  read response
+  if [ $response == "y" ]; then
+    auto_venv
+  fi
   pip3 install -r requirements.txt
   python manage.py makemigrations
   python manage.py migrate

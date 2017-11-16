@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-
 from rest_framework_swagger.views import get_swagger_view
-schema_view = get_swagger_view(title='Library App API')
 
 from libraryapp import views
+
+schema_view = get_swagger_view(title='Library App API')
+
 
 urlpatterns = [
     url(r'^xyz-admin/', include(admin.site.urls)),
