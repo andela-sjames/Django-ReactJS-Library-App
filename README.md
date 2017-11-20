@@ -41,6 +41,7 @@ SECRET_KEY=some_awesome_secret_key
 DB_USER=reactlibapp
 DB_PASS=reactlibapp
 DB_PORT=5432
+DB_HOST=db
 DB_NAME=reactlibapp
 CLIENT_ID=google_client_id
 ```
@@ -106,5 +107,3 @@ See also the list of [contributors](https://github.com/andela-sjames/Django-Reac
 Django-ReactJS-Library-App is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
-
-
