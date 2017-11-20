@@ -29,10 +29,10 @@ RUN usermod -aG docker djangoreactapp
 # grant newly created user permissions on essential files
 RUN chown -R djangoreactapp:$(id -gn djangoreactapp) ~/
 RUN chown -R djangoreactapp:$(id -gn djangoreactapp) /app/
-RUN chmod +x ./run_web.sh && chmod +x ./launch.sh
+RUN chmod +x ./scripts/run_web.sh && chmod +x ./scripts/launch.sh
 ENV PYTHONUNBUFFERED 1
 
 # change user to newly created user
 USER djangoreactapp
 
-ENTRYPOINT ["./run_web.sh"]
+ENTRYPOINT ["./scripts/run_web.sh"]
