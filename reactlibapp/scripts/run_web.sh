@@ -6,7 +6,7 @@ python << END
 import sys
 import psycopg2
 try:
-    conn = psycopg2.connect(dbname="postgres", user="postgres", password="postgres", host="db")
+    conn = psycopg2.connect(dbname="postgres", user="postgres", password="postgres", host="postgres")
 except psycopg2.OperationalError:
     sys.exit(-1)
 sys.exit(0)
@@ -19,4 +19,4 @@ until postgres_ready; do
 done
 
 # Start app
-./scripts/launch.sh
+./launch.sh
