@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  postgres:
+  db:
     restart: always
     image: postgres
     container_name: react_lib_db
@@ -13,8 +13,8 @@ services:
     volumes:
       - ./reactlibapp:/app
       - /app/client/node_modules/
-    ports: 
+    ports:
       - "8000:8000"
       - "9000:9000"
     depends_on:
-      - postgres
+      - db
