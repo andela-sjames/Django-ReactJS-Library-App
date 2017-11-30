@@ -26,7 +26,6 @@ from libraryapi.serializers import (
 
 from libraryapi.models import GoogleUser
 from libraryapi.utils import resolve_google_oauth
-from libraryapi.errors import unauthorized
 
 
 class GoogleRegisterView(APIView):
@@ -51,12 +50,6 @@ class GoogleRegisterView(APIView):
     def post(self, request, format=None):
         
         idinfo = resolve_google_oauth(request)
-
-        try:
-            if type(idinfo.data) == type(dict()):
-                return Response(idinfo.data)
-        except Exception as e:
-            pass
 
         # check if it is a returning user.
         try:

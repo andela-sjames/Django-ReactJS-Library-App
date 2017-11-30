@@ -4,7 +4,7 @@ import os
 from oauth2client import client, crypt
 from rest_framework.response import Response
 
-from libraryapi.errors import not_allowed, unauthorized
+from rest_framework.exceptions import AuthenticationFailed, PermissionDenied
 
 def resolve_google_oauth(request):
     # token should be passed as an object {'ID_Token' : id_token }
@@ -14,27 +14,24 @@ def resolve_google_oauth(request):
 
     token.replace(" ", "")
 
+
     try:
         idinfo = client.verify_id_token(token, CLIENT_ID)
 
         if 'hd' not in idinfo:
-            return not_allowed()
+            raise AuthenticationFailed('Sorry, only Andelans can sign in')
+
+        if idinfo['hd'] != 'andela.com':
+            raise AuthenticationFailed('Sorry, only Andelans can sign in')
 
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-            return unauthorized('Wrong Issuer')
+            raise PermissionDenied('Wrong Issuer')
 
-        if idinfo['hd'] != 'andela.com' or \
-            idinfo['email_verified'] != True or \
-            idinfo['aud'] != CLIENT_ID:
-            return unauthorized('Invalid parameters given')
-
-        if idinfo['hd'] == 'andela.com' and \
-            idinfo['email_verified'] == True and \
-            idinfo['aud'] == CLIENT_ID:
+        if idinfo['email_verified'] == 'True' and idinfo['aud'] == CLIENT_ID:
             return idinfo
 
     except crypt.AppIdentityError:
-        return unauthorized('Invalid Token')
+        raise PermissionDenied('Invalid Token')
 
 
     return idinfo
