@@ -53,7 +53,7 @@ describe('Authentication action creators', () => {
     });
 
     const expectedActions = [
-      {payload: {message: 'Invalid Token'},
+      {payload: undefined,
        type: 'SIGNIN_FAILURE',
       },
     ];

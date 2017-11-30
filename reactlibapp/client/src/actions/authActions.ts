@@ -16,7 +16,7 @@ export const signIn = (googleUser: any) => (
       .catch((err) => {
         dispatch({
           type: auth.SIGNIN_FAILURE,
-          payload: err.response.data,
+          payload: err.response.data.detail,
         });
       })
   )
