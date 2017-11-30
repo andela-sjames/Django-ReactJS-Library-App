@@ -53,7 +53,9 @@ describe('Authentication action creators', () => {
     });
 
     const expectedActions = [
-      { type: auth.SIGNIN_FAILURE },
+      {payload: {message: 'Invalid Token'},
+       type: 'SIGNIN_FAILURE',
+      },
     ];
 
     const store = mockStore();

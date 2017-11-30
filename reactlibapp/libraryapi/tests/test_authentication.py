@@ -93,7 +93,7 @@ class ApiRegistrationTestCase(APITestCase):
             url = reverse_lazy('auth_register')
             response = self.client.post(url, data, format='json')
             self.assertEqual(
-                response.data["status"], 401
+                response.status_code, 403
             )
 
     def test_request_middleware(self):
