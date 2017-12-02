@@ -20,6 +20,7 @@ export default function authReducer(state: object = {}, action: IAction = { type
     case auth.SIGNOUT_SUCCESS:
       return {
         isAuthenticated: false,
+        error: action.payload,
       };
     default:
       return state;

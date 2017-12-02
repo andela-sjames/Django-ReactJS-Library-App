@@ -1,7 +1,8 @@
 export interface IState {
   auth: {
-    isAuthenticated?: boolean,
-    email: string,
+    isAuthenticated: boolean,
+    email?: string,
+    error?: string,
   },
 }
 
