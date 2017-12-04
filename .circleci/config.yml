@@ -48,29 +48,16 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: tr1
-  deploy-heroku:
-    steps:
-      - run:
-          name: Run setup script
-          command: bash .circleci/setup-heroku.sh
+      - run: bash .circleci/setup-heroku.sh
       - add_ssh_keys:
           fingerprints:
             - "8d:e9:3f:a3:79:c5:f4:af:bc:19:6c:3f:43:f5:72:2f"
-      - run:
+      - deploy:
           name: Deploy Master to Heroku
           command: |
-            git push -f heroku master
-            heroku run python reactlibapp/manage.py makemigrations --settings=reactlibapp.settings --app library-app-staging
-            heroku run python reactlibapp/manage.py migrate --settings=reactlibapp.settings --app library-app-staging
-            heroku restart            
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-      - deploy-heroku:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              git push -f heroku master
+              heroku run python reactlibapp/manage.py makemigrations --settings=reactlibapp.settings --app library-app-staging
+              heroku run python reactlibapp/manage.py migrate --settings=reactlibapp.settings --app library-app-staging
+              heroku restart
+            fi
