@@ -1,1 +1,1 @@
-web: gunicorn reactlibapp.wsgi --bind 127.0.0.1:8000 --pythonpath=reactlibapp
+web: gunicorn reactlibapp.wsgi:application --pythonpath=reactlibapp --log-file -
