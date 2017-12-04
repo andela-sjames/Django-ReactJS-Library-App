@@ -6,6 +6,12 @@ TESTED_SERVER=0
 TESTS_FAILED=0
 SHOULD_REPORT=0
 
+# if any code doesn't return 0, exit the script
+set -o pipefail
+
+# print each step of your code to the terminal
+set -x
+
 read -d '' HELP_STRING <<'EOF'
   "This script is a testing and coverage reporting utility"
   Usage:
@@ -45,15 +51,15 @@ while getopts "hcsrR:" opt; do
     ;;
   c)
     TESTED_CLIENT=1
-    cd client
+    cd ../client
     npm test
     if [ $? -gt 0 ]; then
       TESTS_FAILED=1
     fi
-    cd ..
     ;;
   s)
     TESTED_SERVER=1
+    cd ..
     export_env
     coverage run --source libraryapp,libraryapi manage.py test
     if [ $? -gt 0 ]; then

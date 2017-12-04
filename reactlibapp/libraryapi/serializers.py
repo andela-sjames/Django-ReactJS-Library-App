@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from libraryapp.models import Book, Author, GoogleUser, Ratings, History,\
+from libraryapi.models import Book, Author, GoogleUser, Ratings, History,\
     Category, Interest, Quote
 
 from rest_framework import serializers
@@ -15,7 +15,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 class GoogleUserSerializer(serializers.ModelSerializer):
     """GoogleUser Model serializer class."""
-
 
     class Meta:
         model = GoogleUser
@@ -58,7 +57,7 @@ class RatingSerializer(serializers.ModelSerializer):
     book = BookSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Ratings
+        # model = Ratings
         fields = ('comment', 'user', 'book', 'score')
 
 

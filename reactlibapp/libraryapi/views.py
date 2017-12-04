@@ -9,9 +9,11 @@ from rest_framework.permissions import AllowAny
 from rest_framework.generics import GenericAPIView, ListAPIView, CreateAPIView
 from rest_framework.views import APIView
 from rest_framework_jwt.settings import api_settings
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from libraryapi.setpagination import LimitOffsetpage
-from libraryapp.models import (
+from libraryapi.models import (
     Category, Author, 
     Book, History, 
     Interest, Quote, 
@@ -22,9 +24,8 @@ from libraryapi.serializers import (
     InterestSerializer, QuoteSerializer, 
     GoogleUserSerializer, UserSerializer)
 
-from libraryapp.models import GoogleUser
+from libraryapi.models import GoogleUser
 from libraryapi.utils import resolve_google_oauth
-from libraryapi.errors import unauthorized
 
 
 class GoogleRegisterView(APIView):
@@ -49,12 +50,6 @@ class GoogleRegisterView(APIView):
     def post(self, request, format=None):
         
         idinfo = resolve_google_oauth(request)
-
-        try:
-            if type(idinfo.data) == type(dict()):
-                return Response(idinfo.data)
-        except Exception as e:
-            pass
 
         # check if it is a returning user.
         try:
@@ -90,6 +85,7 @@ class GoogleUserView(GenericAPIView):
     serializer_class = GoogleUserSerializer
 
     def get(self, request):
+        # import pdb;pdb.set_trace()
         id = self.request.user.id
         app_user = User.objects.get(id=id)
         try:
@@ -117,6 +113,8 @@ class AuthorListView(ListAPIView):
     model = Author
     serializer_class = AuthorSerializer
     pagination_class = LimitOffsetpage
+    authentication_classes = (JSONWebTokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
     filter_fields = ('name',)
     queryset = Author.objects.all()
 

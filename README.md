@@ -34,9 +34,25 @@ To install the project follow the following steps
 
   `virtualenv -p python3 env`
 
-- Navigate into the *reactlibapp* directory and run this command to start the project:
+-  Create a `.env` at the root of the project and populate with the following sample data
 
-  `./app.sh start local`
+```
+SECRET_KEY=some_awesome_secret_key
+DB_USER=reactlibapp
+DB_PASS=reactlibapp
+DB_PORT=5432
+DB_HOST=db
+DB_NAME=reactlibapp
+CLIENT_ID=google_client_id
+```
+
+- Navigate into the `reactlibapp/scripts` directory and run the following commands:
+
+  - `./createdb <db_name/db_user>` to create your db and db user for postgres connection
+
+  - `./app.sh start local` to start the project.
+
+- Or just call the help menu ./app.sh help from the `scripts` folder to see the available options for Docker.
 
 - The project has a command line tool that simplify development:
 -  use `./app.sh help` to see usage
@@ -91,5 +107,3 @@ See also the list of [contributors](https://github.com/andela-sjames/Django-Reac
 Django-ReactJS-Library-App is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
-
-

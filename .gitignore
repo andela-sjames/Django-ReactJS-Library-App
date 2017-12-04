@@ -83,3 +83,9 @@ reactlibapp/staticfiles
 # ignore editor related files
 .vscode
 .DS_Store
+
+Fingerprint
+libapp_secret
+libapp_secret.pub
+
+reactlibapp/venv

@@ -53,7 +53,9 @@ describe('Authentication action creators', () => {
     });
 
     const expectedActions = [
-      { type: auth.SIGNIN_FAILURE },
+      {payload: undefined,
+       type: 'SIGNIN_FAILURE',
+      },
     ];
 
     const store = mockStore();
