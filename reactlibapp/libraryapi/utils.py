@@ -9,8 +9,8 @@ from rest_framework.exceptions import AuthenticationFailed, PermissionDenied
 def resolve_google_oauth(request):
     # token should be passed as an object {'ID_Token' : id_token }
     # to this view
-    token = request.data.get('ID_Token')
-    CLIENT_ID = os.environ.get('CLIENT_ID')
+    token: str = request.data.get('ID_Token')
+    CLIENT_ID: str = os.environ.get('CLIENT_ID')
 
     token.replace(" ", "")
 
@@ -33,5 +33,5 @@ def resolve_google_oauth(request):
     except crypt.AppIdentityError:
         raise PermissionDenied('Invalid Token')
 
-
+    console.log(idinfo)
     return idinfo

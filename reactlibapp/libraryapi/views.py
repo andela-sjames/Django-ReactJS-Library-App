@@ -48,7 +48,6 @@ class GoogleRegisterView(APIView):
         return body
 
     def post(self, request, format=None):
-        
         idinfo = resolve_google_oauth(request)
 
         # check if it is a returning user.
@@ -86,7 +85,7 @@ class GoogleUserView(GenericAPIView):
 
     def get(self, request):
         # import pdb;pdb.set_trace()
-        id = self.request.user.id
+        id: int = self.request.user.id
         app_user = User.objects.get(id=id)
         try:
             google_user = GoogleUser.objects.get(app_user=app_user)
@@ -142,7 +141,7 @@ class HistoryListView(ListAPIView):
         This view should return a list for
         the currently authenticated user's history.
         """
-        quser = self.request.user.id
+        quser: int = self.request.user.id
         queryset = History.objects.filter(user=quser)
 
         return queryset
@@ -161,7 +160,7 @@ class InterestListView(ListAPIView):
         This view should return a list for
         the currently authenticated user's interest.
         """
-        quser = self.request.user.id
+        quser: int = self.request.user.id
         queryset = Interest.objects.filter(user=quser)
 
         return queryset
