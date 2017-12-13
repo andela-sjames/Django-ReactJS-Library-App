@@ -1,16 +1,18 @@
-[![CircleCI](https://circleci.com/gh/andela-sjames/Django-ReactJS-Library-App/tree/develop.svg?style=svg)](https://circleci.com/gh/andela-sjames/Django-ReactJS-Library-App/tree/develop)
-
 # Django-ReactJS-Library-App
+
 An app to manage Amity library books using ReactJS.
 
-## Getting Started
+[![CircleCI](https://circleci.com/gh/andela-sjames/Django-ReactJS-Library-App/tree/develop.svg?style=svg)](https://circleci.com/gh/andela-sjames/Django-ReactJS-Library-App/tree/develop)
 
+## Getting Started
 
 These project is developed using Python (Django) for the backend and React.js for the front-end.
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
+
 To run this project the following prerequisites are required installed and available in the enviroment.
+
 - [Python](https://www.python.org/downloads/) (Along with [pip](https://pypi.python.org/pypi/pip))
 - [Node](https://nodejs.org/en/) (NPM specifically)
 - [PostgreSQL](https://www.postgresql.org/download/)
@@ -21,6 +23,7 @@ For further information on setting up your development environment checkout this
 ### Installing
 
 To install the project follow the following steps
+
 - First install [Virtualenv](http://www.virtualenv.org/) to create an isolated enviroment for this Python project with the command:
 
   `pip install virtualenv`
@@ -34,9 +37,9 @@ To install the project follow the following steps
 
   `virtualenv -p python3 env`
 
--  Create a `.env` at the root of the project and populate with the following sample data
+- Create a `.env` at the root of the project and populate with the following sample data
 
-```
+```bash
 SECRET_KEY=some_awesome_secret_key
 DB_USER=reactlibapp
 DB_PASS=reactlibapp
@@ -55,7 +58,7 @@ CLIENT_ID=google_client_id
 - Or just call the help menu ./app.sh help from the `scripts` folder to see the available options for Docker.
 
 - The project has a command line tool that simplify development:
--  use `./app.sh help` to see usage
+- use `./app.sh help` to see usage
 
 - The resources used by the application is documented via swagger, to view that navigate to:
   `http://localhost:8000/docs`
@@ -63,6 +66,7 @@ CLIENT_ID=google_client_id
 At this point you can open up your browser and visit `http://localhost:8000` to see the application running.
 
 *P.S*: To run a production instance of the application in development using `gunicorn`, follow the steps below:
+
 - run the command: `gunicorn reactlibapp.wsgi --bind 127.0.0.1:8000 --pythonpath=reactlibapp`
 
 ## Running the tests
@@ -92,13 +96,9 @@ TBD
 
 TBD
 
-## Authors
+## Contributors
 
-* [Samuel James](https://github.com/andela-sjames) - *Initial work*
-* [Bolaji Olajide](https://github.com/BolajiOlajide)
-* [Princess Jewel Essien](https://github.com/andela-pessien)
-* [Moyosore Sosan](https://github.com/andela-msosan)
-* [Azeez Olaniran](https://github.com/andela-aolaniran)
+Here's a [list](https://github.com/andela-sjames/Django-ReactJS-Library-App/graphs/contributors) of the contributors of this project.2
 
 See also the list of [contributors](https://github.com/andela-sjames/Django-ReactJS-Library-App/contributors) who participate in this project.
 
