@@ -18,5 +18,7 @@ until postgres_ready; do
   sleep 1
 done
 
+echo "============ Postgres is ready ============="
+
 # Start app
-./scripts/launch.sh
+./scripts/launch.sh $1

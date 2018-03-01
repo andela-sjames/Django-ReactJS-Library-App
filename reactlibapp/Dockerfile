@@ -35,4 +35,4 @@ ENV PYTHONUNBUFFERED 1
 # change user to newly created user
 USER djangoreactapp
 
-ENTRYPOINT ["./scripts/run_web.sh"]
+CMD ["./scripts/run_web.sh", "docker"]
