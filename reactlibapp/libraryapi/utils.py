@@ -35,3 +35,4 @@ def resolve_google_oauth(request):
 
 
     return idinfo
+    
