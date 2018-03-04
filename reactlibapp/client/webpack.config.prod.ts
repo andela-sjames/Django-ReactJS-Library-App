@@ -8,11 +8,13 @@ dotenv.config({
 });
 
 const ExtractAppCSS = new ExtractTextPlugin({
-  filename: 'css/app.css',
+  // filename: 'css/app.css',
+  filename: 'css/[name].[contenthash:8].css',
   allChunks: true,
 });
 const ExtractVendorCSS = new ExtractTextPlugin({
-  filename: 'css/vendor.css',
+  // filename: 'css/vendor.css',
+  filename: 'css/[name].[contenthash:8].css',
   allChunks: true,
 });
 
@@ -31,6 +33,7 @@ export default {
       CLIENT_ID: process.env.CLIENT_ID,
     }),
     new webpack.optimize.OccurrenceOrderPlugin(true),
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendors',
       filename: 'js/vendor.js',
@@ -56,7 +59,7 @@ export default {
   target: 'web',
   output: {
     path: path.join(__dirname, '../static'),
-    filename: 'js/app.js',
+    filename: 'js/[name].[chunkhash].js',
   },
   module: {
     rules: [
