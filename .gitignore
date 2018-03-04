@@ -66,6 +66,7 @@ target/
 *.env.*
 
 # ignore client-generated files
+reactlibapp/assets
 reactlibapp/client/node_modules
 reactlibapp/client/coverage
 reactlibapp/client/webpack-stats.json

@@ -2,18 +2,17 @@ import * as path from 'path';
 import * as webpack from 'webpack';
 import * as dotenv from 'dotenv';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
+import * as HTMLWebpackPlugin from 'html-webpack-plugin';
 
 dotenv.config({
   path: '../.env',
 });
 
 const ExtractAppCSS = new ExtractTextPlugin({
-  // filename: 'css/app.css',
   filename: 'css/[name].[contenthash:8].css',
   allChunks: true,
 });
 const ExtractVendorCSS = new ExtractTextPlugin({
-  // filename: 'css/vendor.css',
   filename: 'css/[name].[contenthash:8].css',
   allChunks: true,
 });
@@ -52,6 +51,10 @@ export default {
       comments: false,
       sourceMap: true,
     }),
+    new HTMLWebpackPlugin({
+      template: '../templates/base.html',
+      filename: '../assets/base.html'
+    })
   ],
   entry: [
     './src/index.tsx',

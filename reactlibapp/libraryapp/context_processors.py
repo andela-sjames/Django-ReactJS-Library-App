@@ -1,4 +1,3 @@
-
 import os
 
 def set_environment(request):
