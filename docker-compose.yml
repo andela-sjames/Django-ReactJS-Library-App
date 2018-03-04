@@ -9,7 +9,7 @@ services:
     container_name: react_lib_web
     build: ./reactlibapp
     env_file:
-      - .env
+      - .env_docker
     volumes:
       - ./reactlibapp:/app
       - /app/client/node_modules/

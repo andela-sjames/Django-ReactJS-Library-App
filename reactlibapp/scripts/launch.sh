@@ -38,6 +38,15 @@ function auto_venv() {
   source venv/bin/activate
 }
 
+function server_prep() {
+  python manage.py makemigrations
+  python manage.py migrate
+  echo '============================================'
+  echo 'Done running migrations'
+  cd client
+  npm run watch
+}
+
 function setup_server() {
   # run any pending migrations
   echo 'Do you need me to automate virtual environment?'
@@ -47,10 +56,8 @@ function setup_server() {
     auto_venv
   fi
   cd ..
-  pip3 install -r requirements.txt
   python manage.py makemigrations
   python manage.py migrate
-
 }
 
 case "$1" in
@@ -64,4 +71,9 @@ esac
 # if in production, setup_client will exit once building is done
 # this means you need to wait for webpack's initial output before attempting
 # to launch the app in a browser
-setup_server && setup_client & cd .. && python manage.py runserver 0.0.0.0:8000
+# ls && setup_client & python manage.py runserver 0.0.0.0:8000
+if [[ "$1" == "docker" ]]; then
+  server_prep & python manage.py runserver 0.0.0.0:8000
+else
+  setup_server && setup_client & cd .. && python manage.py runserver 0.0.0.0:8000
+fi
