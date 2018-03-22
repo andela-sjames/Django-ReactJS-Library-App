@@ -15,10 +15,6 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,700,500,100" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css" />
         <title> AMITY Library Application </title>
-        {% if environment == 'production' %}
-            <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/vendor.css' %}" />
-            <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/app.css' %}" />
-        {% endif %}
         <script src="https://apis.google.com/js/api:client.js"></script>
 	</head>
 
@@ -33,10 +29,7 @@
         <div id="app-background"></div>
 
         {% block base_js %}
-            {% if environment == 'production' %}
-                <script src="{% static 'js/vendor.js' %}"></script>
-                <script src="{% static 'js/app.js' %}"></script>
-            {% else %}
+            {% if environment != 'production' %}
                 {% render_bundle 'main' %}
             {% endif %}
         {% endblock %}
