@@ -3,7 +3,10 @@ import os, sys
 # Production specific settings
 from .base import *
 
+import dotenv
+
 DEBUG = True
+dotenv.load();
 
 ALLOWED_HOSTS = ['*']
 
@@ -37,3 +40,8 @@ else:
           }
       },
  }
+
+if dotenv.get('HEROKU'):
+    TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'assets')]
+else:
+    TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'templates')]

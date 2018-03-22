@@ -23,4 +23,4 @@ ALLOWED_HOSTS = ['*']
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-TEMPLATES[0]['DIRS'][0] = os.path.join(BASE_DIR, 'assets')
+TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'assets')]
