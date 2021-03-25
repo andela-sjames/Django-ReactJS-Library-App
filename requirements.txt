@@ -43,7 +43,7 @@ PyJWT==1.5.2
 pystache==0.5.4
 python-env==1.0.0
 pytz==2017.2
-PyYAML==3.12
+PyYAML==5.4
 requests==2.18.3
 rsa==3.4.2
 simplejson==3.11.1
