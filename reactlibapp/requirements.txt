@@ -9,7 +9,7 @@ dj-database-url==0.4.2
 dj-static==0.0.6
 Django==1.11.4
 django-crispy-forms==1.6.1
-django-debug-toolbar==1.8
+django-debug-toolbar==1.11.1
 django-envie==0.0.9
 django-filter==1.0.4
 django-nose==1.4.4
